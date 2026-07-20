@@ -46,6 +46,8 @@ function createApp() {
       return res.status(400).json({ error: 'All fields are required' });
     }
 
+    const parseBoolean = (value) => value === true || value === 'true' || value === '1';
+
     const report = {
       id: nextId++,
       reporterName,
@@ -53,9 +55,9 @@ function createApp() {
       damageType,
       description,
       status: 'WAITING_FOR_VALIDATION',
-      damagePhotosExist: Boolean(damagePhotosExist),
-      engineerReportExists: Boolean(engineerReportExists),
-      eligibilityCheckPerformed: Boolean(eligibilityCheckPerformed),
+      damagePhotosExist: parseBoolean(damagePhotosExist),
+      engineerReportExists: parseBoolean(engineerReportExists),
+      eligibilityCheckPerformed: parseBoolean(eligibilityCheckPerformed),
       apartmentsInBuilding: Number(apartmentsInBuilding) || 0,
     };
 

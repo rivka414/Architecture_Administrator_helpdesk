@@ -85,6 +85,10 @@ function getReadinessMessage(report) {
   return canStart ? 'Rehabilitation can be started' : 'Information to start rehabilitation missing';
 }
 
+function canOpenBudgetRequest(report) {
+  return Boolean(report.damagePhotosExist && report.engineerReportExists && report.eligibilityCheckPerformed);
+}
+
 function renderDetails(report) {
   selectedReportId = report.id;
   const availableStatuses = getAvailableStatuses(report.status);
@@ -108,7 +112,21 @@ function renderDetails(report) {
     <p><strong>Eligibility check performed:</strong> ${report.eligibilityCheckPerformed ? 'Yes' : 'No'}</p>
     <p><strong>Apartments in building:</strong> ${report.apartmentsInBuilding}</p>
     <p><strong>Readiness:</strong> ${getReadinessMessage(report)}</p>
+    <div style="margin-top:0.75rem;">
+      <button id="budgetRequestButton" ${canOpenBudgetRequest(report) ? '' : 'disabled'}>Open Budget Request</button>
+      ${canOpenBudgetRequest(report) ? '' : '<p style="color:#8a4b00; margin-top:0.35rem;">Budget request is blocked until all required information is present.</p>'}
+    </div>
   `;
+
+  const budgetButton = document.getElementById('budgetRequestButton');
+  if (budgetButton) {
+    budgetButton.addEventListener('click', () => {
+      if (!canOpenBudgetRequest(report)) {
+        return;
+      }
+      alert('Budget request opened for this report.');
+    });
+  }
 }
 
 async function openDetails(id) {
@@ -122,6 +140,11 @@ async function createReport(event) {
   event.preventDefault();
   const formData = new FormData(createForm);
   const payload = Object.fromEntries(formData.entries());
+
+  payload.damagePhotosExist = payload.damagePhotosExist === 'true';
+  payload.engineerReportExists = payload.engineerReportExists === 'true';
+  payload.eligibilityCheckPerformed = payload.eligibilityCheckPerformed === 'true';
+  payload.apartmentsInBuilding = Number(payload.apartmentsInBuilding) || 0;
 
   const response = await fetch('/reports', {
     method: 'POST',
