@@ -40,7 +40,7 @@ function createApp() {
   });
 
   app.post('/reports', (req, res) => {
-    const { reporterName, address, damageType, description, damagePhotosExist, engineerReportExists, eligibilityCheckPerformed, apartmentsInBuilding } = req.body;
+    const { reporterName, address, damageType, description, damagePhotosExist, engineerReportExists, eligibilityCheckPerformed, socialApproval, apartmentsInBuilding } = req.body;
 
     if (!reporterName || !address || !damageType || !description) {
       return res.status(400).json({ error: 'All fields are required' });
@@ -58,6 +58,7 @@ function createApp() {
       damagePhotosExist: parseBoolean(damagePhotosExist),
       engineerReportExists: parseBoolean(engineerReportExists),
       eligibilityCheckPerformed: parseBoolean(eligibilityCheckPerformed),
+      socialApproval: parseBoolean(socialApproval),
       apartmentsInBuilding: Number(apartmentsInBuilding) || 0,
     };
 

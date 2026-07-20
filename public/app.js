@@ -86,7 +86,11 @@ function getReadinessMessage(report) {
 }
 
 function canOpenBudgetRequest(report) {
-  return Boolean(report.damagePhotosExist && report.engineerReportExists && report.eligibilityCheckPerformed);
+  const hasRequiredInfo = Boolean(report.damagePhotosExist && report.engineerReportExists && report.eligibilityCheckPerformed);
+  const needsSocialApproval = Number(report.apartmentsInBuilding) > 24;
+  const hasSocialApproval = Boolean(report.socialApproval);
+
+  return hasRequiredInfo && (!needsSocialApproval || hasSocialApproval);
 }
 
 function renderDetails(report) {
@@ -111,10 +115,11 @@ function renderDetails(report) {
     <p><strong>Engineer report exists:</strong> ${report.engineerReportExists ? 'Yes' : 'No'}</p>
     <p><strong>Eligibility check performed:</strong> ${report.eligibilityCheckPerformed ? 'Yes' : 'No'}</p>
     <p><strong>Apartments in building:</strong> ${report.apartmentsInBuilding}</p>
+    <p><strong>Social approval:</strong> ${report.socialApproval ? 'Yes' : 'No'}</p>
     <p><strong>Readiness:</strong> ${getReadinessMessage(report)}</p>
     <div style="margin-top:0.75rem;">
       <button id="budgetRequestButton" ${canOpenBudgetRequest(report) ? '' : 'disabled'}>Open Budget Request</button>
-      ${canOpenBudgetRequest(report) ? '' : '<p style="color:#8a4b00; margin-top:0.35rem;">Budget request is blocked until all required information is present.</p>'}
+      ${canOpenBudgetRequest(report) ? '' : '<p style="color:#8a4b00; margin-top:0.35rem;">Budget request is blocked until all required information is present and social approval is provided when required.</p>'}
     </div>
   `;
 
@@ -144,6 +149,7 @@ async function createReport(event) {
   payload.damagePhotosExist = payload.damagePhotosExist === 'true';
   payload.engineerReportExists = payload.engineerReportExists === 'true';
   payload.eligibilityCheckPerformed = payload.eligibilityCheckPerformed === 'true';
+  payload.socialApproval = payload.socialApproval === 'true';
   payload.apartmentsInBuilding = Number(payload.apartmentsInBuilding) || 0;
 
   const response = await fetch('/reports', {

@@ -90,6 +90,7 @@ test('POST /reports parses string boolean values correctly', async () => {
   assert.equal(body.damagePhotosExist, false);
   assert.equal(body.engineerReportExists, true);
   assert.equal(body.eligibilityCheckPerformed, false);
+  assert.equal(body.socialApproval, false);
   assert.equal(body.apartmentsInBuilding, 10);
 });
 
