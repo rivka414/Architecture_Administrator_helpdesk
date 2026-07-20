@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Damage Reports</title>
+    <style>
+      body { font-family: Arial, sans-serif; margin: 0; background: #f4f6f8; color: #222; }
+      nav { background: #1f4f7a; color: white; padding: 1rem 2rem; }
+      main { max-width: 900px; margin: 2rem auto; padding: 0 1rem 2rem; }
+      .card { background: white; padding: 1rem 1.25rem; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.08); margin-bottom: 1rem; }
+      button, input, select, textarea { font: inherit; padding: 0.6rem; border-radius: 6px; border: 1px solid #c7c7c7; }
+      button { background: #1f4f7a; color: white; border: none; cursor: pointer; }
+      .hidden { display: none; }
+      ul { padding-left: 1.1rem; }
+      .status { font-weight: bold; }
+      .status.WAITING_FOR_VALIDATION { color: #8a4b00; }
+      .status.NEW { color: #c47b00; }
+      .status.IN_REVIEW { color: #0b6b2f; }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <h1>Damage Reports</h1>
+    </nav>
+    <main>
+      <div id="listScreen" class="card">
+        <h2>Reports List</h2>
+        <button id="createButton">Create Report</button>
+        <ul id="reportList"></ul>
+      </div>
+
+      <div id="createScreen" class="card hidden">
+        <h2>Create Report</h2>
+        <form id="createForm">
+          <div><label>Reporter Name</label><br /><input name="reporterName" required /></div>
+          <div style="margin-top:0.5rem;"><label>Address</label><br /><input name="address" required /></div>
+          <div style="margin-top:0.5rem;"><label>Damage Type</label><br /><input name="damageType" required /></div>
+          <div style="margin-top:0.5rem;"><label>Description</label><br /><textarea name="description" required></textarea></div>
+          <div style="margin-top:0.75rem;"><button type="submit">Save Report</button> <button type="button" id="cancelCreate">Cancel</button></div>
+        </form>
+      </div>
+
+      <div id="detailsScreen" class="card hidden">
+        <h2>Report Details</h2>
+        <div id="detailsContent"></div>
+        <div style="margin-top:1rem;">
+          <label>Status</label>
+          <select id="statusSelect">
+            <option value="WAITING_FOR_VALIDATION">WAITING_FOR_VALIDATION</option>
+            <option value="NEW">NEW</option>
+            <option value="IN_REVIEW">IN_REVIEW</option>
+          </select>
+          <button id="saveStatusButton" style="margin-left:0.5rem;">Update Status</button>
+          <button id="backButton" style="margin-left:0.5rem;">Back</button>
+        </div>
+      </div>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
