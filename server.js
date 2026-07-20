@@ -1,12 +1,10 @@
 const express = require('express');
+const fs = require('fs');
 const path = require('path');
+const { InhabitationFileService } = require('./inhabitationFileService');
 
-function createApp() {
-  const app = express();
-  app.use(express.json());
-  app.use(express.static(path.join(__dirname, 'public')));
-
-  const reports = [
+function createInitialReports() {
+  return [
     {
       id: 1,
       reporterName: 'John Doe',
@@ -32,15 +30,48 @@ function createApp() {
       apartmentsInBuilding: 8,
     },
   ];
+}
 
-  let nextId = 3;
+function loadReports(reportsFilePath) {
+  if (!fs.existsSync(reportsFilePath)) {
+    return createInitialReports();
+  }
+
+  try {
+    const data = fs.readFileSync(reportsFilePath, 'utf8');
+    const parsed = JSON.parse(data);
+    if (Array.isArray(parsed) && parsed.length) {
+      return parsed;
+    }
+  } catch (error) {
+    console.warn('Could not read reports file, using defaults.', error.message);
+  }
+
+  return createInitialReports();
+}
+
+function saveReports(reportsFilePath, reports) {
+  fs.mkdirSync(path.dirname(reportsFilePath), { recursive: true });
+  fs.writeFileSync(reportsFilePath, JSON.stringify(reports, null, 2));
+}
+
+function createApp() {
+  const app = express();
+  const habitationFileService = new InhabitationFileService(path.join(__dirname, 'files'));
+  const reportsFilePath = path.join(__dirname, 'data', 'reports.json');
+  app.use(express.json());
+  app.use(express.static(path.join(__dirname, 'public')));
+  app.use('/files', express.static(path.join(__dirname, 'files')));
+
+  let reports = loadReports(reportsFilePath);
+  let nextId = reports.length ? Math.max(...reports.map((report) => Number(report.id))) + 1 : 3;
 
   app.get('/reports', (req, res) => {
     res.json(reports);
   });
 
   app.post('/reports', (req, res) => {
-    const { reporterName, address, damageType, description, damagePhotosExist, engineerReportExists, eligibilityCheckPerformed, socialApproval, apartmentsInBuilding } = req.body;
+    const { reporterName, address, damageType, description, damagePhotosExist, engineerReportExists, eligibilityCheckPerformed, socialApproval, apartmentsInBuilding, budgetRequestOpened, status } = req.body;
 
     if (!reporterName || !address || !damageType || !description) {
       return res.status(400).json({ error: 'All fields are required' });
@@ -60,9 +91,12 @@ function createApp() {
       eligibilityCheckPerformed: parseBoolean(eligibilityCheckPerformed),
       socialApproval: parseBoolean(socialApproval),
       apartmentsInBuilding: Number(apartmentsInBuilding) || 0,
+      budgetRequestOpened: parseBoolean(budgetRequestOpened),
+      status: status || 'WAITING_FOR_VALIDATION',
     };
 
     reports.push(report);
+    saveReports(reportsFilePath, reports);
     res.status(201).json(report);
   });
 
@@ -74,6 +108,39 @@ function createApp() {
     res.json(report);
   });
 
+  app.patch('/reports/:id/budget-request', (req, res) => {
+    const report = reports.find((item) => item.id === Number(req.params.id));
+    if (!report) {
+      return res.status(404).json({ error: 'Report not found' });
+    }
+
+    report.budgetRequestOpened = true;
+    saveReports(reportsFilePath, reports);
+    res.json(report);
+  });
+
+  app.post('/buildings/:id/return-home-package', async (req, res) => {
+    const report = reports.find((item) => item.id === Number(req.params.id));
+    if (!report) {
+      return res.status(404).json({ error: 'Report not found' });
+    }
+
+    const canGenerate = Boolean(
+      report.damagePhotosExist &&
+      report.engineerReportExists &&
+      report.eligibilityCheckPerformed &&
+      report.budgetRequestOpened &&
+      ['Building in the process of restoration', 'Restoration process completed'].includes(report.status)
+    );
+
+    if (!canGenerate) {
+      return res.status(400).json({ error: 'Report is not eligible for a re-occupation file' });
+    }
+
+    const result = await habitationFileService.generateReturnHomePackage(report);
+    res.json(result);
+  });
+
   app.patch('/reports/:id/status', (req, res) => {
     const report = reports.find((item) => item.id === Number(req.params.id));
     if (!report) {
@@ -81,7 +148,7 @@ function createApp() {
     }
 
     const { status } = req.body;
-    const allowedStatuses = ['WAITING_FOR_VALIDATION', 'NEW', 'IN_REVIEW'];
+    const allowedStatuses = ['WAITING_FOR_VALIDATION', 'NEW', 'IN_REVIEW', 'Building in the process of restoration', 'Restoration process completed'];
     if (!allowedStatuses.includes(status)) {
       return res.status(400).json({ error: 'Invalid status' });
     }
@@ -90,7 +157,9 @@ function createApp() {
     const validTransitions = {
       WAITING_FOR_VALIDATION: ['NEW'],
       NEW: ['IN_REVIEW'],
-      IN_REVIEW: [],
+      IN_REVIEW: ['Building in the process of restoration'],
+      'Building in the process of restoration': ['Restoration process completed'],
+      'Restoration process completed': [],
     };
 
     if (!validTransitions[currentStatus].includes(status) && currentStatus !== status) {
@@ -98,6 +167,7 @@ function createApp() {
     }
 
     report.status = status;
+    saveReports(reportsFilePath, reports);
     res.json(report);
   });
 

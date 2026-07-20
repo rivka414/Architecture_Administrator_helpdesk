@@ -10,6 +10,7 @@ const budgetReadyFilter = document.getElementById('budgetReadyFilter');
 
 let reports = [];
 let selectedReportId = null;
+let pendingSuccessMessage = '';
 
 function showScreen(screen) {
   [listScreen, createScreen, detailsScreen].forEach((element) => element.classList.add('hidden'));
@@ -28,6 +29,16 @@ function isWaitingInLine(report) {
 
 function isReadyForBudgetRelease(report) {
   return Boolean(report.damagePhotosExist && report.engineerReportExists && report.eligibilityCheckPerformed);
+}
+
+function canGenerateReoccupationFile(report) {
+  return Boolean(
+    report.damagePhotosExist &&
+    report.engineerReportExists &&
+    report.eligibilityCheckPerformed &&
+    report.budgetRequestOpened &&
+    ['Building in the process of restoration', 'Restoration process completed'].includes(report.status)
+  );
 }
 
 function getVisibleReports() {
@@ -62,6 +73,7 @@ function renderReports() {
         <th>Status</th>
         <th>Waiting in line for work</th>
         <th>Ready for budget release</th>
+        <th>Re-occupation file</th>
         <th>Action</th>
       </tr>
     </thead>
@@ -77,6 +89,7 @@ function renderReports() {
       <td><span class="status ${report.status}">${report.status}</span></td>
       <td>${isWaitingInLine(report) ? 'Yes' : 'No'}</td>
       <td>${isReadyForBudgetRelease(report) ? 'Yes' : 'No'}</td>
+      <td>${canGenerateReoccupationFile(report) ? `<a href="#" class="generate-file-link" data-id="${report.id}">Generate a re-occupation file</a>` : '—'}</td>
       <td><a href="#" data-id="${report.id}">View</a></td>
     `;
     tbody.appendChild(row);
@@ -87,11 +100,15 @@ function renderReports() {
 
 function getAvailableStatuses(currentStatus) {
   const transitions = {
-    WAITING_FOR_VALIDATION: ['WAITING_FOR_VALIDATION', 'NEW'],
-    NEW: ['NEW', 'IN_REVIEW'],
-    IN_REVIEW: ['IN_REVIEW'],
+    WAITING_FOR_VALIDATION: ['NEW'],
+    NEW: ['IN_REVIEW'],
+    IN_REVIEW: ['Building in the process of restoration'],
+    'Building in the process of restoration': ['Restoration process completed'],
+    'Restoration process completed': [],
   };
-  return transitions[currentStatus] || [];
+
+  const options = [currentStatus, ...(transitions[currentStatus] || [])];
+  return options.filter((status, index) => options.indexOf(status) === index);
 }
 
 function getReadinessMessage(report) {
@@ -107,8 +124,31 @@ function canOpenBudgetRequest(report) {
   return hasRequiredInfo && (!needsSocialApproval || hasSocialApproval);
 }
 
+async function openBudgetRequest(report) {
+  const response = await fetch(`/reports/${report.id}/budget-request`, { method: 'PATCH' });
+  if (!response.ok) {
+    const result = await response.json().catch(() => ({}));
+    alert(result.error || 'Unable to open budget request.');
+    return;
+  }
+
+  const updated = await response.json();
+  const existingReport = reports.find((item) => item.id === updated.id);
+  if (existingReport) {
+    Object.assign(existingReport, updated);
+  } else {
+    reports.push(updated);
+  }
+
+  pendingSuccessMessage = 'Budget request opened successfully.';
+  renderDetails(updated);
+  renderReports();
+}
+
 function renderDetails(report) {
   selectedReportId = report.id;
+  const successMessage = pendingSuccessMessage;
+  pendingSuccessMessage = '';
   const availableStatuses = getAvailableStatuses(report.status);
   statusSelect.innerHTML = '';
   availableStatuses.forEach((status) => {
@@ -119,6 +159,7 @@ function renderDetails(report) {
   });
   statusSelect.value = report.status;
   detailsContent.innerHTML = `
+    ${successMessage ? `<div class="success-message">${successMessage}</div>` : ''}
     <p><strong>ID:</strong> ${report.id}</p>
     <p><strong>Reporter:</strong> ${report.reporterName}</p>
     <p><strong>Address:</strong> ${report.address}</p>
@@ -133,6 +174,7 @@ function renderDetails(report) {
     <p><strong>Readiness:</strong> ${getReadinessMessage(report)}</p>
     <div style="margin-top:0.75rem;">
       <button id="budgetRequestButton" ${canOpenBudgetRequest(report) ? '' : 'disabled'}>Open Budget Request</button>
+      ${canGenerateReoccupationFile(report) ? '<button id="exportButton" style="margin-left:0.5rem;">Generate a re-occupation file</button>' : ''}
       ${canOpenBudgetRequest(report) ? '' : '<p style="color:#8a4b00; margin-top:0.35rem;">Budget request is blocked until all required information is present and social approval is provided when required.</p>'}
     </div>
   `;
@@ -143,7 +185,22 @@ function renderDetails(report) {
       if (!canOpenBudgetRequest(report)) {
         return;
       }
-      alert('Budget request opened for this report.');
+      openBudgetRequest(report);
+    });
+  }
+
+  const exportButton = document.getElementById('exportButton');
+  if (exportButton) {
+    exportButton.addEventListener('click', async () => {
+      const response = await fetch(`/buildings/${report.id}/return-home-package`, { method: 'POST' });
+      const result = await response.json();
+      if (response.ok) {
+        pendingSuccessMessage = 'Re-occupation file generated successfully.';
+        renderDetails(report);
+        window.open(result.url, '_blank');
+      } else {
+        alert(result.error || 'Unable to generate the re-occupation file.');
+      }
     });
   }
 }
@@ -204,6 +261,17 @@ waitingFilter.addEventListener('change', renderReports);
 budgetReadyFilter.addEventListener('change', renderReports);
 createForm.addEventListener('submit', createReport);
 reportList.addEventListener('click', async (event) => {
+  const fileLink = event.target.closest('a.generate-file-link');
+  if (fileLink) {
+    event.preventDefault();
+    const response = await fetch(`/buildings/${fileLink.dataset.id}/return-home-package`, { method: 'POST' });
+    const result = await response.json();
+    if (response.ok) {
+      window.open(result.url, '_blank');
+    }
+    return;
+  }
+
   const link = event.target.closest('a[data-id]');
   if (!link) return;
   event.preventDefault();

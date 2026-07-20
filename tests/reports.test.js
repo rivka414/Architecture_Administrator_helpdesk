@@ -94,6 +94,85 @@ test('POST /reports parses string boolean values correctly', async () => {
   assert.equal(body.apartmentsInBuilding, 10);
 });
 
+test('PATCH /reports/:id/budget-request marks a budget request as opened', async () => {
+  const createResponse = await fetch(`${baseUrl}/reports`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      reporterName: 'Mina',
+      address: 'Hill 8',
+      damageType: 'Water',
+      description: 'Roof leak',
+    }),
+  });
+  const created = await createResponse.json();
+
+  const response = await fetch(`${baseUrl}/reports/${created.id}/budget-request`, {
+    method: 'PATCH',
+  });
+
+  assert.equal(response.status, 200);
+  const body = await response.json();
+  assert.equal(body.budgetRequestOpened, true);
+});
+
+test('POST /buildings/:id/return-home-package generates a file for eligible reports', async () => {
+  const createResponse = await fetch(`${baseUrl}/reports`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      reporterName: 'Eli',
+      address: 'Garden 33',
+      damageType: 'Structural',
+      description: 'Foundation issue',
+      damagePhotosExist: true,
+      engineerReportExists: true,
+      eligibilityCheckPerformed: true,
+      socialApproval: true,
+      apartmentsInBuilding: 30,
+      budgetRequestOpened: true,
+      status: 'Restoration process completed',
+    }),
+  });
+  const created = await createResponse.json();
+
+  const response = await fetch(`${baseUrl}/buildings/${created.id}/return-home-package`, {
+    method: 'POST',
+  });
+
+  assert.equal(response.status, 200);
+  const body = await response.json();
+  assert.ok(body.url);
+  assert.ok(body.fileName);
+});
+
+test('POST /buildings/:id/return-home-package allows generation after restoration work begins', async () => {
+  const createResponse = await fetch(`${baseUrl}/reports`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      reporterName: 'Rina',
+      address: 'North 9',
+      damageType: 'Water',
+      description: 'Basement issue',
+      damagePhotosExist: true,
+      engineerReportExists: true,
+      eligibilityCheckPerformed: true,
+      socialApproval: true,
+      apartmentsInBuilding: 18,
+      budgetRequestOpened: true,
+      status: 'Building in the process of restoration',
+    }),
+  });
+  const created = await createResponse.json();
+
+  const response = await fetch(`${baseUrl}/buildings/${created.id}/return-home-package`, {
+    method: 'POST',
+  });
+
+  assert.equal(response.status, 200);
+});
+
 test('PATCH /reports/:id/status supports the new status flow', async () => {
   const createResponse = await fetch(`${baseUrl}/reports`, {
     method: 'POST',
