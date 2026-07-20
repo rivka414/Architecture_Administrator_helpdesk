@@ -6,6 +6,7 @@ const detailsContent = document.getElementById('detailsContent');
 const createForm = document.getElementById('createForm');
 const statusSelect = document.getElementById('statusSelect');
 const waitingFilter = document.getElementById('waitingFilter');
+const budgetReadyFilter = document.getElementById('budgetReadyFilter');
 
 let reports = [];
 let selectedReportId = null;
@@ -25,11 +26,22 @@ function isWaitingInLine(report) {
   return Boolean(report.engineerReportExists && report.eligibilityCheckPerformed);
 }
 
+function isReadyForBudgetRelease(report) {
+  return Boolean(report.damagePhotosExist && report.engineerReportExists && report.eligibilityCheckPerformed);
+}
+
 function getVisibleReports() {
-  if (!waitingFilter.checked) {
-    return reports;
+  let filteredReports = reports;
+
+  if (waitingFilter.checked) {
+    filteredReports = filteredReports.filter((report) => isWaitingInLine(report));
   }
-  return reports.filter((report) => isWaitingInLine(report));
+
+  if (budgetReadyFilter.checked) {
+    filteredReports = filteredReports.filter((report) => isReadyForBudgetRelease(report));
+  }
+
+  return filteredReports;
 }
 
 function renderReports() {
@@ -49,6 +61,7 @@ function renderReports() {
         <th>Reporter</th>
         <th>Status</th>
         <th>Waiting in line for work</th>
+        <th>Ready for budget release</th>
         <th>Action</th>
       </tr>
     </thead>
@@ -63,6 +76,7 @@ function renderReports() {
       <td>${report.reporterName}</td>
       <td><span class="status ${report.status}">${report.status}</span></td>
       <td>${isWaitingInLine(report) ? 'Yes' : 'No'}</td>
+      <td>${isReadyForBudgetRelease(report) ? 'Yes' : 'No'}</td>
       <td><a href="#" data-id="${report.id}">View</a></td>
     `;
     tbody.appendChild(row);
@@ -187,6 +201,7 @@ document.getElementById('cancelCreate').addEventListener('click', () => showScre
 document.getElementById('backButton').addEventListener('click', () => showScreen(listScreen));
 document.getElementById('saveStatusButton').addEventListener('click', updateStatus);
 waitingFilter.addEventListener('change', renderReports);
+budgetReadyFilter.addEventListener('change', renderReports);
 createForm.addEventListener('submit', createReport);
 reportList.addEventListener('click', async (event) => {
   const link = event.target.closest('a[data-id]');
