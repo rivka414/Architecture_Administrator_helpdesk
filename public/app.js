@@ -5,6 +5,7 @@ const reportList = document.getElementById('reportList');
 const detailsContent = document.getElementById('detailsContent');
 const createForm = document.getElementById('createForm');
 const statusSelect = document.getElementById('statusSelect');
+const waitingFilter = document.getElementById('waitingFilter');
 
 let reports = [];
 let selectedReportId = null;
@@ -20,13 +21,54 @@ async function loadReports() {
   renderReports();
 }
 
+function isWaitingInLine(report) {
+  return Boolean(report.engineerReportExists && report.eligibilityCheckPerformed);
+}
+
+function getVisibleReports() {
+  if (!waitingFilter.checked) {
+    return reports;
+  }
+  return reports.filter((report) => isWaitingInLine(report));
+}
+
 function renderReports() {
+  const visibleReports = getVisibleReports();
   reportList.innerHTML = '';
-  reports.forEach((report) => {
-    const item = document.createElement('li');
-    item.innerHTML = `<strong>#${report.id}</strong> ${report.reporterName} - <span class="status ${report.status}">${report.status}</span> <a href="#" data-id="${report.id}">View</a>`;
-    reportList.appendChild(item);
+
+  if (!visibleReports.length) {
+    reportList.innerHTML = '<p>No reports match the current filter.</p>';
+    return;
+  }
+
+  const table = document.createElement('table');
+  table.innerHTML = `
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Reporter</th>
+        <th>Status</th>
+        <th>Waiting in line for work</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  `;
+
+  const tbody = table.querySelector('tbody');
+  visibleReports.forEach((report) => {
+    const row = document.createElement('tr');
+    row.innerHTML = `
+      <td>#${report.id}</td>
+      <td>${report.reporterName}</td>
+      <td><span class="status ${report.status}">${report.status}</span></td>
+      <td>${isWaitingInLine(report) ? 'Yes' : 'No'}</td>
+      <td><a href="#" data-id="${report.id}">View</a></td>
+    `;
+    tbody.appendChild(row);
   });
+
+  reportList.appendChild(table);
 }
 
 function getAvailableStatuses(currentStatus) {
@@ -36,6 +78,11 @@ function getAvailableStatuses(currentStatus) {
     IN_REVIEW: ['IN_REVIEW'],
   };
   return transitions[currentStatus] || [];
+}
+
+function getReadinessMessage(report) {
+  const canStart = Boolean(report.damagePhotosExist && report.engineerReportExists && report.eligibilityCheckPerformed);
+  return canStart ? 'Rehabilitation can be started' : 'Information to start rehabilitation missing';
 }
 
 function renderDetails(report) {
@@ -56,6 +103,11 @@ function renderDetails(report) {
     <p><strong>Damage Type:</strong> ${report.damageType}</p>
     <p><strong>Description:</strong> ${report.description}</p>
     <p><strong>Status:</strong> <span class="status ${report.status}">${report.status}</span></p>
+    <p><strong>Damage photos exist:</strong> ${report.damagePhotosExist ? 'Yes' : 'No'}</p>
+    <p><strong>Engineer report exists:</strong> ${report.engineerReportExists ? 'Yes' : 'No'}</p>
+    <p><strong>Eligibility check performed:</strong> ${report.eligibilityCheckPerformed ? 'Yes' : 'No'}</p>
+    <p><strong>Apartments in building:</strong> ${report.apartmentsInBuilding}</p>
+    <p><strong>Readiness:</strong> ${getReadinessMessage(report)}</p>
   `;
 }
 
@@ -105,6 +157,7 @@ document.getElementById('createButton').addEventListener('click', () => showScre
 document.getElementById('cancelCreate').addEventListener('click', () => showScreen(listScreen));
 document.getElementById('backButton').addEventListener('click', () => showScreen(listScreen));
 document.getElementById('saveStatusButton').addEventListener('click', updateStatus);
+waitingFilter.addEventListener('change', renderReports);
 createForm.addEventListener('submit', createReport);
 reportList.addEventListener('click', async (event) => {
   const link = event.target.closest('a[data-id]');

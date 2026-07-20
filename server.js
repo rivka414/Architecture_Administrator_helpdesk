@@ -14,6 +14,10 @@ function createApp() {
       damageType: 'Water',
       description: 'Leak under the sink',
       status: 'WAITING_FOR_VALIDATION',
+      damagePhotosExist: true,
+      engineerReportExists: true,
+      eligibilityCheckPerformed: true,
+      apartmentsInBuilding: 12,
     },
     {
       id: 2,
@@ -22,6 +26,10 @@ function createApp() {
       damageType: 'Electrical',
       description: 'Broken outlet',
       status: 'IN_REVIEW',
+      damagePhotosExist: false,
+      engineerReportExists: true,
+      eligibilityCheckPerformed: false,
+      apartmentsInBuilding: 8,
     },
   ];
 
@@ -32,7 +40,7 @@ function createApp() {
   });
 
   app.post('/reports', (req, res) => {
-    const { reporterName, address, damageType, description } = req.body;
+    const { reporterName, address, damageType, description, damagePhotosExist, engineerReportExists, eligibilityCheckPerformed, apartmentsInBuilding } = req.body;
 
     if (!reporterName || !address || !damageType || !description) {
       return res.status(400).json({ error: 'All fields are required' });
@@ -45,6 +53,10 @@ function createApp() {
       damageType,
       description,
       status: 'WAITING_FOR_VALIDATION',
+      damagePhotosExist: Boolean(damagePhotosExist),
+      engineerReportExists: Boolean(engineerReportExists),
+      eligibilityCheckPerformed: Boolean(eligibilityCheckPerformed),
+      apartmentsInBuilding: Number(apartmentsInBuilding) || 0,
     };
 
     reports.push(report);

@@ -45,6 +45,54 @@ test('POST /reports creates a report with WAITING_FOR_VALIDATION by default', as
   assert.ok(body.id);
 });
 
+test('POST /reports stores the new eligibility fields', async () => {
+  const response = await fetch(`${baseUrl}/reports`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      reporterName: 'Carol',
+      address: 'Park Avenue 7',
+      damageType: 'Structural',
+      description: 'Wall crack in the lobby',
+      damagePhotosExist: true,
+      engineerReportExists: true,
+      eligibilityCheckPerformed: true,
+      apartmentsInBuilding: 24,
+    }),
+  });
+
+  assert.equal(response.status, 201);
+  const body = await response.json();
+  assert.equal(body.damagePhotosExist, true);
+  assert.equal(body.engineerReportExists, true);
+  assert.equal(body.eligibilityCheckPerformed, true);
+  assert.equal(body.apartmentsInBuilding, 24);
+});
+
+test('POST /reports parses string boolean values correctly', async () => {
+  const response = await fetch(`${baseUrl}/reports`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      reporterName: 'Dina',
+      address: 'Lake Road 5',
+      damageType: 'Fire',
+      description: 'Smoke damage',
+      damagePhotosExist: 'false',
+      engineerReportExists: 'true',
+      eligibilityCheckPerformed: 'false',
+      apartmentsInBuilding: '10',
+    }),
+  });
+
+  assert.equal(response.status, 201);
+  const body = await response.json();
+  assert.equal(body.damagePhotosExist, false);
+  assert.equal(body.engineerReportExists, true);
+  assert.equal(body.eligibilityCheckPerformed, false);
+  assert.equal(body.apartmentsInBuilding, 10);
+});
+
 test('PATCH /reports/:id/status supports the new status flow', async () => {
   const createResponse = await fetch(`${baseUrl}/reports`, {
     method: 'POST',

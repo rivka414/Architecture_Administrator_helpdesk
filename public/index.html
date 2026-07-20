@@ -12,7 +12,10 @@
       button, input, select, textarea { font: inherit; padding: 0.6rem; border-radius: 6px; border: 1px solid #c7c7c7; }
       button { background: #1f4f7a; color: white; border: none; cursor: pointer; }
       .hidden { display: none; }
-      ul { padding-left: 1.1rem; }
+      .list-controls { margin-bottom: 0.75rem; }
+      table { width: 100%; border-collapse: collapse; background: white; }
+      th, td { border: 1px solid #d9d9d9; padding: 0.6rem; text-align: left; }
+      th { background: #eef4f8; }
       .status { font-weight: bold; }
       .status.WAITING_FOR_VALIDATION { color: #8a4b00; }
       .status.NEW { color: #c47b00; }
@@ -26,8 +29,11 @@
     <main>
       <div id="listScreen" class="card">
         <h2>Reports List</h2>
-        <button id="createButton">Create Report</button>
-        <ul id="reportList"></ul>
+        <div class="list-controls">
+          <button id="createButton">Create Report</button>
+          <label style="margin-left:0.75rem;"><input type="checkbox" id="waitingFilter" /> Show only buildings waiting in line for work</label>
+        </div>
+        <div id="reportList"></div>
       </div>
 
       <div id="createScreen" class="card hidden">
@@ -37,6 +43,10 @@
           <div style="margin-top:0.5rem;"><label>Address</label><br /><input name="address" required /></div>
           <div style="margin-top:0.5rem;"><label>Damage Type</label><br /><input name="damageType" required /></div>
           <div style="margin-top:0.5rem;"><label>Description</label><br /><textarea name="description" required></textarea></div>
+          <div style="margin-top:0.5rem;"><label>Damage photos exist</label><br /><select name="damagePhotosExist"><option value="true">Yes</option><option value="false">No</option></select></div>
+          <div style="margin-top:0.5rem;"><label>Engineer report exists</label><br /><select name="engineerReportExists"><option value="true">Yes</option><option value="false">No</option></select></div>
+          <div style="margin-top:0.5rem;"><label>Eligibility check performed</label><br /><select name="eligibilityCheckPerformed"><option value="true">Yes</option><option value="false">No</option></select></div>
+          <div style="margin-top:0.5rem;"><label>Apartments in building</label><br /><input name="apartmentsInBuilding" type="number" min="0" value="0" /></div>
           <div style="margin-top:0.75rem;"><button type="submit">Save Report</button> <button type="button" id="cancelCreate">Cancel</button></div>
         </form>
       </div>
