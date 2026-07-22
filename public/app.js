@@ -55,13 +55,15 @@ function updateModeIndicator(mode) {
     success: 'Server: Success',
     always_fail: 'Server: Always Fail',
     fail_first: 'Server: Fail First Attempt',
-    random: 'Server: Random Failure'
+    random: 'Server: Random Failure',
+    timeout: 'Server: Response Lost (Timeout)'
   };
   const colors = {
     success: '#0b6b2f',
     always_fail: '#c62828',
     fail_first: '#e65100',
-    random: '#6a1b9a'
+    random: '#6a1b9a',
+    timeout: '#bf360c'
   };
   notificationModeIndicator.textContent = labels[mode] || mode;
   notificationModeIndicator.style.color = colors[mode] || '#222';

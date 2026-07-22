@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const VALID_MODES = ['success', 'always_fail', 'fail_first', 'random'];
+const VALID_MODES = ['success', 'always_fail', 'fail_first', 'random', 'timeout'];
 
 class NotificationService {
   constructor(csvFilePath) {
@@ -80,6 +80,10 @@ class NotificationService {
     const csvLine = `${messageId},${buildingId},"${buildingAddress}",${email},"${subject}",${dateTime},${status}\n`;
     fs.appendFileSync(this.csvFilePath, csvLine, 'utf8');
     
+    if (this.statusMode === 'timeout') {
+      throw new Error('Response timeout: no response received from notification server');
+    }
+
     return {
       status: status,
       messageId: messageId
@@ -91,9 +95,13 @@ class NotificationService {
     let lastResult;
 
     for (let attempt = 0; attempt < MAX_ATTEMPTS; attempt++) {
-      lastResult = this.sendNotification(buildingId, email, subject, body, buildingAddress);
-      if (lastResult.status === 'SENT') {
-        return lastResult;
+      try {
+        lastResult = this.sendNotification(buildingId, email, subject, body, buildingAddress);
+        if (lastResult.status === 'SENT') {
+          return lastResult;
+        }
+      } catch (error) {
+        lastResult = null;
       }
     }
 
