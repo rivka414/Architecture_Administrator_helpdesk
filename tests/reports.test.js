@@ -256,3 +256,40 @@ test('PATCH /reports/:id/appraisal returns 400 when required fields are missing'
 
   assert.equal(response.status, 400);
 });
+
+test('PATCH /reports/:id/permit-approval saves local authority approval data', async () => {
+  const createResponse = await fetch(`${baseUrl}/reports`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      reporterName: 'Dan',
+      address: 'Station 11',
+      damageType: 'Structural',
+      description: 'Roof damage',
+    }),
+  });
+  const created = await createResponse.json();
+
+  const response = await fetch(`${baseUrl}/reports/${created.id}/permit-approval`, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      waterSupply: true,
+      electricitySupply: true,
+      accessRoads: true,
+      environmentalCleared: false,
+      localAuthorityComments: 'Road repair pending',
+      approved: false,
+    }),
+  });
+
+  assert.equal(response.status, 200);
+  const body = await response.json();
+  assert.ok(body.permitApproval);
+  assert.equal(body.permitApproval.waterSupply, true);
+  assert.equal(body.permitApproval.electricitySupply, true);
+  assert.equal(body.permitApproval.accessRoads, true);
+  assert.equal(body.permitApproval.environmentalCleared, false);
+  assert.equal(body.permitApproval.localAuthorityComments, 'Road repair pending');
+  assert.equal(body.permitApproval.approved, false);
+});

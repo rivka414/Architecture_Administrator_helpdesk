@@ -1,3 +1,1 @@
 MessageID,BuildingID,BuildingAddress,Email,Subject,DateTime,Status,IdempotencyKey
-1,21,"Zichron Yaakov, Hanadiv 1",raphael.oz@example.com,"Return to Home Approval Zichron Yaakov, Hanadiv 1",2026-07-22T13:59:54.346Z,SENT,21
-2,10,"Ramat Gan, Bialik 12",michal.bar@example.com,"Return to Home Approval Ramat Gan, Bialik 12",2026-07-22T14:01:17.921Z,SENT,10

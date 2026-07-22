@@ -13,11 +13,14 @@
     "apartmentsInBuilding": 12,
     "budgetRequestOpened": true,
     "familyEmail": "john.doe@example.com",
-    "appraisal": {
-      "damageLevel": "severe",
-      "appraiserComments": "",
-      "inspectionDate": "2026-07-20",
-      "reinspectionRequired": true
+    "appraisal": null,
+    "permitApproval": {
+      "waterSupply": true,
+      "electricitySupply": true,
+      "accessRoads": false,
+      "environmentalCleared": false,
+      "localAuthorityComments": "Road needs repair",
+      "approved": false
     }
   },
   {
@@ -34,7 +37,8 @@
     "apartmentsInBuilding": 8,
     "budgetRequestOpened": true,
     "familyEmail": "jane.smith@example.com",
-    "appraisal": null
+    "appraisal": null,
+    "permitApproval": null
   },
   {
     "id": 3,
@@ -50,7 +54,8 @@
     "apartmentsInBuilding": 30,
     "budgetRequestOpened": true,
     "familyEmail": "david.cohen@example.com",
-    "appraisal": null
+    "appraisal": null,
+    "permitApproval": null
   },
   {
     "id": 4,
@@ -66,7 +71,8 @@
     "apartmentsInBuilding": 36,
     "budgetRequestOpened": true,
     "familyEmail": "sarah.levy@example.com",
-    "appraisal": null
+    "appraisal": null,
+    "permitApproval": null
   },
   {
     "id": 5,
@@ -82,11 +88,14 @@
     "apartmentsInBuilding": 20,
     "budgetRequestOpened": true,
     "familyEmail": "moshe.ben@example.com",
-    "appraisal": {
-      "damageLevel": "light",
-      "appraiserComments": "Minor cosmetic damage",
-      "inspectionDate": "2026-07-21",
-      "reinspectionRequired": false
+    "appraisal": null,
+    "permitApproval": {
+      "waterSupply": true,
+      "electricitySupply": true,
+      "accessRoads": true,
+      "environmentalCleared": true,
+      "localAuthorityComments": "All clear",
+      "approved": true
     }
   },
   {
@@ -103,7 +112,8 @@
     "apartmentsInBuilding": 16,
     "budgetRequestOpened": true,
     "familyEmail": "rivka.m@example.com",
-    "appraisal": null
+    "appraisal": null,
+    "permitApproval": null
   },
   {
     "id": 7,
@@ -119,7 +129,8 @@
     "apartmentsInBuilding": 10,
     "budgetRequestOpened": true,
     "familyEmail": "avi.shalom@example.com",
-    "appraisal": null
+    "appraisal": null,
+    "permitApproval": null
   },
   {
     "id": 8,
@@ -135,7 +146,8 @@
     "apartmentsInBuilding": 28,
     "budgetRequestOpened": true,
     "familyEmail": "hanna.gold@example.com",
-    "appraisal": null
+    "appraisal": null,
+    "permitApproval": null
   },
   {
     "id": 9,
@@ -151,7 +163,8 @@
     "apartmentsInBuilding": 14,
     "budgetRequestOpened": true,
     "familyEmail": "yosef.a@example.com",
-    "appraisal": null
+    "appraisal": null,
+    "permitApproval": null
   },
   {
     "id": 10,
@@ -159,20 +172,16 @@
     "address": "Ramat Gan, Bialik 12",
     "damageType": "Fire",
     "description": "Electrical fire in stairwell",
-    "status": "Restoration process completed",
+    "status": "IN_REVIEW",
     "damagePhotosExist": true,
     "engineerReportExists": true,
     "eligibilityCheckPerformed": true,
     "socialApproval": false,
     "apartmentsInBuilding": 18,
-    "budgetRequestOpened": true,
+    "budgetRequestOpened": false,
     "familyEmail": "michal.bar@example.com",
-    "appraisal": {
-      "damageLevel": "light",
-      "appraiserComments": "d",
-      "inspectionDate": "2026-07-22",
-      "reinspectionRequired": true
-    }
+    "appraisal": null,
+    "permitApproval": null
   },
   {
     "id": 11,
@@ -180,7 +189,7 @@
     "address": "Ashdod, Sderot 20",
     "damageType": "Structural",
     "description": "Earthquake damage to facade",
-    "status": "NEW",
+    "status": "Restoration process completed",
     "damagePhotosExist": true,
     "engineerReportExists": true,
     "eligibilityCheckPerformed": false,
@@ -188,7 +197,8 @@
     "apartmentsInBuilding": 22,
     "budgetRequestOpened": false,
     "familyEmail": "eitan.p@example.com",
-    "appraisal": null
+    "appraisal": null,
+    "permitApproval": null
   },
   {
     "id": 12,
@@ -204,7 +214,8 @@
     "apartmentsInBuilding": 9,
     "budgetRequestOpened": false,
     "familyEmail": "tamar.raz@example.com",
-    "appraisal": null
+    "appraisal": null,
+    "permitApproval": null
   },
   {
     "id": 13,
@@ -220,7 +231,8 @@
     "apartmentsInBuilding": 6,
     "budgetRequestOpened": false,
     "familyEmail": "shlomo.d@example.com",
-    "appraisal": null
+    "appraisal": null,
+    "permitApproval": null
   },
   {
     "id": 14,
@@ -236,7 +248,8 @@
     "apartmentsInBuilding": 15,
     "budgetRequestOpened": false,
     "familyEmail": "nurit.f@example.com",
-    "appraisal": null
+    "appraisal": null,
+    "permitApproval": null
   },
   {
     "id": 15,
@@ -252,7 +265,8 @@
     "apartmentsInBuilding": 11,
     "budgetRequestOpened": false,
     "familyEmail": "amos.k@example.com",
-    "appraisal": null
+    "appraisal": null,
+    "permitApproval": null
   },
   {
     "id": 16,
@@ -268,7 +282,8 @@
     "apartmentsInBuilding": 24,
     "budgetRequestOpened": false,
     "familyEmail": "dina.alon@example.com",
-    "appraisal": null
+    "appraisal": null,
+    "permitApproval": null
   },
   {
     "id": 17,
@@ -284,7 +299,8 @@
     "apartmentsInBuilding": 7,
     "budgetRequestOpened": false,
     "familyEmail": "gideon.t@example.com",
-    "appraisal": null
+    "appraisal": null,
+    "permitApproval": null
   },
   {
     "id": 18,
@@ -300,7 +316,8 @@
     "apartmentsInBuilding": 5,
     "budgetRequestOpened": false,
     "familyEmail": "orly.bd@example.com",
-    "appraisal": null
+    "appraisal": null,
+    "permitApproval": null
   },
   {
     "id": 19,
@@ -316,7 +333,8 @@
     "apartmentsInBuilding": 20,
     "budgetRequestOpened": false,
     "familyEmail": "menachem.l@example.com",
-    "appraisal": null
+    "appraisal": null,
+    "permitApproval": null
   },
   {
     "id": 20,
@@ -332,7 +350,8 @@
     "apartmentsInBuilding": 13,
     "budgetRequestOpened": false,
     "familyEmail": "batya.s@example.com",
-    "appraisal": null
+    "appraisal": null,
+    "permitApproval": null
   },
   {
     "id": 21,
@@ -348,11 +367,14 @@
     "apartmentsInBuilding": 32,
     "budgetRequestOpened": true,
     "familyEmail": "raphael.oz@example.com",
-    "appraisal": {
-      "damageLevel": "light",
-      "appraiserComments": "6",
-      "inspectionDate": "2026-07-22",
-      "reinspectionRequired": true
+    "appraisal": null,
+    "permitApproval": {
+      "waterSupply": true,
+      "electricitySupply": true,
+      "accessRoads": true,
+      "environmentalCleared": true,
+      "localAuthorityComments": "2",
+      "approved": true
     }
   },
   {
@@ -369,11 +391,7 @@
     "apartmentsInBuilding": 4,
     "budgetRequestOpened": false,
     "familyEmail": "varda.s@example.com",
-    "appraisal": {
-      "damageLevel": "medium",
-      "appraiserComments": "666",
-      "inspectionDate": "2026-07-21",
-      "reinspectionRequired": true
-    }
+    "appraisal": null,
+    "permitApproval": null
   }
 ]

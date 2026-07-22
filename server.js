@@ -385,6 +385,9 @@ function createApp() {
     if (!report.appraisal) {
       report.appraisal = null;
     }
+    if (!report.permitApproval) {
+      report.permitApproval = null;
+    }
   });
   let nextId = reports.length ? Math.max(...reports.map((report) => Number(report.id))) + 1 : 3;
 
@@ -459,6 +462,27 @@ function createApp() {
       appraiserComments: appraiserComments || '',
       inspectionDate,
       reinspectionRequired: Boolean(reinspectionRequired),
+    };
+
+    saveReports(reportsFilePath, reports);
+    res.json(report);
+  });
+
+  app.patch('/reports/:id/permit-approval', (req, res) => {
+    const report = reports.find((item) => item.id === Number(req.params.id));
+    if (!report) {
+      return res.status(404).json({ error: 'Report not found' });
+    }
+
+    const { waterSupply, electricitySupply, accessRoads, environmentalCleared, localAuthorityComments, approved } = req.body;
+
+    report.permitApproval = {
+      waterSupply: Boolean(waterSupply),
+      electricitySupply: Boolean(electricitySupply),
+      accessRoads: Boolean(accessRoads),
+      environmentalCleared: Boolean(environmentalCleared),
+      localAuthorityComments: localAuthorityComments || '',
+      approved: Boolean(approved),
     };
 
     saveReports(reportsFilePath, reports);

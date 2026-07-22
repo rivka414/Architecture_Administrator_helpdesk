@@ -18,6 +18,20 @@ const messageCenterButton = document.getElementById('messageCenterButton');
 const appraisersPortalButton = document.getElementById('appraisersPortalButton');
 const backFromMessageCenter = document.getElementById('backFromMessageCenter');
 const backFromAppraisersPortal = document.getElementById('backFromAppraisersPortal');
+const localAuthorityPortalScreen = document.getElementById('localAuthorityPortalScreen');
+const localAuthorityPortalButton = document.getElementById('localAuthorityPortalButton');
+const localAuthorityPortalList = document.getElementById('localAuthorityPortalList');
+const permitApprovalForm = document.getElementById('permitApprovalForm');
+const permitBuildingInfo = document.getElementById('permitBuildingInfo');
+const permitWaterSupply = document.getElementById('permitWaterSupply');
+const permitElectricitySupply = document.getElementById('permitElectricitySupply');
+const permitAccessRoads = document.getElementById('permitAccessRoads');
+const permitEnvironmentalCleared = document.getElementById('permitEnvironmentalCleared');
+const permitComments = document.getElementById('permitComments');
+const permitApproved = document.getElementById('permitApproved');
+const savePermitApprovalButton = document.getElementById('savePermitApprovalButton');
+const cancelPermitApprovalButton = document.getElementById('cancelPermitApprovalButton');
+const backFromLocalAuthorityPortal = document.getElementById('backFromLocalAuthorityPortal');
 const modalOverlay = document.getElementById('modalOverlay');
 const modalContent = document.getElementById('modalContent');
 const notificationModeSelect = document.getElementById('notificationModeSelect');
@@ -37,7 +51,7 @@ let generatedFiles = {};
 let selectedAppraisalReportId = null;
 
 function showScreen(screen) {
-  [listScreen, createScreen, detailsScreen, messageCenterScreen, appraisersPortalScreen].forEach((element) => element.classList.add('hidden'));
+  [listScreen, createScreen, detailsScreen, messageCenterScreen, appraisersPortalScreen, localAuthorityPortalScreen].forEach((element) => element.classList.add('hidden'));
   screen.classList.remove('hidden');
 }
 
@@ -210,6 +224,101 @@ async function saveAppraisal() {
     appraisalForm.classList.add('hidden');
     appraisersPortalList.classList.remove('hidden');
     renderAppraisersPortal();
+  }
+}
+
+let selectedPermitReportId = null;
+
+function renderLocalAuthorityPortal() {
+  if (!reports.length) {
+    localAuthorityPortalList.innerHTML = '<p>No buildings found.</p>';
+    return;
+  }
+
+  const table = document.createElement('table');
+  table.innerHTML = `
+    <thead>
+      <tr>
+        <th>Building ID</th>
+        <th>Address</th>
+        <th>Locality</th>
+        <th>Status</th>
+        <th>Permit Approval</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  `;
+
+  const tbody = table.querySelector('tbody');
+  reports.forEach((report) => {
+    const row = document.createElement('tr');
+    const locality = report.address ? report.address.split(',')[0].trim() : '';
+    const hasApproval = report.permitApproval ? 'Yes' : 'No';
+    row.innerHTML = `
+      <td>#${report.id}</td>
+      <td>${report.address}</td>
+      <td>${locality}</td>
+      <td><span class="status ${report.status}">${report.status}</span></td>
+      <td>${hasApproval}</td>
+      <td><a href="#" class="permit-link" data-id="${report.id}">Update Infrastructure</a></td>
+    `;
+    tbody.appendChild(row);
+  });
+
+  localAuthorityPortalList.innerHTML = '';
+  localAuthorityPortalList.appendChild(table);
+}
+
+function openPermitApprovalForm(reportId) {
+  const report = reports.find((item) => item.id === reportId);
+  if (!report) return;
+
+  selectedPermitReportId = reportId;
+  permitBuildingInfo.textContent = `Building #${report.id} - ${report.address}`;
+  permitApprovalForm.classList.remove('hidden');
+  localAuthorityPortalList.classList.add('hidden');
+
+  if (report.permitApproval) {
+    permitWaterSupply.checked = report.permitApproval.waterSupply || false;
+    permitElectricitySupply.checked = report.permitApproval.electricitySupply || false;
+    permitAccessRoads.checked = report.permitApproval.accessRoads || false;
+    permitEnvironmentalCleared.checked = report.permitApproval.environmentalCleared || false;
+    permitComments.value = report.permitApproval.localAuthorityComments || '';
+    permitApproved.checked = report.permitApproval.approved || false;
+  } else {
+    permitWaterSupply.checked = false;
+    permitElectricitySupply.checked = false;
+    permitAccessRoads.checked = false;
+    permitEnvironmentalCleared.checked = false;
+    permitComments.value = '';
+    permitApproved.checked = false;
+  }
+}
+
+async function savePermitApproval() {
+  const response = await fetch(`/reports/${selectedPermitReportId}/permit-approval`, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      waterSupply: permitWaterSupply.checked,
+      electricitySupply: permitElectricitySupply.checked,
+      accessRoads: permitAccessRoads.checked,
+      environmentalCleared: permitEnvironmentalCleared.checked,
+      localAuthorityComments: permitComments.value,
+      approved: permitApproved.checked,
+    }),
+  });
+
+  if (response.ok) {
+    const updated = await response.json();
+    const report = reports.find((item) => item.id === updated.id);
+    if (report) {
+      report.permitApproval = updated.permitApproval;
+    }
+    permitApprovalForm.classList.add('hidden');
+    localAuthorityPortalList.classList.remove('hidden');
+    renderLocalAuthorityPortal();
   }
 }
 
@@ -467,6 +576,17 @@ function renderDetails(report) {
         <p><strong>Re-inspection Required:</strong> ${report.appraisal.reinspectionRequired ? 'Yes' : 'No'}</p>
       </div>
     ` : ''}
+    ${report.permitApproval ? `
+      <div style="margin-top:1rem; padding:0.75rem; background:#f0f4f8; border-radius:6px;">
+        <h3 style="margin-top:0;">Local Authority Approval</h3>
+        <p><strong>Water Supply:</strong> ${report.permitApproval.waterSupply ? 'Yes' : 'No'}</p>
+        <p><strong>Electricity Supply:</strong> ${report.permitApproval.electricitySupply ? 'Yes' : 'No'}</p>
+        <p><strong>Access Roads:</strong> ${report.permitApproval.accessRoads ? 'Yes' : 'No'}</p>
+        <p><strong>Environmental Hazards Cleared:</strong> ${report.permitApproval.environmentalCleared ? 'Yes' : 'No'}</p>
+        <p><strong>Comments:</strong> ${report.permitApproval.localAuthorityComments || '—'}</p>
+        <p><strong>Approved:</strong> ${report.permitApproval.approved ? 'Yes' : 'No'}</p>
+      </div>
+    ` : ''}
     <div style="margin-top:0.75rem;">
       <button id="budgetRequestButton" ${canOpenBudgetRequest(report) ? '' : 'disabled'}>Open Budget Request</button>
       ${canGenerateReoccupationFile(report) ? '<button id="exportButton" style="margin-left:0.5rem;">Generate a re-occupation file</button>' : ''}
@@ -583,6 +703,28 @@ saveAppraisalButton.addEventListener('click', saveAppraisal);
 cancelAppraisalButton.addEventListener('click', () => {
   appraisalForm.classList.add('hidden');
   appraisersPortalList.classList.remove('hidden');
+});
+localAuthorityPortalButton.addEventListener('click', async () => {
+  await loadReports();
+  renderLocalAuthorityPortal();
+  showScreen(localAuthorityPortalScreen);
+});
+backFromLocalAuthorityPortal.addEventListener('click', () => {
+  permitApprovalForm.classList.add('hidden');
+  localAuthorityPortalList.classList.remove('hidden');
+  showScreen(listScreen);
+});
+localAuthorityPortalList.addEventListener('click', (event) => {
+  const link = event.target.closest('a.permit-link');
+  if (link) {
+    event.preventDefault();
+    openPermitApprovalForm(Number(link.dataset.id));
+  }
+});
+savePermitApprovalButton.addEventListener('click', savePermitApproval);
+cancelPermitApprovalButton.addEventListener('click', () => {
+  permitApprovalForm.classList.add('hidden');
+  localAuthorityPortalList.classList.remove('hidden');
 });
 notificationModeSelect.addEventListener('change', () => setNotificationMode(notificationModeSelect.value));
 reportList.addEventListener('click', async (event) => {

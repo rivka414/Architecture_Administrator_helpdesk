@@ -40,6 +40,7 @@
           <button id="createButton">Create Report</button>
           <button id="messageCenterButton" style="margin-left:0.5rem;">Message Center</button>
           <button id="appraisersPortalButton" style="margin-left:0.5rem;">Appraisers Portal</button>
+          <button id="localAuthorityPortalButton" style="margin-left:0.5rem;">Local Authority Portal</button>
           <label style="margin-left:0.75rem;"><input type="checkbox" id="waitingFilter" /> Show only buildings waiting in line for work</label>
           <label style="margin-left:0.75rem;"><input type="checkbox" id="budgetReadyFilter" /> Show only buildings ready for budget release</label>
           <label style="margin-left:0.75rem;">
@@ -123,6 +124,26 @@
           </div>
         </div>
         <button id="backFromAppraisersPortal" style="margin-top:1rem;">Back to Reports</button>
+      </div>
+
+      <div id="localAuthorityPortalScreen" class="card hidden">
+        <h2>Local Authority Portal</h2>
+        <div id="localAuthorityPortalList"></div>
+        <div id="permitApprovalForm" class="hidden" style="margin-top:1rem;">
+          <h3>Infrastructure Readiness Confirmation</h3>
+          <p id="permitBuildingInfo"></p>
+          <div style="margin-top:0.5rem;"><label><input id="permitWaterSupply" type="checkbox" /> Proper water supply</label></div>
+          <div style="margin-top:0.5rem;"><label><input id="permitElectricitySupply" type="checkbox" /> Proper electricity supply</label></div>
+          <div style="margin-top:0.5rem;"><label><input id="permitAccessRoads" type="checkbox" /> Open access roads</label></div>
+          <div style="margin-top:0.5rem;"><label><input id="permitEnvironmentalCleared" type="checkbox" /> Environmental hazards have been cleared</label></div>
+          <div style="margin-top:0.5rem;"><label>Local Authority Comments</label><br /><textarea id="permitComments" rows="4"></textarea></div>
+          <div style="margin-top:0.5rem;"><label><input id="permitApproved" type="checkbox" /> Local authority approval</label></div>
+          <div style="margin-top:0.75rem;">
+            <button id="savePermitApprovalButton">Save</button>
+            <button id="cancelPermitApprovalButton" style="margin-left:0.5rem;">Cancel</button>
+          </div>
+        </div>
+        <button id="backFromLocalAuthorityPortal" style="margin-top:1rem;">Back to Reports</button>
       </div>
     </main>
 
