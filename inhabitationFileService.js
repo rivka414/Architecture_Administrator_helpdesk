@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const PDFDocument = require('pdfkit');
 
 class InhabitationFileService {
   constructor(outputDir) {
@@ -15,34 +16,93 @@ class InhabitationFileService {
 
     await new Promise((resolve) => setTimeout(resolve, 1000));
 
-    const content = `\n%PDF-1.4
-1 0 obj<< /Type /Catalog /Pages 2 0 R >>endobj
-2 0 obj<< /Type /Pages /Kids[3 0 R] /Count 1 >>endobj
-3 0 obj<< /Type /Page /Parent 2 0 R /MediaBox[0 0 612 792] /Contents 4 0 R /Resources<< /Font<< /F1 5 0 R >> >> >>endobj
-4 0 obj<< /Length 220 >>stream
-BT /F1 16 Tf 50 750 Td 0 0 0 rg (שם הקובץ: ${fileName}) Tj 0 -20 Td (מזהה בניין: ${report.id}) Tj 0 -20 Td (כתובת: ${report.address}) Tj 0 -20 Td (מספר דירות: ${report.apartmentsInBuilding}) Tj 0 -20 Td (סטטוס זכאות: ${report.eligibilityCheckPerformed ? 'כן' : 'לא'}) Tj 0 -20 Td (סטטוס תקציב: ${report.budgetRequestOpened ? 'כן' : 'לא'}) Tj 0 -20 Td (סטטוס שיקום: ${report.status}) Tj 0 -20 Td (ניתן לשוב למגורים) Tj ET
-endstream
-endobj
-5 0 obj<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>endobj
-xref
-0 6
-0000000000 65535 f 
-0000000010 00000 n 
-0000000062 00000 n 
-0000000119 00000 n 
-0000000206 00000 n 
-0000000300 00000 n 
-trailer<< /Size 6 /Root 1 0 R >>
-startxref
-0
-%%EOF`;
+    const doc = new PDFDocument({ 
+      size: 'A4',
+      margins: { top: 50, bottom: 50, left: 50, right: 50 },
+      layout: 'portrait'
+    });
 
-    fs.writeFileSync(filePath, content, 'utf8');
+    const stream = fs.createWriteStream(filePath);
+    doc.pipe(stream);
+
+    try {
+      doc.font('C:\\Windows\\Fonts\\arial.ttf');
+    } catch (e) {
+      const fontPath = path.join(__dirname, 'fonts', 'NotoSansHebrew-Regular.ttf');
+      if (fs.existsSync(fontPath)) {
+        doc.font(fontPath);
+      } else {
+        doc.font('Helvetica');
+      }
+    }
+
+    const title = 'קובץ שיבה למגורים';
+    const buildingId = `מזהה בניין: ${report.id}`;
+    const address = `כתובת: ${report.address}`;
+    const apartments = `מספר דירות: ${report.apartmentsInBuilding}`;
+    const eligibilityStatus = `סטטוס זכאות: ${report.eligibilityCheckPerformed ? 'כן' : 'לא'}`;
+    const budgetStatus = `סטטוס תקציב: ${report.budgetRequestOpened ? 'כן' : 'לא'}`;
+    const rehabilitationStatus = `סטטוס שיקום: ${this.translateStatus(report.status)}`;
+    const canReinhabit = 'ניתן לשוב למגורים';
+
+    const pageWidth = doc.page.width;
+    const rightMargin = 50;
+    const leftMargin = 50;
+    const contentWidth = pageWidth - rightMargin - leftMargin;
+
+    doc.fontSize(24).fillColor('#1f4f7a');
+    doc.text(title, leftMargin, 80, { 
+      width: contentWidth, 
+      align: 'left' 
+    });
+    
+    doc.fontSize(14).fillColor('#000000');
+    const lineHeight = 30;
+    let currentY = 140;
+
+    doc.text(buildingId, leftMargin, currentY, { width: contentWidth, align: 'left' });
+    currentY += lineHeight;
+    
+    doc.text(address, leftMargin, currentY, { width: contentWidth, align: 'left' });
+    currentY += lineHeight;
+    
+    doc.text(apartments, leftMargin, currentY, { width: contentWidth, align: 'left' });
+    currentY += lineHeight;
+    
+    doc.text(eligibilityStatus, leftMargin, currentY, { width: contentWidth, align: 'left' });
+    currentY += lineHeight;
+    
+    doc.text(budgetStatus, leftMargin, currentY, { width: contentWidth, align: 'left' });
+    currentY += lineHeight;
+    
+    doc.text(rehabilitationStatus, leftMargin, currentY, { width: contentWidth, align: 'left' });
+    currentY += lineHeight + 20;
+
+    doc.fontSize(18).fillColor('#0b6b2f');
+    doc.text(canReinhabit, leftMargin, currentY, { width: contentWidth, align: 'left' });
+
+    doc.end();
+
+    await new Promise((resolve, reject) => {
+      stream.on('finish', resolve);
+      stream.on('error', reject);
+    });
 
     return {
       fileName,
       url: `/files/${fileName}`,
     };
+  }
+
+  translateStatus(status) {
+    const translations = {
+      'WAITING_FOR_VALIDATION': 'ממתין לאימות',
+      'NEW': 'חדש',
+      'IN_REVIEW': 'בבדיקה',
+      'Building in the process of restoration': 'בניין בתהליך שיקום',
+      'Restoration process completed': 'תהליך השיקום הושלם'
+    };
+    return translations[status] || status;
   }
 }
 
