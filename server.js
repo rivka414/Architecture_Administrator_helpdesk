@@ -382,6 +382,9 @@ function createApp() {
     if (report.budgetRequestOpened === undefined) {
       report.budgetRequestOpened = false;
     }
+    if (!report.appraisal) {
+      report.appraisal = null;
+    }
   });
   let nextId = reports.length ? Math.max(...reports.map((report) => Number(report.id))) + 1 : 3;
 
@@ -435,6 +438,29 @@ function createApp() {
     }
 
     report.budgetRequestOpened = true;
+    saveReports(reportsFilePath, reports);
+    res.json(report);
+  });
+
+  app.patch('/reports/:id/appraisal', (req, res) => {
+    const report = reports.find((item) => item.id === Number(req.params.id));
+    if (!report) {
+      return res.status(404).json({ error: 'Report not found' });
+    }
+
+    const { damageLevel, appraiserComments, inspectionDate, reinspectionRequired } = req.body;
+
+    if (!damageLevel || !inspectionDate) {
+      return res.status(400).json({ error: 'Damage level and inspection date are required' });
+    }
+
+    report.appraisal = {
+      damageLevel,
+      appraiserComments: appraiserComments || '',
+      inspectionDate,
+      reinspectionRequired: Boolean(reinspectionRequired),
+    };
+
     saveReports(reportsFilePath, reports);
     res.json(report);
   });

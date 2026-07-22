@@ -2,9 +2,12 @@ const listScreen = document.getElementById('listScreen');
 const createScreen = document.getElementById('createScreen');
 const detailsScreen = document.getElementById('detailsScreen');
 const messageCenterScreen = document.getElementById('messageCenterScreen');
+const appraisersPortalScreen = document.getElementById('appraisersPortalScreen');
 const reportList = document.getElementById('reportList');
 const detailsContent = document.getElementById('detailsContent');
 const notificationsList = document.getElementById('notificationsList');
+const appraisersPortalList = document.getElementById('appraisersPortalList');
+const appraisalForm = document.getElementById('appraisalForm');
 const createForm = document.getElementById('createForm');
 const statusSelect = document.getElementById('statusSelect');
 const waitingFilter = document.getElementById('waitingFilter');
@@ -12,19 +15,29 @@ const budgetReadyFilter = document.getElementById('budgetReadyFilter');
 const settlementFilter = document.getElementById('settlementFilter');
 const batchGenerateButton = document.getElementById('batchGenerateButton');
 const messageCenterButton = document.getElementById('messageCenterButton');
+const appraisersPortalButton = document.getElementById('appraisersPortalButton');
 const backFromMessageCenter = document.getElementById('backFromMessageCenter');
+const backFromAppraisersPortal = document.getElementById('backFromAppraisersPortal');
 const modalOverlay = document.getElementById('modalOverlay');
 const modalContent = document.getElementById('modalContent');
 const notificationModeSelect = document.getElementById('notificationModeSelect');
 const notificationModeIndicator = document.getElementById('notificationModeIndicator');
+const appraisalDamageLevel = document.getElementById('appraisalDamageLevel');
+const appraisalComments = document.getElementById('appraisalComments');
+const appraisalDate = document.getElementById('appraisalDate');
+const appraisalReinspection = document.getElementById('appraisalReinspection');
+const appraisalBuildingInfo = document.getElementById('appraisalBuildingInfo');
+const saveAppraisalButton = document.getElementById('saveAppraisalButton');
+const cancelAppraisalButton = document.getElementById('cancelAppraisalButton');
 
 let reports = [];
 let selectedReportId = null;
 let pendingSuccessMessage = '';
 let generatedFiles = {};
+let selectedAppraisalReportId = null;
 
 function showScreen(screen) {
-  [listScreen, createScreen, detailsScreen, messageCenterScreen].forEach((element) => element.classList.add('hidden'));
+  [listScreen, createScreen, detailsScreen, messageCenterScreen, appraisersPortalScreen].forEach((element) => element.classList.add('hidden'));
   screen.classList.remove('hidden');
 }
 
@@ -111,6 +124,93 @@ function renderNotifications(notifications) {
 
   notificationsList.innerHTML = '';
   notificationsList.appendChild(table);
+}
+
+function renderAppraisersPortal() {
+  if (!reports.length) {
+    appraisersPortalList.innerHTML = '<p>No buildings found.</p>';
+    return;
+  }
+
+  const table = document.createElement('table');
+  table.innerHTML = `
+    <thead>
+      <tr>
+        <th>Building ID</th>
+        <th>Address</th>
+        <th>Locality</th>
+        <th>Status</th>
+        <th>Appraisal</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  `;
+
+  const tbody = table.querySelector('tbody');
+  reports.forEach((report) => {
+    const row = document.createElement('tr');
+    const locality = report.address ? report.address.split(',')[0].trim() : '';
+    const hasAppraisal = report.appraisal ? 'Yes' : 'No';
+    row.innerHTML = `
+      <td>#${report.id}</td>
+      <td>${report.address}</td>
+      <td>${locality}</td>
+      <td><span class="status ${report.status}">${report.status}</span></td>
+      <td>${hasAppraisal}</td>
+      <td><a href="#" class="appraisal-link" data-id="${report.id}">Enter Assessment</a></td>
+    `;
+    tbody.appendChild(row);
+  });
+
+  appraisersPortalList.innerHTML = '';
+  appraisersPortalList.appendChild(table);
+}
+
+function openAppraisalForm(reportId) {
+  const report = reports.find((item) => item.id === reportId);
+  if (!report) return;
+
+  selectedAppraisalReportId = reportId;
+  appraisalBuildingInfo.textContent = `Building #${report.id} - ${report.address}`;
+  appraisalForm.classList.remove('hidden');
+  appraisersPortalList.classList.add('hidden');
+
+  if (report.appraisal) {
+    appraisalDamageLevel.value = report.appraisal.damageLevel;
+    appraisalComments.value = report.appraisal.appraiserComments || '';
+    appraisalDate.value = report.appraisal.inspectionDate || '';
+    appraisalReinspection.checked = report.appraisal.reinspectionRequired || false;
+  } else {
+    appraisalDamageLevel.value = 'light';
+    appraisalComments.value = '';
+    appraisalDate.value = '';
+    appraisalReinspection.checked = false;
+  }
+}
+
+async function saveAppraisal() {
+  const response = await fetch(`/reports/${selectedAppraisalReportId}/appraisal`, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      damageLevel: appraisalDamageLevel.value,
+      appraiserComments: appraisalComments.value,
+      inspectionDate: appraisalDate.value,
+      reinspectionRequired: appraisalReinspection.checked,
+    }),
+  });
+
+  if (response.ok) {
+    const updated = await response.json();
+    const report = reports.find((item) => item.id === updated.id);
+    if (report) {
+      report.appraisal = updated.appraisal;
+    }
+    appraisalForm.classList.add('hidden');
+    appraisersPortalList.classList.remove('hidden');
+    renderAppraisersPortal();
+  }
 }
 
 async function loadReports() {
@@ -358,6 +458,15 @@ function renderDetails(report) {
     <p><strong>Social approval:</strong> ${report.socialApproval ? 'Yes' : 'No'}</p>
     <p><strong>Family Email:</strong> ${report.familyEmail || '—'}</p>
     <p><strong>Readiness:</strong> ${getReadinessMessage(report)}</p>
+    ${report.appraisal ? `
+      <div style="margin-top:1rem; padding:0.75rem; background:#f0f4f8; border-radius:6px;">
+        <h3 style="margin-top:0;">Appraiser Assessment</h3>
+        <p><strong>Damage Level:</strong> ${report.appraisal.damageLevel}</p>
+        <p><strong>Comments:</strong> ${report.appraisal.appraiserComments || '—'}</p>
+        <p><strong>Inspection Date:</strong> ${report.appraisal.inspectionDate}</p>
+        <p><strong>Re-inspection Required:</strong> ${report.appraisal.reinspectionRequired ? 'Yes' : 'No'}</p>
+      </div>
+    ` : ''}
     <div style="margin-top:0.75rem;">
       <button id="budgetRequestButton" ${canOpenBudgetRequest(report) ? '' : 'disabled'}>Open Budget Request</button>
       ${canGenerateReoccupationFile(report) ? '<button id="exportButton" style="margin-left:0.5rem;">Generate a re-occupation file</button>' : ''}
@@ -453,6 +562,28 @@ messageCenterButton.addEventListener('click', async () => {
   showScreen(messageCenterScreen);
 });
 backFromMessageCenter.addEventListener('click', () => showScreen(listScreen));
+appraisersPortalButton.addEventListener('click', async () => {
+  await loadReports();
+  renderAppraisersPortal();
+  showScreen(appraisersPortalScreen);
+});
+backFromAppraisersPortal.addEventListener('click', () => {
+  appraisalForm.classList.add('hidden');
+  appraisersPortalList.classList.remove('hidden');
+  showScreen(listScreen);
+});
+appraisersPortalList.addEventListener('click', (event) => {
+  const link = event.target.closest('a.appraisal-link');
+  if (link) {
+    event.preventDefault();
+    openAppraisalForm(Number(link.dataset.id));
+  }
+});
+saveAppraisalButton.addEventListener('click', saveAppraisal);
+cancelAppraisalButton.addEventListener('click', () => {
+  appraisalForm.classList.add('hidden');
+  appraisersPortalList.classList.remove('hidden');
+});
 notificationModeSelect.addEventListener('change', () => setNotificationMode(notificationModeSelect.value));
 reportList.addEventListener('click', async (event) => {
   const fileLink = event.target.closest('a.generate-file-link');

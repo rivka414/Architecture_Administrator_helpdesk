@@ -201,3 +201,58 @@ test('PATCH /reports/:id/status supports the new status flow', async () => {
   const body = await secondUpdate.json();
   assert.equal(body.status, 'IN_REVIEW');
 });
+
+test('PATCH /reports/:id/appraisal saves a damage assessment', async () => {
+  const createResponse = await fetch(`${baseUrl}/reports`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      reporterName: 'Tom',
+      address: 'Valley 44',
+      damageType: 'Structural',
+      description: 'Cracked walls',
+    }),
+  });
+  const created = await createResponse.json();
+
+  const response = await fetch(`${baseUrl}/reports/${created.id}/appraisal`, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      damageLevel: 'severe',
+      appraiserComments: 'Major structural damage to load-bearing walls',
+      inspectionDate: '2026-07-20',
+      reinspectionRequired: true,
+    }),
+  });
+
+  assert.equal(response.status, 200);
+  const body = await response.json();
+  assert.ok(body.appraisal);
+  assert.equal(body.appraisal.damageLevel, 'severe');
+  assert.equal(body.appraisal.appraiserComments, 'Major structural damage to load-bearing walls');
+  assert.equal(body.appraisal.inspectionDate, '2026-07-20');
+  assert.equal(body.appraisal.reinspectionRequired, true);
+});
+
+test('PATCH /reports/:id/appraisal returns 400 when required fields are missing', async () => {
+  const createResponse = await fetch(`${baseUrl}/reports`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      reporterName: 'Sara',
+      address: 'Hilltop 9',
+      damageType: 'Water',
+      description: 'Flooding',
+    }),
+  });
+  const created = await createResponse.json();
+
+  const response = await fetch(`${baseUrl}/reports/${created.id}/appraisal`, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ damageLevel: 'medium' }),
+  });
+
+  assert.equal(response.status, 400);
+});

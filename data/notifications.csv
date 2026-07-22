@@ -1,6 +1,3 @@
 MessageID,BuildingID,BuildingAddress,Email,Subject,DateTime,Status,IdempotencyKey
-1,1,"Tel Aviv, Rothschild 1",john.doe@example.com,"Return to Home Approval Tel Aviv, Rothschild 1",2026-07-22T13:48:28.433Z,FAILED,1
-2,1,"Tel Aviv, Rothschild 1",john.doe@example.com,"Return to Home Approval Tel Aviv, Rothschild 1",2026-07-22T13:48:28.434Z,FAILED,1
-3,1,"Tel Aviv, Rothschild 1",john.doe@example.com,"Return to Home Approval Tel Aviv, Rothschild 1",2026-07-22T13:48:28.434Z,FAILED,1
-4,1,"Tel Aviv, Rothschild 1",john.doe@example.com,"Return to Home Approval Tel Aviv, Rothschild 1",2026-07-22T13:50:12.409Z,SENT,1
-5,3,"Jerusalem, Jaffa 10",david.cohen@example.com,"Return to Home Approval Jerusalem, Jaffa 10",2026-07-22T13:50:29.887Z,SENT,3
+1,21,"Zichron Yaakov, Hanadiv 1",raphael.oz@example.com,"Return to Home Approval Zichron Yaakov, Hanadiv 1",2026-07-22T13:59:54.346Z,SENT,21
+2,10,"Ramat Gan, Bialik 12",michal.bar@example.com,"Return to Home Approval Ramat Gan, Bialik 12",2026-07-22T14:01:17.921Z,SENT,10
