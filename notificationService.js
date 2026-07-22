@@ -1,10 +1,14 @@
 const fs = require('fs');
 const path = require('path');
 
+const VALID_MODES = ['success', 'always_fail', 'fail_first', 'random'];
+
 class NotificationService {
   constructor(csvFilePath) {
     this.csvFilePath = csvFilePath;
     this.messageIdCounter = 1;
+    this.statusMode = 'success';
+    this.attemptCount = 0;
     
     // Ensure the directory exists
     const dir = path.dirname(this.csvFilePath);
@@ -20,6 +24,31 @@ class NotificationService {
     
     // Load the last message ID from the CSV file
     this.loadLastMessageId();
+  }
+
+  getStatusMode() {
+    return this.statusMode;
+  }
+
+  setStatusMode(mode) {
+    if (VALID_MODES.includes(mode)) {
+      this.statusMode = mode;
+      this.attemptCount = 0;
+    }
+  }
+
+  shouldFail() {
+    switch (this.statusMode) {
+      case 'always_fail':
+        return true;
+      case 'fail_first':
+        this.attemptCount++;
+        return this.attemptCount === 1;
+      case 'random':
+        return Math.random() < 0.3;
+      default:
+        return false;
+    }
   }
   
   loadLastMessageId() {
@@ -45,16 +74,30 @@ class NotificationService {
     const messageId = this.messageIdCounter++;
     const now = new Date();
     const dateTime = now.toISOString();
-    const status = 'SENT';
+    const status = this.shouldFail() ? 'FAILED' : 'SENT';
     
     // Append to CSV file
     const csvLine = `${messageId},${buildingId},"${buildingAddress}",${email},"${subject}",${dateTime},${status}\n`;
     fs.appendFileSync(this.csvFilePath, csvLine, 'utf8');
     
     return {
-      status: 'SENT',
+      status: status,
       messageId: messageId
     };
+  }
+
+  sendWithRetry(buildingId, email, subject, body, buildingAddress) {
+    const MAX_ATTEMPTS = 3;
+    let lastResult;
+
+    for (let attempt = 0; attempt < MAX_ATTEMPTS; attempt++) {
+      lastResult = this.sendNotification(buildingId, email, subject, body, buildingAddress);
+      if (lastResult.status === 'SENT') {
+        return lastResult;
+      }
+    }
+
+    return lastResult;
   }
   
   getAllNotifications() {

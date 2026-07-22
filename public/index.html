@@ -85,6 +85,16 @@
 
       <div id="messageCenterScreen" class="card hidden">
         <h2>Message Center</h2>
+        <div style="margin-bottom:1rem; padding:0.75rem; background:#f0f4f8; border-radius:6px;">
+          <label><strong>Notification Server Status:</strong></label>
+          <select id="notificationModeSelect" style="margin-left:0.5rem;">
+            <option value="success">Success</option>
+            <option value="always_fail">Always Fail</option>
+            <option value="fail_first">Fail First Attempt</option>
+            <option value="random">Random Failure (~30%)</option>
+          </select>
+          <span id="notificationModeIndicator" style="margin-left:0.5rem; font-weight:bold;"></span>
+        </div>
         <div id="notificationsList"></div>
         <button id="backFromMessageCenter" style="margin-top:1rem;">Back to Reports</button>
       </div>

@@ -465,7 +465,7 @@ function createApp() {
       const body = `Hello,\n\nWe are pleased to inform you that your building has been approved for return to home.\nThe occupancy file has been prepared successfully.\n\nBest regards,\nMinistry of Construction and Housing`;
       
       try {
-        await notificationService.sendNotification(
+        await notificationService.sendWithRetry(
           report.id,
           report.familyEmail,
           subject,
@@ -517,7 +517,7 @@ function createApp() {
             const subject = `Return to Home Approval ${report.address}`;
             const body = `Hello,\n\nWe are pleased to inform you that your building has been approved for return to home.\nThe occupancy file has been prepared successfully.\n\nBest regards,\nMinistry of Construction and Housing`;
             try {
-              await notificationService.sendNotification(report.id, report.familyEmail, subject, body, report.address);
+              await notificationService.sendWithRetry(report.id, report.familyEmail, subject, body, report.address);
             } catch (error) {
               console.error(`Failed to send notification for building ${report.id}:`, error);
             }
@@ -560,6 +560,19 @@ function createApp() {
   app.get('/notifications', (req, res) => {
     const notifications = notificationService.getAllNotifications();
     res.json(notifications);
+  });
+
+  app.get('/notifications/status', (req, res) => {
+    res.json({ mode: notificationService.getStatusMode() });
+  });
+
+  app.post('/notifications/status', (req, res) => {
+    const { mode } = req.body;
+    if (!mode) {
+      return res.status(400).json({ error: 'Missing mode' });
+    }
+    notificationService.setStatusMode(mode);
+    res.json({ mode: notificationService.getStatusMode() });
   });
 
   app.patch('/reports/:id/status', (req, res) => {

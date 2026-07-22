@@ -15,6 +15,8 @@ const messageCenterButton = document.getElementById('messageCenterButton');
 const backFromMessageCenter = document.getElementById('backFromMessageCenter');
 const modalOverlay = document.getElementById('modalOverlay');
 const modalContent = document.getElementById('modalContent');
+const notificationModeSelect = document.getElementById('notificationModeSelect');
+const notificationModeIndicator = document.getElementById('notificationModeIndicator');
 
 let reports = [];
 let selectedReportId = null;
@@ -30,6 +32,39 @@ async function loadNotifications() {
   const response = await fetch('/notifications');
   const notifications = await response.json();
   renderNotifications(notifications);
+}
+
+async function loadNotificationMode() {
+  const response = await fetch('/notifications/status');
+  const data = await response.json();
+  notificationModeSelect.value = data.mode;
+  updateModeIndicator(data.mode);
+}
+
+async function setNotificationMode(mode) {
+  await fetch('/notifications/status', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ mode })
+  });
+  updateModeIndicator(mode);
+}
+
+function updateModeIndicator(mode) {
+  const labels = {
+    success: 'Server: Success',
+    always_fail: 'Server: Always Fail',
+    fail_first: 'Server: Fail First Attempt',
+    random: 'Server: Random Failure'
+  };
+  const colors = {
+    success: '#0b6b2f',
+    always_fail: '#c62828',
+    fail_first: '#e65100',
+    random: '#6a1b9a'
+  };
+  notificationModeIndicator.textContent = labels[mode] || mode;
+  notificationModeIndicator.style.color = colors[mode] || '#222';
 }
 
 function renderNotifications(notifications) {
@@ -410,10 +445,11 @@ settlementFilter.addEventListener('change', renderReports);
 batchGenerateButton.addEventListener('click', batchGenerateFiles);
 createForm.addEventListener('submit', createReport);
 messageCenterButton.addEventListener('click', async () => {
-  await loadNotifications();
+  await Promise.all([loadNotifications(), loadNotificationMode()]);
   showScreen(messageCenterScreen);
 });
 backFromMessageCenter.addEventListener('click', () => showScreen(listScreen));
+notificationModeSelect.addEventListener('change', () => setNotificationMode(notificationModeSelect.value));
 reportList.addEventListener('click', async (event) => {
   const fileLink = event.target.closest('a.generate-file-link');
   if (fileLink) {
