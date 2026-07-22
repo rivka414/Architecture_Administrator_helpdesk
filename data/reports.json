@@ -13,8 +13,20 @@
     "apartmentsInBuilding": 12,
     "budgetRequestOpened": true,
     "familyEmail": "john.doe@example.com",
-    "appraisal": null,
-    "permitApproval": null,
+    "appraisal": {
+      "damageLevel": "light",
+      "appraiserComments": "OK",
+      "inspectionDate": "2026-07-20",
+      "reinspectionRequired": false
+    },
+    "permitApproval": {
+      "waterSupply": true,
+      "electricitySupply": true,
+      "accessRoads": true,
+      "environmentalCleared": true,
+      "localAuthorityComments": "",
+      "approved": true
+    },
     "returnHomeFileGenerated": true
   },
   {
@@ -31,8 +43,20 @@
     "apartmentsInBuilding": 8,
     "budgetRequestOpened": true,
     "familyEmail": "jane.smith@example.com",
-    "appraisal": null,
-    "permitApproval": null,
+    "appraisal": {
+      "damageLevel": "light",
+      "appraiserComments": "ggg",
+      "inspectionDate": "2026-07-22",
+      "reinspectionRequired": true
+    },
+    "permitApproval": {
+      "waterSupply": true,
+      "electricitySupply": true,
+      "accessRoads": true,
+      "environmentalCleared": true,
+      "localAuthorityComments": "uj",
+      "approved": true
+    },
     "returnHomeFileGenerated": true
   },
   {
@@ -173,7 +197,7 @@
     "eligibilityCheckPerformed": true,
     "socialApproval": false,
     "apartmentsInBuilding": 18,
-    "budgetRequestOpened": false,
+    "budgetRequestOpened": true,
     "familyEmail": "michal.bar@example.com",
     "appraisal": null,
     "permitApproval": null,
@@ -185,7 +209,7 @@
     "address": "Ashdod, Sderot 20",
     "damageType": "Structural",
     "description": "Earthquake damage to facade",
-    "status": "NEW",
+    "status": "IN_REVIEW",
     "damagePhotosExist": true,
     "engineerReportExists": true,
     "eligibilityCheckPerformed": false,
@@ -257,29 +281,17 @@
     "address": "Kfar Saba, Sokolov 4",
     "damageType": "Fire",
     "description": "Balcony fire spread to wall",
-    "status": "Building in the process of restoration",
+    "status": "IN_REVIEW",
     "damagePhotosExist": true,
     "engineerReportExists": true,
     "eligibilityCheckPerformed": true,
     "socialApproval": false,
     "apartmentsInBuilding": 11,
-    "budgetRequestOpened": true,
+    "budgetRequestOpened": false,
     "familyEmail": "amos.k@example.com",
-    "appraisal": {
-      "damageLevel": "medium",
-      "appraiserComments": "/",
-      "inspectionDate": "2026-07-22",
-      "reinspectionRequired": true
-    },
-    "permitApproval": {
-      "waterSupply": true,
-      "electricitySupply": true,
-      "accessRoads": true,
-      "environmentalCleared": true,
-      "localAuthorityComments": "כ",
-      "approved": true
-    },
-    "returnHomeFileGenerated": true
+    "appraisal": null,
+    "permitApproval": null,
+    "returnHomeFileGenerated": false
   },
   {
     "id": 16,
