@@ -38,6 +38,7 @@
         <h2>Reports List</h2>
         <div class="list-controls">
           <button id="createButton">Create Report</button>
+          <button id="messageCenterButton" style="margin-left:0.5rem;">Message Center</button>
           <label style="margin-left:0.75rem;"><input type="checkbox" id="waitingFilter" /> Show only buildings waiting in line for work</label>
           <label style="margin-left:0.75rem;"><input type="checkbox" id="budgetReadyFilter" /> Show only buildings ready for budget release</label>
           <label style="margin-left:0.75rem;">
@@ -62,6 +63,7 @@
           <div style="margin-top:0.5rem;"><label>Eligibility check performed</label><br /><select name="eligibilityCheckPerformed"><option value="true">Yes</option><option value="false">No</option></select></div>
           <div style="margin-top:0.5rem;"><label>Social approval</label><br /><select name="socialApproval"><option value="true">Yes</option><option value="false">No</option></select></div>
           <div style="margin-top:0.5rem;"><label>Apartments in building</label><br /><input name="apartmentsInBuilding" type="number" min="0" value="0" /></div>
+          <div style="margin-top:0.5rem;"><label>Family Email</label><br /><input name="familyEmail" type="email" /></div>
           <div style="margin-top:0.75rem;"><button type="submit">Save Report</button> <button type="button" id="cancelCreate">Cancel</button></div>
         </form>
       </div>
@@ -79,6 +81,12 @@
           <button id="saveStatusButton" style="margin-left:0.5rem;">Update Status</button>
           <button id="backButton" style="margin-left:0.5rem;">Back</button>
         </div>
+      </div>
+
+      <div id="messageCenterScreen" class="card hidden">
+        <h2>Message Center</h2>
+        <div id="notificationsList"></div>
+        <button id="backFromMessageCenter" style="margin-top:1rem;">Back to Reports</button>
       </div>
     </main>
 

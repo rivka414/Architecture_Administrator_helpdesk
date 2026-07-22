@@ -1,14 +1,18 @@
 const listScreen = document.getElementById('listScreen');
 const createScreen = document.getElementById('createScreen');
 const detailsScreen = document.getElementById('detailsScreen');
+const messageCenterScreen = document.getElementById('messageCenterScreen');
 const reportList = document.getElementById('reportList');
 const detailsContent = document.getElementById('detailsContent');
+const notificationsList = document.getElementById('notificationsList');
 const createForm = document.getElementById('createForm');
 const statusSelect = document.getElementById('statusSelect');
 const waitingFilter = document.getElementById('waitingFilter');
 const budgetReadyFilter = document.getElementById('budgetReadyFilter');
 const settlementFilter = document.getElementById('settlementFilter');
 const batchGenerateButton = document.getElementById('batchGenerateButton');
+const messageCenterButton = document.getElementById('messageCenterButton');
+const backFromMessageCenter = document.getElementById('backFromMessageCenter');
 const modalOverlay = document.getElementById('modalOverlay');
 const modalContent = document.getElementById('modalContent');
 
@@ -18,8 +22,56 @@ let pendingSuccessMessage = '';
 let generatedFiles = {};
 
 function showScreen(screen) {
-  [listScreen, createScreen, detailsScreen].forEach((element) => element.classList.add('hidden'));
+  [listScreen, createScreen, detailsScreen, messageCenterScreen].forEach((element) => element.classList.add('hidden'));
   screen.classList.remove('hidden');
+}
+
+async function loadNotifications() {
+  const response = await fetch('/notifications');
+  const notifications = await response.json();
+  renderNotifications(notifications);
+}
+
+function renderNotifications(notifications) {
+  if (!notifications.length) {
+    notificationsList.innerHTML = '<p>No messages sent yet.</p>';
+    return;
+  }
+
+  const table = document.createElement('table');
+  table.innerHTML = `
+    <thead>
+      <tr>
+        <th>Message ID</th>
+        <th>Building ID</th>
+        <th>Building Address</th>
+        <th>Email</th>
+        <th>Subject</th>
+        <th>Date & Time</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  `;
+
+  const tbody = table.querySelector('tbody');
+  notifications.forEach((msg) => {
+    const row = document.createElement('tr');
+    const dt = msg.dateTime ? new Date(msg.dateTime).toLocaleString() : '';
+    row.innerHTML = `
+      <td>${msg.messageId}</td>
+      <td>#${msg.buildingId}</td>
+      <td>${msg.buildingAddress}</td>
+      <td>${msg.email}</td>
+      <td>${msg.subject}</td>
+      <td>${dt}</td>
+      <td><span class="status">${msg.status}</span></td>
+    `;
+    tbody.appendChild(row);
+  });
+
+  notificationsList.innerHTML = '';
+  notificationsList.appendChild(table);
 }
 
 async function loadReports() {
@@ -265,6 +317,7 @@ function renderDetails(report) {
     <p><strong>Eligibility check performed:</strong> ${report.eligibilityCheckPerformed ? 'Yes' : 'No'}</p>
     <p><strong>Apartments in building:</strong> ${report.apartmentsInBuilding}</p>
     <p><strong>Social approval:</strong> ${report.socialApproval ? 'Yes' : 'No'}</p>
+    <p><strong>Family Email:</strong> ${report.familyEmail || '—'}</p>
     <p><strong>Readiness:</strong> ${getReadinessMessage(report)}</p>
     <div style="margin-top:0.75rem;">
       <button id="budgetRequestButton" ${canOpenBudgetRequest(report) ? '' : 'disabled'}>Open Budget Request</button>
@@ -356,6 +409,11 @@ budgetReadyFilter.addEventListener('change', renderReports);
 settlementFilter.addEventListener('change', renderReports);
 batchGenerateButton.addEventListener('click', batchGenerateFiles);
 createForm.addEventListener('submit', createReport);
+messageCenterButton.addEventListener('click', async () => {
+  await loadNotifications();
+  showScreen(messageCenterScreen);
+});
+backFromMessageCenter.addEventListener('click', () => showScreen(listScreen));
 reportList.addEventListener('click', async (event) => {
   const fileLink = event.target.closest('a.generate-file-link');
   if (fileLink) {

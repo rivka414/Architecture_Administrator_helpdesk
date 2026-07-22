@@ -1,0 +1,15 @@
+MessageID,BuildingID,BuildingAddress,Email,Subject,DateTime,Status
+1,10,"Ramat Gan, Bialik 12",michal.bar@example.com,"Return to Home Approval Ramat Gan, Bialik 12",2026-07-22T12:35:09.371Z,SENT
+2,23,"a",r0534148535@gmail.com,"Return to Home Approval a",2026-07-22T12:35:41.504Z,SENT
+3,1,"Tel Aviv, Rothschild 1",john.doe@example.com,"Return to Home Approval Tel Aviv, Rothschild 1",2026-07-22T12:39:54.781Z,SENT
+4,2,"Tel Aviv, Allenby 22",jane.smith@example.com,"Return to Home Approval Tel Aviv, Allenby 22",2026-07-22T12:39:55.939Z,SENT
+5,3,"Jerusalem, Jaffa 10",david.cohen@example.com,"Return to Home Approval Jerusalem, Jaffa 10",2026-07-22T12:39:57.053Z,SENT
+6,4,"Jerusalem, King George 5",sarah.levy@example.com,"Return to Home Approval Jerusalem, King George 5",2026-07-22T12:39:58.140Z,SENT
+7,5,"Haifa, Herzl 15",moshe.ben@example.com,"Return to Home Approval Haifa, Herzl 15",2026-07-22T12:39:59.246Z,SENT
+8,6,"Haifa, Nordau 8",rivka.m@example.com,"Return to Home Approval Haifa, Nordau 8",2026-07-22T12:40:00.366Z,SENT
+9,7,"Beer Sheva, Ben Yehuda 3",avi.shalom@example.com,"Return to Home Approval Beer Sheva, Ben Yehuda 3",2026-07-22T12:40:01.513Z,SENT
+10,8,"Netanya, Rothschild 42",hanna.gold@example.com,"Return to Home Approval Netanya, Rothschild 42",2026-07-22T12:40:02.644Z,SENT
+11,9,"Petah Tikva, Hovevei Zion 7",yosef.a@example.com,"Return to Home Approval Petah Tikva, Hovevei Zion 7",2026-07-22T12:40:03.768Z,SENT
+12,10,"Ramat Gan, Bialik 12",michal.bar@example.com,"Return to Home Approval Ramat Gan, Bialik 12",2026-07-22T12:40:04.876Z,SENT
+13,21,"Zichron Yaakov, Hanadiv 1",raphael.oz@example.com,"Return to Home Approval Zichron Yaakov, Hanadiv 1",2026-07-22T12:40:06.023Z,SENT
+14,23,"a",r0534148535@gmail.com,"Return to Home Approval a",2026-07-22T12:40:07.126Z,SENT
