@@ -141,6 +141,50 @@ function createApp() {
     res.json(result);
   });
 
+  app.post('/buildings/batch-return-home-packages', async (req, res) => {
+    const { settlement } = req.body;
+    
+    let filteredReports = reports;
+    
+    if (settlement) {
+      filteredReports = reports.filter((report) => {
+        const address = report.address || '';
+        const reportSettlement = address.split(',')[0].trim();
+        return reportSettlement === settlement;
+      });
+    }
+
+    const generatedFiles = [];
+    
+    for (const report of filteredReports) {
+      const canGenerate = Boolean(
+        report.damagePhotosExist &&
+        report.engineerReportExists &&
+        report.eligibilityCheckPerformed &&
+        report.budgetRequestOpened &&
+        ['Building in the process of restoration', 'Restoration process completed'].includes(report.status)
+      );
+
+      if (canGenerate) {
+        try {
+          const result = await habitationFileService.generateReturnHomePackage(report);
+          generatedFiles.push({
+            buildingId: report.id,
+            url: result.url,
+            fileName: result.fileName
+          });
+        } catch (error) {
+          console.error(`Failed to generate file for building ${report.id}:`, error);
+        }
+      }
+    }
+
+    res.json({
+      count: generatedFiles.length,
+      files: generatedFiles
+    });
+  });
+
   app.patch('/reports/:id/status', (req, res) => {
     const report = reports.find((item) => item.id === Number(req.params.id));
     if (!report) {

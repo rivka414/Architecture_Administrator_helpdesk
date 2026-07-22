@@ -21,6 +21,12 @@
       .status.NEW { color: #c47b00; }
       .status.IN_REVIEW { color: #0b6b2f; }
       .success-message { background: #e8f5e9; color: #1b5e20; border: 1px solid #81c784; padding: 0.6rem 0.75rem; border-radius: 6px; margin-bottom: 0.75rem; }
+      .modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; z-index: 1000; }
+      .modal { background: white; padding: 2rem; border-radius: 8px; text-align: center; max-width: 400px; }
+      .spinner { border: 4px solid #f3f3f3; border-top: 4px solid #1f4f7a; border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin: 1rem auto; }
+      @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+      .document-icon { cursor: pointer; color: #1f4f7a; font-size: 1.2rem; text-decoration: none; }
+      .document-icon:hover { text-decoration: underline; }
     </style>
   </head>
   <body>
@@ -34,6 +40,12 @@
           <button id="createButton">Create Report</button>
           <label style="margin-left:0.75rem;"><input type="checkbox" id="waitingFilter" /> Show only buildings waiting in line for work</label>
           <label style="margin-left:0.75rem;"><input type="checkbox" id="budgetReadyFilter" /> Show only buildings ready for budget release</label>
+          <label style="margin-left:0.75rem;">
+            <select id="settlementFilter">
+              <option value="">All Settlements</option>
+            </select>
+          </label>
+          <button id="batchGenerateButton" style="margin-left:0.75rem;">Generate occupancy files for all eligible buildings</button>
         </div>
         <div id="reportList"></div>
       </div>
@@ -69,6 +81,12 @@
         </div>
       </div>
     </main>
+
+    <div id="modalOverlay" class="modal-overlay hidden" onclick="if(event.target === this) hideModal()">
+      <div class="modal">
+        <div id="modalContent"></div>
+      </div>
+    </div>
 
     <script src="app.js"></script>
   </body>

@@ -7,10 +7,15 @@ const createForm = document.getElementById('createForm');
 const statusSelect = document.getElementById('statusSelect');
 const waitingFilter = document.getElementById('waitingFilter');
 const budgetReadyFilter = document.getElementById('budgetReadyFilter');
+const settlementFilter = document.getElementById('settlementFilter');
+const batchGenerateButton = document.getElementById('batchGenerateButton');
+const modalOverlay = document.getElementById('modalOverlay');
+const modalContent = document.getElementById('modalContent');
 
 let reports = [];
 let selectedReportId = null;
 let pendingSuccessMessage = '';
+let generatedFiles = {};
 
 function showScreen(screen) {
   [listScreen, createScreen, detailsScreen].forEach((element) => element.classList.add('hidden'));
@@ -20,7 +25,34 @@ function showScreen(screen) {
 async function loadReports() {
   const response = await fetch('/reports');
   reports = await response.json();
+  populateSettlementFilter();
   renderReports();
+}
+
+function populateSettlementFilter() {
+  const settlements = new Set();
+  reports.forEach(report => {
+    const address = report.address || '';
+    const settlement = address.split(',')[0].trim();
+    if (settlement) {
+      settlements.add(settlement);
+    }
+  });
+  
+  const currentValue = settlementFilter.value;
+  settlementFilter.innerHTML = '<option value="">All Settlements</option>';
+  settlements.forEach(settlement => {
+    const option = document.createElement('option');
+    option.value = settlement;
+    option.textContent = settlement;
+    settlementFilter.appendChild(option);
+  });
+  settlementFilter.value = currentValue;
+}
+
+function extractSettlement(address) {
+  if (!address) return '';
+  return address.split(',')[0].trim();
 }
 
 function isWaitingInLine(report) {
@@ -52,6 +84,13 @@ function getVisibleReports() {
     filteredReports = filteredReports.filter((report) => isReadyForBudgetRelease(report));
   }
 
+  if (settlementFilter.value) {
+    filteredReports = filteredReports.filter((report) => {
+      const settlement = extractSettlement(report.address);
+      return settlement === settlementFilter.value;
+    });
+  }
+
   return filteredReports;
 }
 
@@ -74,6 +113,7 @@ function renderReports() {
         <th>Waiting in line for work</th>
         <th>Ready for budget release</th>
         <th>Re-occupation file</th>
+        <th>Document</th>
         <th>Action</th>
       </tr>
     </thead>
@@ -83,6 +123,7 @@ function renderReports() {
   const tbody = table.querySelector('tbody');
   visibleReports.forEach((report) => {
     const row = document.createElement('tr');
+    const fileUrl = generatedFiles[report.id];
     row.innerHTML = `
       <td>#${report.id}</td>
       <td>${report.reporterName}</td>
@@ -90,12 +131,65 @@ function renderReports() {
       <td>${isWaitingInLine(report) ? 'Yes' : 'No'}</td>
       <td>${isReadyForBudgetRelease(report) ? 'Yes' : 'No'}</td>
       <td>${canGenerateReoccupationFile(report) ? `<a href="#" class="generate-file-link" data-id="${report.id}">Generate a re-occupation file</a>` : '—'}</td>
+      <td>${fileUrl ? `<a href="${fileUrl}" target="_blank" class="document-icon">📄</a>` : '—'}</td>
       <td><a href="#" data-id="${report.id}">View</a></td>
     `;
     tbody.appendChild(row);
   });
 
   reportList.appendChild(table);
+
+  updateBatchGenerateButton();
+}
+
+function updateBatchGenerateButton() {
+  const selectedSettlement = settlementFilter.value;
+  if (selectedSettlement) {
+    batchGenerateButton.textContent = 'Generate occupancy files for the entire settlement';
+  } else {
+    batchGenerateButton.textContent = 'Generate occupancy files for all eligible buildings';
+  }
+}
+
+function showModal(content) {
+  modalContent.innerHTML = content;
+  modalOverlay.classList.remove('hidden');
+  modalOverlay.style.display = 'flex';
+}
+
+function hideModal() {
+  modalOverlay.classList.add('hidden');
+  modalOverlay.style.display = 'none';
+}
+
+async function batchGenerateFiles() {
+  const selectedSettlement = settlementFilter.value;
+  const payload = selectedSettlement ? { settlement: selectedSettlement } : {};
+  
+  showModal('<div class="spinner"></div><p>Producing files...</p>');
+  
+  try {
+    const response = await fetch('/buildings/batch-return-home-packages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    
+    const result = await response.json();
+    
+    if (response.ok) {
+      result.files.forEach(file => {
+        generatedFiles[file.buildingId] = file.url;
+      });
+      
+      showModal(`<p>${result.count} return-to-home files have been produced</p><button onclick="hideModal()">Close</button>`);
+      renderReports();
+    } else {
+      showModal(`<p>Error: ${result.error || 'Unable to generate files'}</p><button onclick="hideModal()">Close</button>`);
+    }
+  } catch (error) {
+    showModal(`<p>Error: ${error.message}</p><button onclick="hideModal()">Close</button>`);
+  }
 }
 
 function getAvailableStatuses(currentStatus) {
@@ -259,6 +353,8 @@ document.getElementById('backButton').addEventListener('click', () => showScreen
 document.getElementById('saveStatusButton').addEventListener('click', updateStatus);
 waitingFilter.addEventListener('change', renderReports);
 budgetReadyFilter.addEventListener('change', renderReports);
+settlementFilter.addEventListener('change', renderReports);
+batchGenerateButton.addEventListener('click', batchGenerateFiles);
 createForm.addEventListener('submit', createReport);
 reportList.addEventListener('click', async (event) => {
   const fileLink = event.target.closest('a.generate-file-link');
@@ -279,3 +375,6 @@ reportList.addEventListener('click', async (event) => {
 });
 
 loadReports();
+
+// Ensure modal is hidden on page load
+hideModal();
