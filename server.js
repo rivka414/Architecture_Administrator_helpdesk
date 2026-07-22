@@ -388,6 +388,9 @@ function createApp() {
     if (!report.permitApproval) {
       report.permitApproval = null;
     }
+    if (report.returnHomeFileGenerated === undefined) {
+      report.returnHomeFileGenerated = false;
+    }
   });
   let nextId = reports.length ? Math.max(...reports.map((report) => Number(report.id))) + 1 : 3;
 
@@ -509,6 +512,9 @@ function createApp() {
 
     const result = await habitationFileService.generateReturnHomePackage(report);
     
+    report.returnHomeFileGenerated = true;
+    saveReports(reportsFilePath, reports);
+    
     // Send email notification if family email exists
     if (report.familyEmail) {
       const subject = `Return to Home Approval ${report.address}`;
@@ -558,6 +564,7 @@ function createApp() {
       if (canGenerate) {
         try {
           const result = await habitationFileService.generateReturnHomePackage(report);
+          report.returnHomeFileGenerated = true;
           generatedFiles.push({
             buildingId: report.id,
             url: result.url,
@@ -578,6 +585,8 @@ function createApp() {
         }
       }
     }
+
+    saveReports(reportsFilePath, reports);
 
     res.json({
       count: generatedFiles.length,

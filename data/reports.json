@@ -14,14 +14,8 @@
     "budgetRequestOpened": true,
     "familyEmail": "john.doe@example.com",
     "appraisal": null,
-    "permitApproval": {
-      "waterSupply": true,
-      "electricitySupply": true,
-      "accessRoads": false,
-      "environmentalCleared": false,
-      "localAuthorityComments": "Road needs repair",
-      "approved": false
-    }
+    "permitApproval": null,
+    "returnHomeFileGenerated": true
   },
   {
     "id": 2,
@@ -38,7 +32,8 @@
     "budgetRequestOpened": true,
     "familyEmail": "jane.smith@example.com",
     "appraisal": null,
-    "permitApproval": null
+    "permitApproval": null,
+    "returnHomeFileGenerated": true
   },
   {
     "id": 3,
@@ -55,7 +50,8 @@
     "budgetRequestOpened": true,
     "familyEmail": "david.cohen@example.com",
     "appraisal": null,
-    "permitApproval": null
+    "permitApproval": null,
+    "returnHomeFileGenerated": false
   },
   {
     "id": 4,
@@ -72,7 +68,8 @@
     "budgetRequestOpened": true,
     "familyEmail": "sarah.levy@example.com",
     "appraisal": null,
-    "permitApproval": null
+    "permitApproval": null,
+    "returnHomeFileGenerated": false
   },
   {
     "id": 5,
@@ -89,14 +86,8 @@
     "budgetRequestOpened": true,
     "familyEmail": "moshe.ben@example.com",
     "appraisal": null,
-    "permitApproval": {
-      "waterSupply": true,
-      "electricitySupply": true,
-      "accessRoads": true,
-      "environmentalCleared": true,
-      "localAuthorityComments": "All clear",
-      "approved": true
-    }
+    "permitApproval": null,
+    "returnHomeFileGenerated": false
   },
   {
     "id": 6,
@@ -113,7 +104,8 @@
     "budgetRequestOpened": true,
     "familyEmail": "rivka.m@example.com",
     "appraisal": null,
-    "permitApproval": null
+    "permitApproval": null,
+    "returnHomeFileGenerated": false
   },
   {
     "id": 7,
@@ -130,7 +122,8 @@
     "budgetRequestOpened": true,
     "familyEmail": "avi.shalom@example.com",
     "appraisal": null,
-    "permitApproval": null
+    "permitApproval": null,
+    "returnHomeFileGenerated": false
   },
   {
     "id": 8,
@@ -147,7 +140,8 @@
     "budgetRequestOpened": true,
     "familyEmail": "hanna.gold@example.com",
     "appraisal": null,
-    "permitApproval": null
+    "permitApproval": null,
+    "returnHomeFileGenerated": false
   },
   {
     "id": 9,
@@ -164,7 +158,8 @@
     "budgetRequestOpened": true,
     "familyEmail": "yosef.a@example.com",
     "appraisal": null,
-    "permitApproval": null
+    "permitApproval": null,
+    "returnHomeFileGenerated": false
   },
   {
     "id": 10,
@@ -181,7 +176,8 @@
     "budgetRequestOpened": false,
     "familyEmail": "michal.bar@example.com",
     "appraisal": null,
-    "permitApproval": null
+    "permitApproval": null,
+    "returnHomeFileGenerated": false
   },
   {
     "id": 11,
@@ -189,7 +185,7 @@
     "address": "Ashdod, Sderot 20",
     "damageType": "Structural",
     "description": "Earthquake damage to facade",
-    "status": "Restoration process completed",
+    "status": "NEW",
     "damagePhotosExist": true,
     "engineerReportExists": true,
     "eligibilityCheckPerformed": false,
@@ -198,7 +194,8 @@
     "budgetRequestOpened": false,
     "familyEmail": "eitan.p@example.com",
     "appraisal": null,
-    "permitApproval": null
+    "permitApproval": null,
+    "returnHomeFileGenerated": false
   },
   {
     "id": 12,
@@ -215,7 +212,8 @@
     "budgetRequestOpened": false,
     "familyEmail": "tamar.raz@example.com",
     "appraisal": null,
-    "permitApproval": null
+    "permitApproval": null,
+    "returnHomeFileGenerated": false
   },
   {
     "id": 13,
@@ -232,7 +230,8 @@
     "budgetRequestOpened": false,
     "familyEmail": "shlomo.d@example.com",
     "appraisal": null,
-    "permitApproval": null
+    "permitApproval": null,
+    "returnHomeFileGenerated": false
   },
   {
     "id": 14,
@@ -249,7 +248,8 @@
     "budgetRequestOpened": false,
     "familyEmail": "nurit.f@example.com",
     "appraisal": null,
-    "permitApproval": null
+    "permitApproval": null,
+    "returnHomeFileGenerated": false
   },
   {
     "id": 15,
@@ -257,16 +257,29 @@
     "address": "Kfar Saba, Sokolov 4",
     "damageType": "Fire",
     "description": "Balcony fire spread to wall",
-    "status": "IN_REVIEW",
+    "status": "Building in the process of restoration",
     "damagePhotosExist": true,
     "engineerReportExists": true,
     "eligibilityCheckPerformed": true,
     "socialApproval": false,
     "apartmentsInBuilding": 11,
-    "budgetRequestOpened": false,
+    "budgetRequestOpened": true,
     "familyEmail": "amos.k@example.com",
-    "appraisal": null,
-    "permitApproval": null
+    "appraisal": {
+      "damageLevel": "medium",
+      "appraiserComments": "/",
+      "inspectionDate": "2026-07-22",
+      "reinspectionRequired": true
+    },
+    "permitApproval": {
+      "waterSupply": true,
+      "electricitySupply": true,
+      "accessRoads": true,
+      "environmentalCleared": true,
+      "localAuthorityComments": "כ",
+      "approved": true
+    },
+    "returnHomeFileGenerated": true
   },
   {
     "id": 16,
@@ -283,7 +296,8 @@
     "budgetRequestOpened": false,
     "familyEmail": "dina.alon@example.com",
     "appraisal": null,
-    "permitApproval": null
+    "permitApproval": null,
+    "returnHomeFileGenerated": false
   },
   {
     "id": 17,
@@ -300,7 +314,8 @@
     "budgetRequestOpened": false,
     "familyEmail": "gideon.t@example.com",
     "appraisal": null,
-    "permitApproval": null
+    "permitApproval": null,
+    "returnHomeFileGenerated": false
   },
   {
     "id": 18,
@@ -317,7 +332,8 @@
     "budgetRequestOpened": false,
     "familyEmail": "orly.bd@example.com",
     "appraisal": null,
-    "permitApproval": null
+    "permitApproval": null,
+    "returnHomeFileGenerated": false
   },
   {
     "id": 19,
@@ -334,7 +350,8 @@
     "budgetRequestOpened": false,
     "familyEmail": "menachem.l@example.com",
     "appraisal": null,
-    "permitApproval": null
+    "permitApproval": null,
+    "returnHomeFileGenerated": false
   },
   {
     "id": 20,
@@ -351,7 +368,8 @@
     "budgetRequestOpened": false,
     "familyEmail": "batya.s@example.com",
     "appraisal": null,
-    "permitApproval": null
+    "permitApproval": null,
+    "returnHomeFileGenerated": false
   },
   {
     "id": 21,
@@ -368,14 +386,8 @@
     "budgetRequestOpened": true,
     "familyEmail": "raphael.oz@example.com",
     "appraisal": null,
-    "permitApproval": {
-      "waterSupply": true,
-      "electricitySupply": true,
-      "accessRoads": true,
-      "environmentalCleared": true,
-      "localAuthorityComments": "2",
-      "approved": true
-    }
+    "permitApproval": null,
+    "returnHomeFileGenerated": false
   },
   {
     "id": 22,
@@ -392,6 +404,7 @@
     "budgetRequestOpened": false,
     "familyEmail": "varda.s@example.com",
     "appraisal": null,
-    "permitApproval": null
+    "permitApproval": null,
+    "returnHomeFileGenerated": false
   }
 ]

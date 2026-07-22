@@ -13,6 +13,7 @@ const statusSelect = document.getElementById('statusSelect');
 const waitingFilter = document.getElementById('waitingFilter');
 const budgetReadyFilter = document.getElementById('budgetReadyFilter');
 const settlementFilter = document.getElementById('settlementFilter');
+const settlementSummary = document.getElementById('settlementSummary');
 const batchGenerateButton = document.getElementById('batchGenerateButton');
 const messageCenterButton = document.getElementById('messageCenterButton');
 const appraisersPortalButton = document.getElementById('appraisersPortalButton');
@@ -224,6 +225,7 @@ async function saveAppraisal() {
     appraisalForm.classList.add('hidden');
     appraisersPortalList.classList.remove('hidden');
     renderAppraisersPortal();
+    renderReports();
   }
 }
 
@@ -319,6 +321,7 @@ async function savePermitApproval() {
     permitApprovalForm.classList.add('hidden');
     localAuthorityPortalList.classList.remove('hidden');
     renderLocalAuthorityPortal();
+    renderReports();
   }
 }
 
@@ -373,6 +376,46 @@ function canGenerateReoccupationFile(report) {
   );
 }
 
+function isEligibleForOpening(report) {
+  if (!report.damagePhotosExist) return false;
+  if (!report.engineerReportExists) return false;
+  if (!report.eligibilityCheckPerformed) return false;
+  const needsSocialApproval = Number(report.apartmentsInBuilding) > 24;
+  if (needsSocialApproval && !report.socialApproval) return false;
+  if (!report.budgetRequestOpened) return false;
+  if (!report.returnHomeFileGenerated) return false;
+  if (!report.appraisal) return false;
+  if (report.appraisal.damageLevel === 'severe') return false;
+  if (!report.permitApproval || !report.permitApproval.approved) return false;
+  return true;
+}
+
+function getSettlementSummary(filteredReports) {
+  const total = filteredReports.length;
+  let eligible = 0;
+  let notEligible = 0;
+  let awaitingAppraisal = 0;
+  let awaitingPermit = 0;
+  let notEligibleOther = 0;
+
+  filteredReports.forEach((report) => {
+    if (isEligibleForOpening(report)) {
+      eligible++;
+    } else {
+      notEligible++;
+      if (!report.appraisal) {
+        awaitingAppraisal++;
+      } else if (!report.permitApproval || !report.permitApproval.approved) {
+        awaitingPermit++;
+      } else {
+        notEligibleOther++;
+      }
+    }
+  });
+
+  return { total, eligible, notEligible, awaitingAppraisal, awaitingPermit, notEligibleOther };
+}
+
 function getVisibleReports() {
   let filteredReports = reports;
 
@@ -398,6 +441,25 @@ function renderReports() {
   const visibleReports = getVisibleReports();
   reportList.innerHTML = '';
 
+  if (settlementFilter.value) {
+    const summary = getSettlementSummary(visibleReports);
+    settlementSummary.classList.remove('hidden');
+    settlementSummary.innerHTML = `
+      <strong>Settlement Summary: ${settlementFilter.value}</strong>
+      <div style="margin-top:0.5rem; display:flex; gap:1.5rem; flex-wrap:wrap;">
+        <span>Total buildings: <strong>${summary.total}</strong></span>
+        <span>Eligible for opening: <strong style="color:#0b6b2f;">${summary.eligible}</strong></span>
+        <span>Not eligible: <strong style="color:#c62828;">${summary.notEligible}</strong></span>
+        <span>Awaiting appraisal: <strong style="color:#e65100;">${summary.awaitingAppraisal}</strong></span>
+        <span>Awaiting local authority approval: <strong style="color:#bf360c;">${summary.awaitingPermit}</strong></span>
+        <span>Not eligible (other): <strong style="color:#6a1b9a;">${summary.notEligibleOther}</strong></span>
+      </div>
+    `;
+  } else {
+    settlementSummary.classList.add('hidden');
+    settlementSummary.innerHTML = '';
+  }
+
   if (!visibleReports.length) {
     reportList.innerHTML = '<p>No reports match the current filter.</p>';
     return;
@@ -414,6 +476,7 @@ function renderReports() {
         <th>Ready for budget release</th>
         <th>Re-occupation file</th>
         <th>Document</th>
+        <th>Eligible for opening</th>
         <th>Action</th>
       </tr>
     </thead>
@@ -424,14 +487,16 @@ function renderReports() {
   visibleReports.forEach((report) => {
     const row = document.createElement('tr');
     const fileUrl = generatedFiles[report.id];
+    const eligible = isEligibleForOpening(report);
     row.innerHTML = `
       <td>#${report.id}</td>
       <td>${report.reporterName}</td>
       <td><span class="status ${report.status}">${report.status}</span></td>
       <td>${isWaitingInLine(report) ? 'Yes' : 'No'}</td>
       <td>${isReadyForBudgetRelease(report) ? 'Yes' : 'No'}</td>
-      <td>${canGenerateReoccupationFile(report) ? `<a href="#" class="generate-file-link" data-id="${report.id}">Generate a re-occupation file</a>` : '—'}</td>
+      <td>${report.returnHomeFileGenerated ? 'Yes' : (canGenerateReoccupationFile(report) ? `<a href="#" class="generate-file-link" data-id="${report.id}">Generate a re-occupation file</a>` : '—')}</td>
       <td>${fileUrl ? `<a href="${fileUrl}" target="_blank" class="document-icon">📄</a>` : '—'}</td>
+      <td>${eligible ? 'Yes' : 'No'}</td>
       <td><a href="#" data-id="${report.id}">View</a></td>
     `;
     tbody.appendChild(row);
@@ -735,6 +800,13 @@ reportList.addEventListener('click', async (event) => {
     const result = await response.json();
     if (response.ok) {
       window.open(result.url, '_blank');
+      const reportId = Number(fileLink.dataset.id);
+      generatedFiles[reportId] = result.url;
+      const report = reports.find((item) => item.id === reportId);
+      if (report) {
+        report.returnHomeFileGenerated = true;
+      }
+      renderReports();
     }
     return;
   }
