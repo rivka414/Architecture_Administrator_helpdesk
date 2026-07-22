@@ -470,7 +470,8 @@ function createApp() {
           report.familyEmail,
           subject,
           body,
-          report.address
+          report.address,
+          String(report.id)
         );
       } catch (error) {
         console.error(`Failed to send notification for building ${report.id}:`, error);
@@ -517,7 +518,7 @@ function createApp() {
             const subject = `Return to Home Approval ${report.address}`;
             const body = `Hello,\n\nWe are pleased to inform you that your building has been approved for return to home.\nThe occupancy file has been prepared successfully.\n\nBest regards,\nMinistry of Construction and Housing`;
             try {
-              await notificationService.sendWithRetry(report.id, report.familyEmail, subject, body, report.address);
+              await notificationService.sendWithRetry(report.id, report.familyEmail, subject, body, report.address, String(report.id));
             } catch (error) {
               console.error(`Failed to send notification for building ${report.id}:`, error);
             }
@@ -535,7 +536,7 @@ function createApp() {
   });
 
   app.post('/notifications/send', (req, res) => {
-    const { buildingId, email, subject, body } = req.body;
+    const { buildingId, email, subject, body, idempotencyKey } = req.body;
     
     if (!buildingId || !email || !subject || !body) {
       return res.status(400).json({ error: 'Missing required fields' });
@@ -551,7 +552,8 @@ function createApp() {
       email,
       subject,
       body,
-      report.address
+      report.address,
+      idempotencyKey || String(buildingId)
     );
     
     res.json(result);

@@ -18,7 +18,7 @@ class NotificationService {
     
     // Create CSV file with headers if it doesn't exist
     if (!fs.existsSync(this.csvFilePath)) {
-      const headers = 'MessageID,BuildingID,BuildingAddress,Email,Subject,DateTime,Status\n';
+      const headers = 'MessageID,BuildingID,BuildingAddress,Email,Subject,DateTime,Status,IdempotencyKey\n';
       fs.writeFileSync(this.csvFilePath, headers, 'utf8');
     }
     
@@ -70,14 +70,31 @@ class NotificationService {
     }
   }
   
-  sendNotification(buildingId, email, subject, body, buildingAddress) {
+  hasBeenSentSuccessfully(idempotencyKey) {
+    if (!idempotencyKey) return false;
+    const data = fs.readFileSync(this.csvFilePath, 'utf8');
+    const lines = data.trim().split('\n');
+    for (let i = 1; i < lines.length; i++) {
+      const values = this.parseCSVLine(lines[i]);
+      if (values.length >= 8 && values[6] === 'SENT' && values[7] === idempotencyKey) {
+        return true;
+      }
+    }
+    return false;
+  }
+  
+  sendNotification(buildingId, email, subject, body, buildingAddress, idempotencyKey) {
+    if (this.hasBeenSentSuccessfully(idempotencyKey)) {
+      return { status: 'ALREADY_SENT', messageId: null };
+    }
+
     const messageId = this.messageIdCounter++;
     const now = new Date();
     const dateTime = now.toISOString();
     const status = this.shouldFail() ? 'FAILED' : 'SENT';
     
     // Append to CSV file
-    const csvLine = `${messageId},${buildingId},"${buildingAddress}",${email},"${subject}",${dateTime},${status}\n`;
+    const csvLine = `${messageId},${buildingId},"${buildingAddress}",${email},"${subject}",${dateTime},${status},${idempotencyKey || ''}\n`;
     fs.appendFileSync(this.csvFilePath, csvLine, 'utf8');
     
     if (this.statusMode === 'timeout') {
@@ -90,14 +107,14 @@ class NotificationService {
     };
   }
 
-  sendWithRetry(buildingId, email, subject, body, buildingAddress) {
+  sendWithRetry(buildingId, email, subject, body, buildingAddress, idempotencyKey) {
     const MAX_ATTEMPTS = 3;
     let lastResult;
 
     for (let attempt = 0; attempt < MAX_ATTEMPTS; attempt++) {
       try {
-        lastResult = this.sendNotification(buildingId, email, subject, body, buildingAddress);
-        if (lastResult.status === 'SENT') {
+        lastResult = this.sendNotification(buildingId, email, subject, body, buildingAddress, idempotencyKey);
+        if (lastResult.status === 'SENT' || lastResult.status === 'ALREADY_SENT') {
           return lastResult;
         }
       } catch (error) {
@@ -131,7 +148,8 @@ class NotificationService {
           email: values[3],
           subject: values[4],
           dateTime: values[5],
-          status: values[6]
+          status: values[6],
+          idempotencyKey: values[7] || ''
         });
       }
     }

@@ -86,6 +86,7 @@ function renderNotifications(notifications) {
         <th>Subject</th>
         <th>Date & Time</th>
         <th>Status</th>
+        <th>Idempotency Key</th>
       </tr>
     </thead>
     <tbody></tbody>
@@ -103,6 +104,7 @@ function renderNotifications(notifications) {
       <td>${msg.subject}</td>
       <td>${dt}</td>
       <td><span class="status">${msg.status}</span></td>
+      <td>${msg.idempotencyKey || ''}</td>
     `;
     tbody.appendChild(row);
   });

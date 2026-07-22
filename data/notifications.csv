@@ -1,7 +1,6 @@
-MessageID,BuildingID,BuildingAddress,Email,Subject,DateTime,Status
-1,1,"Tel Aviv, Rothschild 1",john.doe@example.com,"Return to Home Approval Tel Aviv, Rothschild 1",2026-07-22T13:28:48.432Z,SENT
-2,1,"Tel Aviv, Rothschild 1",john.doe@example.com,"Return to Home Approval Tel Aviv, Rothschild 1",2026-07-22T13:28:56.288Z,SENT
-3,7,"Beer Sheva, Ben Yehuda 3",avi.shalom@example.com,"Return to Home Approval Beer Sheva, Ben Yehuda 3",2026-07-22T13:29:09.720Z,SENT
-4,9,"Petah Tikva, Hovevei Zion 7",yosef.a@example.com,"Return to Home Approval Petah Tikva, Hovevei Zion 7",2026-07-22T13:29:23.153Z,SENT
-5,9,"Petah Tikva, Hovevei Zion 7",yosef.a@example.com,"Return to Home Approval Petah Tikva, Hovevei Zion 7",2026-07-22T13:29:23.154Z,SENT
-6,9,"Petah Tikva, Hovevei Zion 7",yosef.a@example.com,"Return to Home Approval Petah Tikva, Hovevei Zion 7",2026-07-22T13:29:23.155Z,SENT
+MessageID,BuildingID,BuildingAddress,Email,Subject,DateTime,Status,IdempotencyKey
+1,1,"Tel Aviv, Rothschild 1",john.doe@example.com,"Return to Home Approval Tel Aviv, Rothschild 1",2026-07-22T13:48:28.433Z,FAILED,1
+2,1,"Tel Aviv, Rothschild 1",john.doe@example.com,"Return to Home Approval Tel Aviv, Rothschild 1",2026-07-22T13:48:28.434Z,FAILED,1
+3,1,"Tel Aviv, Rothschild 1",john.doe@example.com,"Return to Home Approval Tel Aviv, Rothschild 1",2026-07-22T13:48:28.434Z,FAILED,1
+4,1,"Tel Aviv, Rothschild 1",john.doe@example.com,"Return to Home Approval Tel Aviv, Rothschild 1",2026-07-22T13:50:12.409Z,SENT,1
+5,3,"Jerusalem, Jaffa 10",david.cohen@example.com,"Return to Home Approval Jerusalem, Jaffa 10",2026-07-22T13:50:29.887Z,SENT,3
