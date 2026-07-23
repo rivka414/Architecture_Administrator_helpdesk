@@ -1,66 +1,46 @@
 [
   {
     "id": 1,
-    "settlementName": "Jerusalem",
-    "startedBy": "David Cohen",
-    "startedAt": "2026-07-23T17:42:10.818Z",
-    "completedAt": "2026-07-23T17:42:15.277Z",
+    "processId": "515de309-e575-4195-ad23-2f1ccbfb72a0",
+    "settlementName": "Kfar Saba",
+    "startedBy": "Hanna Gold",
+    "startedAt": "2026-07-23T18:45:42.965Z",
+    "completedAt": "2026-07-23T18:45:42.971Z",
     "status": "COMPLETED"
   },
   {
     "id": 2,
-    "settlementName": "Haifa",
-    "startedBy": "Test User",
-    "startedAt": "2026-07-23T17:42:15.293Z",
-    "completedAt": "2026-07-23T17:42:17.594Z",
+    "processId": "217140bc-b997-4b70-a638-bdd3e866ad14",
+    "settlementName": "Ashkelon",
+    "startedBy": "Hanna Gold",
+    "startedAt": "2026-07-23T18:45:45.500Z",
+    "completedAt": "2026-07-23T18:45:45.506Z",
     "status": "COMPLETED"
   },
   {
     "id": 3,
-    "settlementName": "Tel Aviv",
-    "startedBy": "Detail Test",
-    "startedAt": "2026-07-23T17:42:17.612Z",
-    "completedAt": "2026-07-23T17:42:19.861Z",
+    "processId": "47ab3a9d-bcb3-4ba0-91b8-c3913d57c68b",
+    "settlementName": "Rishon LeZion",
+    "startedBy": "Hanna Gold",
+    "startedAt": "2026-07-23T18:45:47.855Z",
+    "completedAt": "2026-07-23T18:45:47.861Z",
     "status": "COMPLETED"
   },
   {
     "id": 4,
-    "settlementName": "Beer Sheva",
-    "startedBy": "First",
-    "startedAt": "2026-07-23T17:42:19.873Z",
-    "completedAt": "2026-07-23T17:42:21.040Z",
+    "processId": "05bef1c4-4441-4c40-b176-69ad46a999cd",
+    "settlementName": "Holon",
+    "startedBy": "Hanna Gold",
+    "startedAt": "2026-07-23T18:45:50.532Z",
+    "completedAt": "2026-07-23T18:45:50.536Z",
     "status": "COMPLETED"
   },
   {
     "id": 5,
-    "settlementName": "Netanya",
-    "startedBy": "Second",
-    "startedAt": "2026-07-23T17:42:21.043Z",
-    "completedAt": "2026-07-23T17:42:22.168Z",
-    "status": "COMPLETED"
-  },
-  {
-    "id": 6,
-    "settlementName": "Jerusalem",
-    "startedBy": "Log Test User",
-    "startedAt": "2026-07-23T17:42:22.180Z",
-    "completedAt": "2026-07-23T17:42:26.686Z",
-    "status": "COMPLETED"
-  },
-  {
-    "id": 7,
-    "settlementName": "Haifa",
-    "startedBy": "Building Log User",
-    "startedAt": "2026-07-23T17:42:26.698Z",
-    "completedAt": "2026-07-23T17:42:28.930Z",
-    "status": "COMPLETED"
-  },
-  {
-    "id": 8,
-    "settlementName": "Beer Sheva",
-    "startedBy": "Structure Test",
-    "startedAt": "2026-07-23T17:42:28.937Z",
-    "completedAt": "2026-07-23T17:42:30.092Z",
-    "status": "COMPLETED"
+    "processId": "1bfdb646-d7e8-404e-9e87-0f5dcfec72c4",
+    "startedBy": "Hanna Gold",
+    "startedAt": "2026-07-23T18:46:01.458Z",
+    "completedAt": null,
+    "status": "PROCESSING"
   }
 ]

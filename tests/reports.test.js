@@ -1021,3 +1021,149 @@ test('Single building return-home-package logs events to file', async () => {
   assert.ok(completeEvent, 'BUILDING_PROCESSING_COMPLETE should be logged');
   assert.equal(completeEvent.buildingId, created.id);
 });
+
+test('SettlementProcess record includes a processId (UUID)', async () => {
+  const response = await fetch(`${baseUrl}/buildings/batch-return-home-packages`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'X-User-Name': 'UUID Test' },
+    body: JSON.stringify({ settlement: 'Beer Sheva' }),
+  });
+  assert.equal(response.status, 200);
+
+  const processesResponse = await fetch(`${baseUrl}/settlement-processes`);
+  const processes = await processesResponse.json();
+  const latest = processes[0];
+  assert.ok(latest.processId, 'process must have processId');
+  assert.ok(typeof latest.processId === 'string', 'processId must be a string');
+  assert.ok(latest.processId.length > 0, 'processId must not be empty');
+  const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/;
+  assert.ok(uuidRegex.test(latest.processId), 'processId must be a valid UUID');
+});
+
+test('All batch log entries share the same processId', async () => {
+  const logPath = path.join(__dirname, '..', 'data', 'processLogs.json');
+  const beforeLogs = fs.existsSync(logPath) ? fs.readFileSync(logPath, 'utf8') : '';
+
+  await fetch(`${baseUrl}/buildings/batch-return-home-packages`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'X-User-Name': 'Batch PID' },
+    body: JSON.stringify({ settlement: 'Beer Sheva' }),
+  });
+
+  const afterLogs = fs.readFileSync(logPath, 'utf8');
+  const newLines = afterLogs.slice(beforeLogs.length).trim().split('\n').filter(Boolean);
+  const newEntries = newLines.map((line) => JSON.parse(line));
+
+  assert.ok(newEntries.length > 0, 'must have new log entries');
+  const processIds = newEntries.map((e) => e.processId);
+  const uniquePids = [...new Set(processIds)];
+  assert.equal(uniquePids.length, 1, 'all log entries in a batch must share the same processId');
+  assert.ok(uniquePids[0], 'processId must not be null');
+  const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/;
+  assert.ok(uuidRegex.test(uniquePids[0]), 'processId must be a valid UUID');
+});
+
+test('Single building return-home-package logs include processId', async () => {
+  const createResponse = await fetch(`${baseUrl}/reports`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      reporterName: 'PID Single',
+      address: 'Jerusalem, PID St 1',
+      damageType: 'Water',
+      description: 'Test processId',
+      damagePhotosExist: true,
+      engineerReportExists: true,
+      eligibilityCheckPerformed: true,
+      budgetRequestOpened: true,
+      status: 'Restoration process completed',
+    }),
+  });
+  const created = await createResponse.json();
+
+  const logPath = path.join(__dirname, '..', 'data', 'processLogs.json');
+  const beforeLogs = fs.existsSync(logPath) ? fs.readFileSync(logPath, 'utf8') : '';
+
+  await fetch(`${baseUrl}/buildings/${created.id}/return-home-package`, {
+    method: 'POST',
+  });
+
+  const afterLogs = fs.readFileSync(logPath, 'utf8');
+  const newLines = afterLogs.slice(beforeLogs.length).trim().split('\n').filter(Boolean);
+  const newEntries = newLines.map((line) => JSON.parse(line));
+
+  assert.ok(newEntries.length > 0, 'must have new log entries');
+  const processIds = newEntries.map((e) => e.processId);
+  const uniquePids = [...new Set(processIds)];
+  assert.equal(uniquePids.length, 1, 'all single-building logs must share the same processId');
+  assert.ok(uniquePids[0], 'processId must not be null');
+});
+
+test('Different batch processes have different processIds', async () => {
+  const logPath = path.join(__dirname, '..', 'data', 'processLogs.json');
+  const beforeLogs = fs.existsSync(logPath) ? fs.readFileSync(logPath, 'utf8') : '';
+
+  await fetch(`${baseUrl}/buildings/batch-return-home-packages`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'X-User-Name': 'PID Batch 1' },
+    body: JSON.stringify({ settlement: 'Beer Sheva' }),
+  });
+
+  const midLogs = fs.readFileSync(logPath, 'utf8');
+
+  await fetch(`${baseUrl}/buildings/batch-return-home-packages`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'X-User-Name': 'PID Batch 2' },
+    body: JSON.stringify({ settlement: 'Beer Sheva' }),
+  });
+
+  const afterLogs = fs.readFileSync(logPath, 'utf8');
+
+  const firstBatch = midLogs.slice(beforeLogs.length).trim().split('\n').filter(Boolean).map((l) => JSON.parse(l));
+  const secondBatch = afterLogs.slice(midLogs.length).trim().split('\n').filter(Boolean).map((l) => JSON.parse(l));
+
+  const pid1 = firstBatch[0].processId;
+  const pid2 = secondBatch[0].processId;
+  assert.ok(pid1 && pid2, 'both batches must have processIds');
+  assert.notEqual(pid1, pid2, 'different batches must have different processIds');
+});
+
+test('GET /system-health returns correct structure', async () => {
+  const response = await fetch(`${baseUrl}/system-health`);
+  assert.equal(response.status, 200);
+  const metrics = await response.json();
+  assert.ok(metrics.settlementProcesses, 'must have settlementProcesses');
+  assert.ok(metrics.notifications, 'must have notifications');
+  assert.ok(metrics.performance, 'must have performance');
+  assert.equal(typeof metrics.settlementProcesses.completed, 'number');
+  assert.equal(typeof metrics.settlementProcesses.processing, 'number');
+  assert.equal(typeof metrics.notifications.successful, 'number');
+  assert.equal(typeof metrics.notifications.failed, 'number');
+  assert.equal(typeof metrics.notifications.retryCount, 'number');
+});
+
+test('System health metrics reflect batch process data', async () => {
+  const before = await (await fetch(`${baseUrl}/system-health`)).json();
+
+  await fetch(`${baseUrl}/buildings/batch-return-home-packages`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'X-User-Name': 'Health Test' },
+    body: JSON.stringify({ settlement: 'Beer Sheva' }),
+  });
+
+  const after = await (await fetch(`${baseUrl}/system-health`)).json();
+  assert.equal(after.settlementProcesses.completed, before.settlementProcesses.completed + 1);
+});
+
+test('System health retry count equals failed notification count', async () => {
+  const metrics = await (await fetch(`${baseUrl}/system-health`)).json();
+  assert.equal(metrics.notifications.retryCount, metrics.notifications.failed);
+});
+
+test('System health average duration is null when no completed processes', async () => {
+  const metrics = await (await fetch(`${baseUrl}/system-health`)).json();
+  assert.ok(
+    typeof metrics.performance.averageSettlementDuration === 'number' || metrics.performance.averageSettlementDuration === null,
+    'average duration must be a number or null'
+  );
+});

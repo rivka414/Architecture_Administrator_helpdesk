@@ -1,4 +1,5 @@
 const { requireRole, requireSettlementAccess } = require('../roles/rolesHelper');
+const crypto = require('crypto');
 
 function createBuildingsRoutes(express, buildingsService, habitationFileService, notificationService, actionsService, settlementProcessesService, processLogger) {
   const router = express.Router();
@@ -54,6 +55,7 @@ function createBuildingsRoutes(express, buildingsService, habitationFileService,
     if (context.error === 'not_found') return res.status(404).json({ error: 'Report not found' });
     const report = context.report;
     const buildingSettlement = report.settlementId || '';
+    const pid = crypto.randomUUID();
 
     const canGenerate = Boolean(
       report.damagePhotosExist &&
@@ -67,26 +69,26 @@ function createBuildingsRoutes(express, buildingsService, habitationFileService,
       return res.status(400).json({ error: 'Report is not eligible for a re-occupation file' });
     }
 
-    processLogger.info('BUILDING_PDF_START', { settlement: buildingSettlement, buildingId: report.id });
+    processLogger.info('BUILDING_PDF_START', { settlement: buildingSettlement, buildingId: report.id, processId: pid });
 
     const result = await habitationFileService.generateReturnHomePackage(report);
     buildingsService.markReturnHomeFileGenerated(report.id);
 
-    processLogger.info('BUILDING_PDF_END', { settlement: buildingSettlement, buildingId: report.id });
+    processLogger.info('BUILDING_PDF_END', { settlement: buildingSettlement, buildingId: report.id, processId: pid });
 
     if (report.familyEmail) {
       const subject = `Return to Home Approval ${report.address}`;
       const body = `Hello,\n\nWe are pleased to inform you that your building has been approved for return to home.\nThe occupancy file has been prepared successfully.\n\nBest regards,\nMinistry of Construction and Housing`;
-      processLogger.info('BUILDING_NOTIFICATION_START', { settlement: buildingSettlement, buildingId: report.id });
+      processLogger.info('BUILDING_NOTIFICATION_START', { settlement: buildingSettlement, buildingId: report.id, processId: pid });
       try {
         await notificationService.sendWithRetry(report.id, report.familyEmail, subject, body, report.address, String(report.id));
-        processLogger.info('BUILDING_NOTIFICATION_SUCCESS', { settlement: buildingSettlement, buildingId: report.id });
+        processLogger.info('BUILDING_NOTIFICATION_SUCCESS', { settlement: buildingSettlement, buildingId: report.id, processId: pid });
       } catch (error) {
-        processLogger.error('BUILDING_NOTIFICATION_FAILED', { settlement: buildingSettlement, buildingId: report.id, error: error.message });
+        processLogger.error('BUILDING_NOTIFICATION_FAILED', { settlement: buildingSettlement, buildingId: report.id, error: error.message, processId: pid });
       }
     }
 
-    processLogger.info('BUILDING_PROCESSING_COMPLETE', { settlement: buildingSettlement, buildingId: report.id });
+    processLogger.info('BUILDING_PROCESSING_COMPLETE', { settlement: buildingSettlement, buildingId: report.id, processId: pid });
 
     res.json(result);
   });
@@ -99,13 +101,14 @@ function createBuildingsRoutes(express, buildingsService, habitationFileService,
     const effectiveSettlement = (role === 'MUNICIPALITY' && userSettlement) ? userSettlement : settlement;
 
     const process = settlementProcessesService.create(effectiveSettlement, userName);
+    const pid = process.processId;
 
-    processLogger.info('SETTLEMENT_PROCESS_START', { settlement: effectiveSettlement });
+    processLogger.info('SETTLEMENT_PROCESS_START', { settlement: effectiveSettlement, processId: pid });
 
     const filteredReports = buildingsService.getSettlementReports(effectiveSettlement);
     const generatedFiles = [];
 
-    processLogger.info('SETTLEMENT_ELIGIBLE_BUILDINGS_FOUND', { settlement: effectiveSettlement, buildingId: filteredReports.length });
+    processLogger.info('SETTLEMENT_ELIGIBLE_BUILDINGS_FOUND', { settlement: effectiveSettlement, buildingId: filteredReports.length, processId: pid });
 
     let processFailed = false;
 
@@ -119,12 +122,12 @@ function createBuildingsRoutes(express, buildingsService, habitationFileService,
       );
 
       if (canGenerate) {
-        processLogger.info('BUILDING_PROCESSING_START', { settlement: effectiveSettlement, buildingId: report.id });
+        processLogger.info('BUILDING_PROCESSING_START', { settlement: effectiveSettlement, buildingId: report.id, processId: pid });
 
         try {
-          processLogger.info('BUILDING_PDF_START', { settlement: effectiveSettlement, buildingId: report.id });
+          processLogger.info('BUILDING_PDF_START', { settlement: effectiveSettlement, buildingId: report.id, processId: pid });
           const result = await habitationFileService.generateReturnHomePackage(report);
-          processLogger.info('BUILDING_PDF_END', { settlement: effectiveSettlement, buildingId: report.id });
+          processLogger.info('BUILDING_PDF_END', { settlement: effectiveSettlement, buildingId: report.id, processId: pid });
 
           buildingsService.markReturnHomeFileGenerated(report.id);
           generatedFiles.push({ buildingId: report.id, url: result.url, fileName: result.fileName });
@@ -132,27 +135,27 @@ function createBuildingsRoutes(express, buildingsService, habitationFileService,
           if (report.familyEmail) {
             const subject = `Return to Home Approval ${report.address}`;
             const body = `Hello,\n\nWe are pleased to inform you that your building has been approved for return to home.\nThe occupancy file has been prepared successfully.\n\nBest regards,\nMinistry of Construction and Housing`;
-            processLogger.info('BUILDING_NOTIFICATION_START', { settlement: effectiveSettlement, buildingId: report.id });
+            processLogger.info('BUILDING_NOTIFICATION_START', { settlement: effectiveSettlement, buildingId: report.id, processId: pid });
             try {
               await notificationService.sendWithRetry(report.id, report.familyEmail, subject, body, report.address, String(report.id));
-              processLogger.info('BUILDING_NOTIFICATION_SUCCESS', { settlement: effectiveSettlement, buildingId: report.id });
+              processLogger.info('BUILDING_NOTIFICATION_SUCCESS', { settlement: effectiveSettlement, buildingId: report.id, processId: pid });
             } catch (error) {
-              processLogger.error('BUILDING_NOTIFICATION_FAILED', { settlement: effectiveSettlement, buildingId: report.id, error: error.message });
+              processLogger.error('BUILDING_NOTIFICATION_FAILED', { settlement: effectiveSettlement, buildingId: report.id, error: error.message, processId: pid });
             }
           }
         } catch (error) {
           processFailed = true;
-          processLogger.error('BUILDING_PROCESSING_FAILED', { settlement: effectiveSettlement, buildingId: report.id, error: error.message });
+          processLogger.error('BUILDING_PROCESSING_FAILED', { settlement: effectiveSettlement, buildingId: report.id, error: error.message, processId: pid });
         }
 
-        processLogger.info('BUILDING_PROCESSING_COMPLETE', { settlement: effectiveSettlement, buildingId: report.id });
+        processLogger.info('BUILDING_PROCESSING_COMPLETE', { settlement: effectiveSettlement, buildingId: report.id, processId: pid });
       }
     }
 
     if (processFailed) {
-      processLogger.error('SETTLEMENT_PROCESS_FAILED', { settlement: effectiveSettlement });
+      processLogger.error('SETTLEMENT_PROCESS_FAILED', { settlement: effectiveSettlement, processId: pid });
     } else {
-      processLogger.info('SETTLEMENT_PROCESS_COMPLETE', { settlement: effectiveSettlement });
+      processLogger.info('SETTLEMENT_PROCESS_COMPLETE', { settlement: effectiveSettlement, processId: pid });
     }
 
     settlementProcessesService.complete(process.id);

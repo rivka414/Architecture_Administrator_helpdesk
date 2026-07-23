@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const crypto = require('crypto');
 
 class SettlementProcessesService {
   constructor(filePath) {
@@ -32,8 +33,10 @@ class SettlementProcessesService {
   create(settlementName, startedBy) {
     const processes = this._load();
     const id = processes.length ? Math.max(...processes.map((p) => p.id)) + 1 : 1;
+    const processId = crypto.randomUUID();
     const record = {
       id,
+      processId,
       settlementName,
       startedBy,
       startedAt: new Date().toISOString(),

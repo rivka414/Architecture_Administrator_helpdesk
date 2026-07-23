@@ -15,6 +15,8 @@ const { createActionsRoutes } = require('./domains/actions/actionsRoutes');
 const { SettlementProcessesService } = require('./domains/settlementProcesses/settlementProcessesService');
 const { createSettlementProcessesRoutes } = require('./domains/settlementProcesses/settlementProcessesRoutes');
 const { ProcessLogger } = require('./domains/settlementProcesses/processLogger');
+const { SystemHealthService } = require('./domains/systemHealth/systemHealthService');
+const { createSystemHealthRoutes } = require('./domains/systemHealth/systemHealthRoutes');
 
 function createApp() {
   const app = express();
@@ -40,6 +42,9 @@ function createApp() {
   app.use(createApprovalsRoutes(express, approvalsService, actionsService, buildingsService));
   app.use(createBuildingsRoutes(express, buildingsService, habitationFileService, notificationService, actionsService, settlementProcessesService, processLogger));
   app.use(createSettlementProcessesRoutes(express, settlementProcessesService, processLogger));
+
+  const systemHealthService = new SystemHealthService(settlementProcessesService, notificationService);
+  app.use(createSystemHealthRoutes(express, systemHealthService));
 
   app.post('/notifications/send', (req, res) => {
     const { buildingId, email, subject, body, idempotencyKey } = req.body;

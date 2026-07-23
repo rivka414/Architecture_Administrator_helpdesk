@@ -1,65 +1,29 @@
 [
   {
     "id": 1,
-    "userId": 1,
-    "userName": "David Cohen",
-    "action": "Open Budget Request",
+    "userId": 4,
+    "userName": "Hanna Gold",
+    "action": "Status updated to: Restoration process completed",
     "entityType": "building",
     "entityId": 1,
-    "timestamp": "2026-07-23T17:37:08.709Z"
+    "timestamp": "2026-07-23T18:45:22.428Z"
   },
   {
     "id": 2,
-    "userId": 1,
-    "userName": "David Cohen",
-    "action": "Update Appraisal",
+    "userId": 4,
+    "userName": "Hanna Gold",
+    "action": "Open Budget Request",
     "entityType": "building",
-    "entityId": 2,
-    "timestamp": "2026-07-23T17:37:30.369Z"
+    "entityId": 1,
+    "timestamp": "2026-07-23T18:45:23.937Z"
   },
   {
     "id": 3,
-    "userId": 1,
-    "userName": "David Cohen",
-    "action": "Update Appraisal",
-    "entityType": "building",
-    "entityId": 3,
-    "timestamp": "2026-07-23T17:37:41.230Z"
-  },
-  {
-    "id": 4,
     "userId": 4,
     "userName": "Hanna Gold",
-    "action": "Status updated to: NEW",
-    "entityType": "building",
-    "entityId": 236,
-    "timestamp": "2026-07-23T17:42:10.724Z"
-  },
-  {
-    "id": 5,
-    "userId": 1,
-    "userName": "David Cohen",
     "action": "Open Budget Request",
     "entityType": "building",
-    "entityId": 237,
-    "timestamp": "2026-07-23T17:42:10.733Z"
-  },
-  {
-    "id": 6,
-    "userId": 2,
-    "userName": "Sarah Levy",
-    "action": "Update Appraisal",
-    "entityType": "building",
-    "entityId": 238,
-    "timestamp": "2026-07-23T17:42:10.740Z"
-  },
-  {
-    "id": 7,
-    "userId": 1,
-    "userName": "David Cohen",
-    "action": "Update Permit Approval",
-    "entityType": "building",
-    "entityId": 239,
-    "timestamp": "2026-07-23T17:42:10.748Z"
+    "entityId": 1,
+    "timestamp": "2026-07-23T18:45:26.978Z"
   }
 ]

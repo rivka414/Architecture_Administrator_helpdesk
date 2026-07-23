@@ -38,6 +38,10 @@ const settlementProcessesScreen = document.getElementById('settlementProcessesSc
 const settlementProcessesButton = document.getElementById('settlementProcessesButton');
 const settlementProcessesList = document.getElementById('settlementProcessesList');
 const backFromSettlementProcesses = document.getElementById('backFromSettlementProcesses');
+const systemHealthScreen = document.getElementById('systemHealthScreen');
+const systemHealthButton = document.getElementById('systemHealthButton');
+const systemHealthContent = document.getElementById('systemHealthContent');
+const backFromSystemHealth = document.getElementById('backFromSystemHealth');
 const modalOverlay = document.getElementById('modalOverlay');
 const modalContent = document.getElementById('modalContent');
 const notificationModeSelect = document.getElementById('notificationModeSelect');
@@ -68,7 +72,7 @@ let selectedAppraisalReportId = null;
 let currentUser = null;
 
 function showScreen(screen) {
-  [loginScreen, listScreen, createScreen, detailsScreen, messageCenterScreen, appraisersPortalScreen, localAuthorityPortalScreen, settlementProcessesScreen].forEach((element) => element.classList.add('hidden'));
+  [loginScreen, listScreen, createScreen, detailsScreen, messageCenterScreen, appraisersPortalScreen, localAuthorityPortalScreen, settlementProcessesScreen, systemHealthScreen].forEach((element) => element.classList.add('hidden'));
   screen.classList.remove('hidden');
 }
 
@@ -229,7 +233,7 @@ function updateModeIndicator(mode) {
 
 function renderNotifications(notifications) {
   if (!notifications.length) {
-    notificationsList.innerHTML = '<p>No messages sent yet.</p>';
+    notificationsList.innerHTML = '<div class="empty-state"><p>No messages sent yet.</p></div>';
     return;
   }
 
@@ -254,6 +258,7 @@ function renderNotifications(notifications) {
   notifications.forEach((msg) => {
     const row = document.createElement('tr');
     const dt = msg.dateTime ? new Date(msg.dateTime).toLocaleString() : '';
+    const statusClass = msg.status === 'SENT' ? 'status-sent' : 'status-failed';
     row.innerHTML = `
       <td>${msg.messageId}</td>
       <td>#${msg.buildingId}</td>
@@ -261,7 +266,7 @@ function renderNotifications(notifications) {
       <td>${msg.email}</td>
       <td>${msg.subject}</td>
       <td>${dt}</td>
-      <td><span class="status">${msg.status}</span></td>
+      <td><span class="status ${statusClass}">${msg.status}</span></td>
       <td>${msg.idempotencyKey || ''}</td>
     `;
     tbody.appendChild(row);
@@ -273,7 +278,7 @@ function renderNotifications(notifications) {
 
 function renderAppraisersPortal() {
   if (!reports.length) {
-    appraisersPortalList.innerHTML = '<p>No buildings found.</p>';
+    appraisersPortalList.innerHTML = '<div class="empty-state"><p>No buildings found.</p></div>';
     return;
   }
 
@@ -363,7 +368,7 @@ let selectedPermitReportId = null;
 
 function renderLocalAuthorityPortal() {
   if (!reports.length) {
-    localAuthorityPortalList.innerHTML = '<p>No buildings found.</p>';
+    localAuthorityPortalList.innerHTML = '<div class="empty-state"><p>No buildings found.</p></div>';
     return;
   }
 
@@ -581,14 +586,32 @@ function renderReports() {
     const summary = getSettlementSummary(visibleReports);
     settlementSummary.classList.remove('hidden');
     settlementSummary.innerHTML = `
-      <strong>Settlement Summary: ${settlementFilter.value}</strong>
-      <div style="margin-top:0.5rem; display:flex; gap:1.5rem; flex-wrap:wrap;">
-        <span>Total buildings: <strong>${summary.total}</strong></span>
-        <span>Eligible for opening: <strong style="color:#0b6b2f;">${summary.eligible}</strong></span>
-        <span>Not eligible: <strong style="color:#c62828;">${summary.notEligible}</strong></span>
-        <span>Awaiting appraisal: <strong style="color:#e65100;">${summary.awaitingAppraisal}</strong></span>
-        <span>Awaiting local authority approval: <strong style="color:#bf360c;">${summary.awaitingPermit}</strong></span>
-        <span>Not eligible (other): <strong style="color:#6a1b9a;">${summary.notEligibleOther}</strong></span>
+      <div class="settlement-summary-title">Settlement Summary: ${settlementFilter.value}</div>
+      <div class="kpi-grid">
+        <div class="kpi-card total">
+          <div class="kpi-label">Total Buildings</div>
+          <div class="kpi-value">${summary.total}</div>
+        </div>
+        <div class="kpi-card eligible">
+          <div class="kpi-label">Eligible for Opening</div>
+          <div class="kpi-value">${summary.eligible}</div>
+        </div>
+        <div class="kpi-card ineligible">
+          <div class="kpi-label">Not Eligible</div>
+          <div class="kpi-value">${summary.notEligible}</div>
+        </div>
+        <div class="kpi-card awaiting-appraisal">
+          <div class="kpi-label">Awaiting Appraisal</div>
+          <div class="kpi-value">${summary.awaitingAppraisal}</div>
+        </div>
+        <div class="kpi-card awaiting-permit">
+          <div class="kpi-label">Awaiting Permit</div>
+          <div class="kpi-value">${summary.awaitingPermit}</div>
+        </div>
+        <div class="kpi-card other">
+          <div class="kpi-label">Not Eligible (Other)</div>
+          <div class="kpi-value">${summary.notEligibleOther}</div>
+        </div>
       </div>
     `;
   } else {
@@ -597,7 +620,7 @@ function renderReports() {
   }
 
   if (!visibleReports.length) {
-    reportList.innerHTML = '<p>No reports match the current filter.</p>';
+    reportList.innerHTML = '<div class="empty-state"><p>No reports match the current filter.</p></div>';
     return;
   }
 
@@ -683,13 +706,13 @@ async function batchGenerateFiles() {
         generatedFiles[file.buildingId] = file.url;
       });
       
-      showModal(`<p>${result.count} return-to-home files have been produced</p><button onclick="hideModal()">Close</button>`);
+      showModal(`<div class="success-message">${result.count} return-to-home files have been produced</div><button onclick="hideModal()">Close</button>`);
       renderReports();
     } else {
-      showModal(`<p>Error: ${result.error || 'Unable to generate files'}</p><button onclick="hideModal()">Close</button>`);
+      showModal(`<div class="error-message">Error: ${result.error || 'Unable to generate files'}</div><button onclick="hideModal()">Close</button>`);
     }
   } catch (error) {
-    showModal(`<p>Error: ${error.message}</p><button onclick="hideModal()">Close</button>`);
+    showModal(`<div class="error-message">Error: ${error.message}</div><button onclick="hideModal()">Close</button>`);
   }
 }
 
@@ -751,7 +774,7 @@ async function loadActionHistory(buildingId) {
 
 function renderActionHistory(actions) {
   if (!actions.length) {
-    actionHistoryList.innerHTML = '<p>No actions recorded yet.</p>';
+    actionHistoryList.innerHTML = '<div class="empty-state" style="padding:1rem;"><p>No actions recorded yet.</p></div>';
     return;
   }
 
@@ -798,44 +821,52 @@ function renderDetails(report) {
   statusSelect.value = report.status;
   detailsContent.innerHTML = `
     ${successMessage ? `<div class="success-message">${successMessage}</div>` : ''}
-    <p><strong>ID:</strong> ${report.id}</p>
-    <p><strong>Reporter:</strong> ${report.reporterName}</p>
-    <p><strong>Address:</strong> ${report.address}</p>
-    <p><strong>Damage Type:</strong> ${report.damageType}</p>
-    <p><strong>Description:</strong> ${report.description}</p>
-    <p><strong>Status:</strong> <span class="status ${report.status}">${report.status}</span></p>
-    <p><strong>Damage photos exist:</strong> ${report.damagePhotosExist ? 'Yes' : 'No'}</p>
-    <p><strong>Engineer report exists:</strong> ${report.engineerReportExists ? 'Yes' : 'No'}</p>
-    <p><strong>Eligibility check performed:</strong> ${report.eligibilityCheckPerformed ? 'Yes' : 'No'}</p>
-    <p><strong>Apartments in building:</strong> ${report.apartmentsInBuilding}</p>
-    <p><strong>Social approval:</strong> ${report.socialApproval ? 'Yes' : 'No'}</p>
-    <p><strong>Family Email:</strong> ${report.familyEmail || '—'}</p>
-    <p><strong>Readiness:</strong> ${getReadinessMessage(report)}</p>
+    <div class="detail-grid">
+      <div class="detail-item"><div class="detail-label">ID</div><div class="detail-value">#${report.id}</div></div>
+      <div class="detail-item"><div class="detail-label">Reporter</div><div class="detail-value">${report.reporterName}</div></div>
+      <div class="detail-item"><div class="detail-label">Address</div><div class="detail-value">${report.address}</div></div>
+      <div class="detail-item"><div class="detail-label">Damage Type</div><div class="detail-value">${report.damageType}</div></div>
+      <div class="detail-item"><div class="detail-label">Status</div><div class="detail-value"><span class="status ${report.status}">${report.status}</span></div></div>
+      <div class="detail-item"><div class="detail-label">Apartments</div><div class="detail-value">${report.apartmentsInBuilding}</div></div>
+    </div>
+    <div class="detail-grid" style="margin-top:0.5rem;">
+      <div class="detail-item"><div class="detail-label">Damage Photos</div><div class="detail-value">${report.damagePhotosExist ? 'Yes' : 'No'}</div></div>
+      <div class="detail-item"><div class="detail-label">Engineer Report</div><div class="detail-value">${report.engineerReportExists ? 'Yes' : 'No'}</div></div>
+      <div class="detail-item"><div class="detail-label">Eligibility Check</div><div class="detail-value">${report.eligibilityCheckPerformed ? 'Yes' : 'No'}</div></div>
+      <div class="detail-item"><div class="detail-label">Social Approval</div><div class="detail-value">${report.socialApproval ? 'Yes' : 'No'}</div></div>
+      <div class="detail-item"><div class="detail-label">Family Email</div><div class="detail-value">${report.familyEmail || '—'}</div></div>
+      <div class="detail-item"><div class="detail-label">Readiness</div><div class="detail-value">${getReadinessMessage(report)}</div></div>
+    </div>
+    ${report.description ? `<div style="margin-top:0.75rem;"><div class="detail-label">Description</div><div class="detail-value" style="font-size:0.9rem; color:#475569;">${report.description}</div></div>` : ''}
     ${report.appraisal ? `
-      <div style="margin-top:1rem; padding:0.75rem; background:#f0f4f8; border-radius:6px;">
-        <h3 style="margin-top:0;">Appraiser Assessment</h3>
-        <p><strong>Damage Level:</strong> ${report.appraisal.damageLevel}</p>
-        <p><strong>Comments:</strong> ${report.appraisal.appraiserComments || '—'}</p>
-        <p><strong>Inspection Date:</strong> ${report.appraisal.inspectionDate}</p>
-        <p><strong>Re-inspection Required:</strong> ${report.appraisal.reinspectionRequired ? 'Yes' : 'No'}</p>
+      <div class="detail-section">
+        <h3>Appraiser Assessment</h3>
+        <div class="detail-grid">
+          <div class="detail-item"><div class="detail-label">Damage Level</div><div class="detail-value">${report.appraisal.damageLevel}</div></div>
+          <div class="detail-item"><div class="detail-label">Inspection Date</div><div class="detail-value">${report.appraisal.inspectionDate || '—'}</div></div>
+          <div class="detail-item"><div class="detail-label">Re-inspection</div><div class="detail-value">${report.appraisal.reinspectionRequired ? 'Yes' : 'No'}</div></div>
+        </div>
+        ${report.appraisal.appraiserComments ? `<div style="margin-top:0.5rem;"><div class="detail-label">Comments</div><div class="detail-value" style="font-size:0.9rem;">${report.appraisal.appraiserComments}</div></div>` : ''}
       </div>
     ` : ''}
     ${report.permitApproval ? `
-      <div style="margin-top:1rem; padding:0.75rem; background:#f0f4f8; border-radius:6px;">
-        <h3 style="margin-top:0;">Local Authority Approval</h3>
-        <p><strong>Water Supply:</strong> ${report.permitApproval.waterSupply ? 'Yes' : 'No'}</p>
-        <p><strong>Electricity Supply:</strong> ${report.permitApproval.electricitySupply ? 'Yes' : 'No'}</p>
-        <p><strong>Access Roads:</strong> ${report.permitApproval.accessRoads ? 'Yes' : 'No'}</p>
-        <p><strong>Environmental Hazards Cleared:</strong> ${report.permitApproval.environmentalCleared ? 'Yes' : 'No'}</p>
-        <p><strong>Comments:</strong> ${report.permitApproval.localAuthorityComments || '—'}</p>
-        <p><strong>Approved:</strong> ${report.permitApproval.approved ? 'Yes' : 'No'}</p>
+      <div class="detail-section">
+        <h3>Local Authority Approval</h3>
+        <div class="detail-grid">
+          <div class="detail-item"><div class="detail-label">Water Supply</div><div class="detail-value">${report.permitApproval.waterSupply ? 'Yes' : 'No'}</div></div>
+          <div class="detail-item"><div class="detail-label">Electricity</div><div class="detail-value">${report.permitApproval.electricitySupply ? 'Yes' : 'No'}</div></div>
+          <div class="detail-item"><div class="detail-label">Access Roads</div><div class="detail-value">${report.permitApproval.accessRoads ? 'Yes' : 'No'}</div></div>
+          <div class="detail-item"><div class="detail-label">Environmental</div><div class="detail-value">${report.permitApproval.environmentalCleared ? 'Yes' : 'No'}</div></div>
+          <div class="detail-item"><div class="detail-label">Approved</div><div class="detail-value">${report.permitApproval.approved ? 'Yes' : 'No'}</div></div>
+        </div>
+        ${report.permitApproval.localAuthorityComments ? `<div style="margin-top:0.5rem;"><div class="detail-label">Comments</div><div class="detail-value" style="font-size:0.9rem;">${report.permitApproval.localAuthorityComments}</div></div>` : ''}
       </div>
     ` : ''}
-    <div style="margin-top:0.75rem;">
+    <div style="margin-top:1rem; display:flex; gap:0.5rem; flex-wrap:wrap; align-items:center;">
       <button id="budgetRequestButton" ${(canOpenBudgetRequest(report) && canDoAction('MINISTRY')) ? '' : 'disabled'}>Open Budget Request</button>
-      ${canGenerateReoccupationFile(report) ? '<button id="exportButton" style="margin-left:0.5rem;">Generate a re-occupation file</button>' : ''}
-      ${!canDoAction('MINISTRY') ? '<p style="color:#c62828; margin-top:0.35rem;">Only MINISTRY users can open budget requests.</p>' : (canOpenBudgetRequest(report) ? '' : '<p style="color:#8a4b00; margin-top:0.35rem;">Budget request is blocked until all required information is present and social approval is provided when required.</p>')}
+      ${canGenerateReoccupationFile(report) ? '<button id="exportButton" class="btn-secondary">Generate a re-occupation file</button>' : ''}
     </div>
+    ${!canDoAction('MINISTRY') ? '<div class="error-message" style="margin-top:0.5rem;">Only MINISTRY users can open budget requests.</div>' : (!canOpenBudgetRequest(report) ? '<div class="warning-message" style="margin-top:0.5rem;">Budget request is blocked until all required information is present and social approval is provided when required.</div>' : '')}
   `;
 
   const budgetButton = document.getElementById('budgetRequestButton');
@@ -979,6 +1010,12 @@ settlementProcessesButton.addEventListener('click', async () => {
   showScreen(settlementProcessesScreen);
 });
 backFromSettlementProcesses.addEventListener('click', () => showScreen(listScreen));
+
+systemHealthButton.addEventListener('click', async () => {
+  await loadSystemHealth();
+  showScreen(systemHealthScreen);
+});
+backFromSystemHealth.addEventListener('click', () => showScreen(listScreen));
 settlementProcessesList.addEventListener('click', async (event) => {
   const link = event.target.closest('a.view-logs-link');
   if (link) {
@@ -993,17 +1030,17 @@ settlementProcessesList.addEventListener('click', async (event) => {
 
 function renderLogsModal(settlement, logs) {
   if (!logs.length) {
-    showModal(`<h3>Logs: ${settlement}</h3><p>No logs found for this settlement.</p><button onclick="hideModal()">Close</button>`);
+    showModal(`<h3>Logs: ${settlement}</h3><div class="empty-state"><p>No logs found for this settlement.</p></div><button onclick="hideModal()">Close</button>`);
     return;
   }
   let html = `<h3>Logs: ${settlement}</h3><div style="max-height:60vh; overflow:auto;">`;
-  html += '<table style="width:100%; font-size:0.85rem;"><thead><tr><th>Time</th><th>Level</th><th>Event</th><th>Building</th><th>Error</th></tr></thead><tbody>';
+  html += '<table><thead><tr><th>Time</th><th>Level</th><th>Event</th><th>Building</th><th>Error</th></tr></thead><tbody>';
   logs.forEach((l) => {
     const time = new Date(l.timestamp).toLocaleString();
-    const levelColor = l.level === 'ERROR' ? '#c62828' : l.level === 'WARN' ? '#e65100' : '#0b6b2f';
+    const levelClass = l.level === 'ERROR' ? 'status-failed' : l.level === 'WARN' ? 'status PROCESSING' : 'status-sent';
     const building = l.buildingId != null ? `#${l.buildingId}` : '—';
     const error = l.error || '—';
-    html += `<tr><td>${time}</td><td style="color:${levelColor};font-weight:bold;">${l.level}</td><td>${l.event}</td><td>${building}</td><td style="max-width:200px;overflow:hidden;text-overflow:ellipsis;">${error}</td></tr>`;
+    html += `<tr><td>${time}</td><td><span class="status ${levelClass}">${l.level}</span></td><td>${l.event}</td><td>${building}</td><td style="max-width:200px;overflow:hidden;text-overflow:ellipsis;">${error}</td></tr>`;
   });
   html += '</tbody></table></div>';
   html += '<button onclick="hideModal()" style="margin-top:0.75rem;">Close</button>';
@@ -1016,9 +1053,62 @@ async function loadSettlementProcesses() {
   renderSettlementProcesses(processes);
 }
 
+async function loadSystemHealth() {
+  const response = await fetch('/system-health');
+  const metrics = await response.json();
+  renderSystemHealth(metrics);
+}
+
+function renderSystemHealth(metrics) {
+  const { settlementProcesses, notifications, performance } = metrics;
+
+  const formatDuration = (seconds) => {
+    if (seconds === null) return '—';
+    if (seconds < 60) return `${seconds}s`;
+    const m = Math.floor(seconds / 60);
+    const s = seconds % 60;
+    return s > 0 ? `${m}m ${s}s` : `${m}m`;
+  };
+
+  systemHealthContent.innerHTML = `
+    <div class="kpi-grid" style="margin-bottom:1.5rem;">
+      <div class="kpi-card total">
+        <div class="kpi-label">Completed Processes</div>
+        <div class="kpi-value">${settlementProcesses.completed}</div>
+      </div>
+      <div class="kpi-card processing">
+        <div class="kpi-label">Processing</div>
+        <div class="kpi-value">${settlementProcesses.processing}</div>
+      </div>
+    </div>
+
+    <div class="kpi-grid" style="margin-bottom:1.5rem;">
+      <div class="kpi-card eligible">
+        <div class="kpi-label">Successful Notifications</div>
+        <div class="kpi-value">${notifications.successful}</div>
+      </div>
+      <div class="kpi-card ineligible">
+        <div class="kpi-label">Failed Notifications</div>
+        <div class="kpi-value">${notifications.failed}</div>
+      </div>
+      <div class="kpi-card awaiting-appraisal">
+        <div class="kpi-label">Retry Count</div>
+        <div class="kpi-value">${notifications.retryCount}</div>
+      </div>
+    </div>
+
+    <div class="kpi-grid">
+      <div class="kpi-card other">
+        <div class="kpi-label">Avg. Settlement Duration</div>
+        <div class="kpi-value">${formatDuration(performance.averageSettlementDuration)}</div>
+      </div>
+    </div>
+  `;
+}
+
 function renderSettlementProcesses(processes) {
   if (!processes.length) {
-    settlementProcessesList.innerHTML = '<p>No settlement processes recorded yet.</p>';
+    settlementProcessesList.innerHTML = '<div class="empty-state"><p>No settlement processes recorded yet.</p></div>';
     return;
   }
 

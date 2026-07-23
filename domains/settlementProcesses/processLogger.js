@@ -23,6 +23,7 @@ class ProcessLogger {
       timestamp: new Date().toISOString(),
       level,
       event,
+      processId: options.processId || null,
       settlement: options.settlement || null,
       buildingId: options.buildingId != null ? Number(options.buildingId) : null,
       attempt: options.attempt != null ? Number(options.attempt) : null,

@@ -1,127 +1,173 @@
-{"timestamp":"2026-07-23T17:42:08.427Z","level":"INFO","event":"BUILDING_PDF_START","settlement":"Garden 33","buildingId":230,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:09.579Z","level":"INFO","event":"BUILDING_PDF_END","settlement":"Garden 33","buildingId":230,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:09.579Z","level":"INFO","event":"BUILDING_PROCESSING_COMPLETE","settlement":"Garden 33","buildingId":230,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:09.587Z","level":"INFO","event":"BUILDING_PDF_START","settlement":"North 9","buildingId":231,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:10.678Z","level":"INFO","event":"BUILDING_PDF_END","settlement":"North 9","buildingId":231,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:10.678Z","level":"INFO","event":"BUILDING_PROCESSING_COMPLETE","settlement":"North 9","buildingId":231,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:10.819Z","level":"INFO","event":"SETTLEMENT_PROCESS_START","settlement":"Jerusalem","buildingId":null,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:10.820Z","level":"INFO","event":"SETTLEMENT_ELIGIBLE_BUILDINGS_FOUND","settlement":"Jerusalem","buildingId":10,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:10.820Z","level":"INFO","event":"BUILDING_PROCESSING_START","settlement":"Jerusalem","buildingId":3,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:10.820Z","level":"INFO","event":"BUILDING_PDF_START","settlement":"Jerusalem","buildingId":3,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:11.919Z","level":"INFO","event":"BUILDING_PDF_END","settlement":"Jerusalem","buildingId":3,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:11.922Z","level":"INFO","event":"BUILDING_NOTIFICATION_START","settlement":"Jerusalem","buildingId":3,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:11.924Z","level":"INFO","event":"BUILDING_NOTIFICATION_SUCCESS","settlement":"Jerusalem","buildingId":3,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:11.924Z","level":"INFO","event":"BUILDING_PROCESSING_COMPLETE","settlement":"Jerusalem","buildingId":3,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:11.924Z","level":"INFO","event":"BUILDING_PROCESSING_START","settlement":"Jerusalem","buildingId":4,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:11.925Z","level":"INFO","event":"BUILDING_PDF_START","settlement":"Jerusalem","buildingId":4,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:13.048Z","level":"INFO","event":"BUILDING_PDF_END","settlement":"Jerusalem","buildingId":4,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:13.052Z","level":"INFO","event":"BUILDING_NOTIFICATION_START","settlement":"Jerusalem","buildingId":4,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:13.053Z","level":"INFO","event":"BUILDING_NOTIFICATION_SUCCESS","settlement":"Jerusalem","buildingId":4,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:13.054Z","level":"INFO","event":"BUILDING_PROCESSING_COMPLETE","settlement":"Jerusalem","buildingId":4,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:13.054Z","level":"INFO","event":"BUILDING_PROCESSING_START","settlement":"Jerusalem","buildingId":201,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:13.055Z","level":"INFO","event":"BUILDING_PDF_START","settlement":"Jerusalem","buildingId":201,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:14.168Z","level":"INFO","event":"BUILDING_PDF_END","settlement":"Jerusalem","buildingId":201,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:14.170Z","level":"INFO","event":"BUILDING_PROCESSING_COMPLETE","settlement":"Jerusalem","buildingId":201,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:14.171Z","level":"INFO","event":"BUILDING_PROCESSING_START","settlement":"Jerusalem","buildingId":225,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:14.171Z","level":"INFO","event":"BUILDING_PDF_START","settlement":"Jerusalem","buildingId":225,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:15.269Z","level":"INFO","event":"BUILDING_PDF_END","settlement":"Jerusalem","buildingId":225,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:15.275Z","level":"INFO","event":"BUILDING_PROCESSING_COMPLETE","settlement":"Jerusalem","buildingId":225,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:15.276Z","level":"INFO","event":"SETTLEMENT_PROCESS_COMPLETE","settlement":"Jerusalem","buildingId":null,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:15.294Z","level":"INFO","event":"SETTLEMENT_PROCESS_START","settlement":"Haifa","buildingId":null,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:15.297Z","level":"INFO","event":"SETTLEMENT_ELIGIBLE_BUILDINGS_FOUND","settlement":"Haifa","buildingId":2,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:15.297Z","level":"INFO","event":"BUILDING_PROCESSING_START","settlement":"Haifa","buildingId":5,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:15.298Z","level":"INFO","event":"BUILDING_PDF_START","settlement":"Haifa","buildingId":5,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:16.428Z","level":"INFO","event":"BUILDING_PDF_END","settlement":"Haifa","buildingId":5,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:16.430Z","level":"INFO","event":"BUILDING_NOTIFICATION_START","settlement":"Haifa","buildingId":5,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:16.430Z","level":"INFO","event":"BUILDING_NOTIFICATION_SUCCESS","settlement":"Haifa","buildingId":5,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:16.431Z","level":"INFO","event":"BUILDING_PROCESSING_COMPLETE","settlement":"Haifa","buildingId":5,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:16.431Z","level":"INFO","event":"BUILDING_PROCESSING_START","settlement":"Haifa","buildingId":6,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:16.431Z","level":"INFO","event":"BUILDING_PDF_START","settlement":"Haifa","buildingId":6,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:17.588Z","level":"INFO","event":"BUILDING_PDF_END","settlement":"Haifa","buildingId":6,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:17.591Z","level":"INFO","event":"BUILDING_NOTIFICATION_START","settlement":"Haifa","buildingId":6,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:17.592Z","level":"INFO","event":"BUILDING_NOTIFICATION_SUCCESS","settlement":"Haifa","buildingId":6,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:17.593Z","level":"INFO","event":"BUILDING_PROCESSING_COMPLETE","settlement":"Haifa","buildingId":6,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:17.593Z","level":"INFO","event":"SETTLEMENT_PROCESS_COMPLETE","settlement":"Haifa","buildingId":null,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:17.614Z","level":"INFO","event":"SETTLEMENT_PROCESS_START","settlement":"Tel Aviv","buildingId":null,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:17.618Z","level":"INFO","event":"SETTLEMENT_ELIGIBLE_BUILDINGS_FOUND","settlement":"Tel Aviv","buildingId":2,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:17.619Z","level":"INFO","event":"BUILDING_PROCESSING_START","settlement":"Tel Aviv","buildingId":1,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:17.619Z","level":"INFO","event":"BUILDING_PDF_START","settlement":"Tel Aviv","buildingId":1,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:18.752Z","level":"INFO","event":"BUILDING_PDF_END","settlement":"Tel Aviv","buildingId":1,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:18.755Z","level":"INFO","event":"BUILDING_NOTIFICATION_START","settlement":"Tel Aviv","buildingId":1,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:18.756Z","level":"INFO","event":"BUILDING_NOTIFICATION_SUCCESS","settlement":"Tel Aviv","buildingId":1,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:18.757Z","level":"INFO","event":"BUILDING_PROCESSING_COMPLETE","settlement":"Tel Aviv","buildingId":1,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:18.757Z","level":"INFO","event":"BUILDING_PROCESSING_START","settlement":"Tel Aviv","buildingId":2,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:18.758Z","level":"INFO","event":"BUILDING_PDF_START","settlement":"Tel Aviv","buildingId":2,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:19.858Z","level":"INFO","event":"BUILDING_PDF_END","settlement":"Tel Aviv","buildingId":2,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:19.860Z","level":"INFO","event":"BUILDING_NOTIFICATION_START","settlement":"Tel Aviv","buildingId":2,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:19.861Z","level":"INFO","event":"BUILDING_NOTIFICATION_SUCCESS","settlement":"Tel Aviv","buildingId":2,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:19.861Z","level":"INFO","event":"BUILDING_PROCESSING_COMPLETE","settlement":"Tel Aviv","buildingId":2,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:19.861Z","level":"INFO","event":"SETTLEMENT_PROCESS_COMPLETE","settlement":"Tel Aviv","buildingId":null,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:19.874Z","level":"INFO","event":"SETTLEMENT_PROCESS_START","settlement":"Beer Sheva","buildingId":null,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:19.875Z","level":"INFO","event":"SETTLEMENT_ELIGIBLE_BUILDINGS_FOUND","settlement":"Beer Sheva","buildingId":1,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:19.876Z","level":"INFO","event":"BUILDING_PROCESSING_START","settlement":"Beer Sheva","buildingId":7,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:19.876Z","level":"INFO","event":"BUILDING_PDF_START","settlement":"Beer Sheva","buildingId":7,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:21.033Z","level":"INFO","event":"BUILDING_PDF_END","settlement":"Beer Sheva","buildingId":7,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:21.039Z","level":"INFO","event":"BUILDING_NOTIFICATION_START","settlement":"Beer Sheva","buildingId":7,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:21.039Z","level":"INFO","event":"BUILDING_NOTIFICATION_SUCCESS","settlement":"Beer Sheva","buildingId":7,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:21.040Z","level":"INFO","event":"BUILDING_PROCESSING_COMPLETE","settlement":"Beer Sheva","buildingId":7,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:21.040Z","level":"INFO","event":"SETTLEMENT_PROCESS_COMPLETE","settlement":"Beer Sheva","buildingId":null,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:21.043Z","level":"INFO","event":"SETTLEMENT_PROCESS_START","settlement":"Netanya","buildingId":null,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:21.045Z","level":"INFO","event":"SETTLEMENT_ELIGIBLE_BUILDINGS_FOUND","settlement":"Netanya","buildingId":1,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:21.045Z","level":"INFO","event":"BUILDING_PROCESSING_START","settlement":"Netanya","buildingId":8,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:21.045Z","level":"INFO","event":"BUILDING_PDF_START","settlement":"Netanya","buildingId":8,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:22.164Z","level":"INFO","event":"BUILDING_PDF_END","settlement":"Netanya","buildingId":8,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:22.166Z","level":"INFO","event":"BUILDING_NOTIFICATION_START","settlement":"Netanya","buildingId":8,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:22.167Z","level":"INFO","event":"BUILDING_NOTIFICATION_SUCCESS","settlement":"Netanya","buildingId":8,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:22.167Z","level":"INFO","event":"BUILDING_PROCESSING_COMPLETE","settlement":"Netanya","buildingId":8,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:22.168Z","level":"INFO","event":"SETTLEMENT_PROCESS_COMPLETE","settlement":"Netanya","buildingId":null,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:22.180Z","level":"INFO","event":"SETTLEMENT_PROCESS_START","settlement":"Jerusalem","buildingId":null,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:22.183Z","level":"INFO","event":"SETTLEMENT_ELIGIBLE_BUILDINGS_FOUND","settlement":"Jerusalem","buildingId":10,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:22.184Z","level":"INFO","event":"BUILDING_PROCESSING_START","settlement":"Jerusalem","buildingId":3,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:22.185Z","level":"INFO","event":"BUILDING_PDF_START","settlement":"Jerusalem","buildingId":3,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:23.309Z","level":"INFO","event":"BUILDING_PDF_END","settlement":"Jerusalem","buildingId":3,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:23.311Z","level":"INFO","event":"BUILDING_NOTIFICATION_START","settlement":"Jerusalem","buildingId":3,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:23.311Z","level":"INFO","event":"BUILDING_NOTIFICATION_SUCCESS","settlement":"Jerusalem","buildingId":3,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:23.311Z","level":"INFO","event":"BUILDING_PROCESSING_COMPLETE","settlement":"Jerusalem","buildingId":3,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:23.312Z","level":"INFO","event":"BUILDING_PROCESSING_START","settlement":"Jerusalem","buildingId":4,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:23.312Z","level":"INFO","event":"BUILDING_PDF_START","settlement":"Jerusalem","buildingId":4,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:24.455Z","level":"INFO","event":"BUILDING_PDF_END","settlement":"Jerusalem","buildingId":4,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:24.458Z","level":"INFO","event":"BUILDING_NOTIFICATION_START","settlement":"Jerusalem","buildingId":4,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:24.458Z","level":"INFO","event":"BUILDING_NOTIFICATION_SUCCESS","settlement":"Jerusalem","buildingId":4,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:24.458Z","level":"INFO","event":"BUILDING_PROCESSING_COMPLETE","settlement":"Jerusalem","buildingId":4,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:24.459Z","level":"INFO","event":"BUILDING_PROCESSING_START","settlement":"Jerusalem","buildingId":201,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:24.459Z","level":"INFO","event":"BUILDING_PDF_START","settlement":"Jerusalem","buildingId":201,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:25.563Z","level":"INFO","event":"BUILDING_PDF_END","settlement":"Jerusalem","buildingId":201,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:25.566Z","level":"INFO","event":"BUILDING_PROCESSING_COMPLETE","settlement":"Jerusalem","buildingId":201,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:25.566Z","level":"INFO","event":"BUILDING_PROCESSING_START","settlement":"Jerusalem","buildingId":225,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:25.567Z","level":"INFO","event":"BUILDING_PDF_START","settlement":"Jerusalem","buildingId":225,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:26.681Z","level":"INFO","event":"BUILDING_PDF_END","settlement":"Jerusalem","buildingId":225,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:26.685Z","level":"INFO","event":"BUILDING_PROCESSING_COMPLETE","settlement":"Jerusalem","buildingId":225,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:26.685Z","level":"INFO","event":"SETTLEMENT_PROCESS_COMPLETE","settlement":"Jerusalem","buildingId":null,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:26.699Z","level":"INFO","event":"SETTLEMENT_PROCESS_START","settlement":"Haifa","buildingId":null,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:26.700Z","level":"INFO","event":"SETTLEMENT_ELIGIBLE_BUILDINGS_FOUND","settlement":"Haifa","buildingId":2,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:26.701Z","level":"INFO","event":"BUILDING_PROCESSING_START","settlement":"Haifa","buildingId":5,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:26.701Z","level":"INFO","event":"BUILDING_PDF_START","settlement":"Haifa","buildingId":5,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:27.805Z","level":"INFO","event":"BUILDING_PDF_END","settlement":"Haifa","buildingId":5,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:27.809Z","level":"INFO","event":"BUILDING_NOTIFICATION_START","settlement":"Haifa","buildingId":5,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:27.810Z","level":"INFO","event":"BUILDING_NOTIFICATION_SUCCESS","settlement":"Haifa","buildingId":5,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:27.810Z","level":"INFO","event":"BUILDING_PROCESSING_COMPLETE","settlement":"Haifa","buildingId":5,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:27.811Z","level":"INFO","event":"BUILDING_PROCESSING_START","settlement":"Haifa","buildingId":6,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:27.811Z","level":"INFO","event":"BUILDING_PDF_START","settlement":"Haifa","buildingId":6,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:28.922Z","level":"INFO","event":"BUILDING_PDF_END","settlement":"Haifa","buildingId":6,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:28.927Z","level":"INFO","event":"BUILDING_NOTIFICATION_START","settlement":"Haifa","buildingId":6,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:28.928Z","level":"INFO","event":"BUILDING_NOTIFICATION_SUCCESS","settlement":"Haifa","buildingId":6,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:28.928Z","level":"INFO","event":"BUILDING_PROCESSING_COMPLETE","settlement":"Haifa","buildingId":6,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:28.929Z","level":"INFO","event":"SETTLEMENT_PROCESS_COMPLETE","settlement":"Haifa","buildingId":null,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:28.938Z","level":"INFO","event":"SETTLEMENT_PROCESS_START","settlement":"Beer Sheva","buildingId":null,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:28.940Z","level":"INFO","event":"SETTLEMENT_ELIGIBLE_BUILDINGS_FOUND","settlement":"Beer Sheva","buildingId":1,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:28.940Z","level":"INFO","event":"BUILDING_PROCESSING_START","settlement":"Beer Sheva","buildingId":7,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:28.940Z","level":"INFO","event":"BUILDING_PDF_START","settlement":"Beer Sheva","buildingId":7,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:30.085Z","level":"INFO","event":"BUILDING_PDF_END","settlement":"Beer Sheva","buildingId":7,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:30.090Z","level":"INFO","event":"BUILDING_NOTIFICATION_START","settlement":"Beer Sheva","buildingId":7,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:30.091Z","level":"INFO","event":"BUILDING_NOTIFICATION_SUCCESS","settlement":"Beer Sheva","buildingId":7,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:30.091Z","level":"INFO","event":"BUILDING_PROCESSING_COMPLETE","settlement":"Beer Sheva","buildingId":7,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:30.092Z","level":"INFO","event":"SETTLEMENT_PROCESS_COMPLETE","settlement":"Beer Sheva","buildingId":null,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:30.110Z","level":"INFO","event":"BUILDING_PDF_START","settlement":"Jerusalem","buildingId":249,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:31.202Z","level":"INFO","event":"BUILDING_PDF_END","settlement":"Jerusalem","buildingId":249,"attempt":null,"error":null}
-{"timestamp":"2026-07-23T17:42:31.202Z","level":"INFO","event":"BUILDING_PROCESSING_COMPLETE","settlement":"Jerusalem","buildingId":249,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:45:04.042Z","level":"INFO","event":"BUILDING_PDF_START","processId":"7a800076-d99a-4d4f-af59-2f84b488cf02","settlement":"Tel Aviv","buildingId":1,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:45:05.001Z","level":"INFO","event":"BUILDING_PDF_START","processId":"f2901bae-c698-4069-ac43-4a056b17bd37","settlement":"Tel Aviv","buildingId":1,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:45:05.281Z","level":"INFO","event":"BUILDING_PDF_END","processId":"7a800076-d99a-4d4f-af59-2f84b488cf02","settlement":"Tel Aviv","buildingId":1,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:45:05.281Z","level":"INFO","event":"BUILDING_NOTIFICATION_START","processId":"7a800076-d99a-4d4f-af59-2f84b488cf02","settlement":"Tel Aviv","buildingId":1,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:45:05.283Z","level":"INFO","event":"BUILDING_NOTIFICATION_SUCCESS","processId":"7a800076-d99a-4d4f-af59-2f84b488cf02","settlement":"Tel Aviv","buildingId":1,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:45:05.283Z","level":"INFO","event":"BUILDING_PROCESSING_COMPLETE","processId":"7a800076-d99a-4d4f-af59-2f84b488cf02","settlement":"Tel Aviv","buildingId":1,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:45:06.168Z","level":"INFO","event":"BUILDING_PDF_END","processId":"f2901bae-c698-4069-ac43-4a056b17bd37","settlement":"Tel Aviv","buildingId":1,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:45:06.169Z","level":"INFO","event":"BUILDING_NOTIFICATION_START","processId":"f2901bae-c698-4069-ac43-4a056b17bd37","settlement":"Tel Aviv","buildingId":1,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:45:06.169Z","level":"INFO","event":"BUILDING_NOTIFICATION_SUCCESS","processId":"f2901bae-c698-4069-ac43-4a056b17bd37","settlement":"Tel Aviv","buildingId":1,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:45:06.170Z","level":"INFO","event":"BUILDING_PROCESSING_COMPLETE","processId":"f2901bae-c698-4069-ac43-4a056b17bd37","settlement":"Tel Aviv","buildingId":1,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:45:23.220Z","level":"INFO","event":"BUILDING_PDF_START","processId":"2a4824d5-3fbd-4748-bb8d-e07c96715fc5","settlement":"Tel Aviv","buildingId":1,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:45:24.370Z","level":"INFO","event":"BUILDING_PDF_END","processId":"2a4824d5-3fbd-4748-bb8d-e07c96715fc5","settlement":"Tel Aviv","buildingId":1,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:45:24.370Z","level":"INFO","event":"BUILDING_NOTIFICATION_START","processId":"2a4824d5-3fbd-4748-bb8d-e07c96715fc5","settlement":"Tel Aviv","buildingId":1,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:45:24.371Z","level":"INFO","event":"BUILDING_NOTIFICATION_SUCCESS","processId":"2a4824d5-3fbd-4748-bb8d-e07c96715fc5","settlement":"Tel Aviv","buildingId":1,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:45:24.371Z","level":"INFO","event":"BUILDING_PROCESSING_COMPLETE","processId":"2a4824d5-3fbd-4748-bb8d-e07c96715fc5","settlement":"Tel Aviv","buildingId":1,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:45:42.966Z","level":"INFO","event":"SETTLEMENT_PROCESS_START","processId":"515de309-e575-4195-ad23-2f1ccbfb72a0","settlement":"Kfar Saba","buildingId":null,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:45:42.970Z","level":"INFO","event":"SETTLEMENT_ELIGIBLE_BUILDINGS_FOUND","processId":"515de309-e575-4195-ad23-2f1ccbfb72a0","settlement":"Kfar Saba","buildingId":1,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:45:42.970Z","level":"INFO","event":"SETTLEMENT_PROCESS_COMPLETE","processId":"515de309-e575-4195-ad23-2f1ccbfb72a0","settlement":"Kfar Saba","buildingId":null,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:45:45.502Z","level":"INFO","event":"SETTLEMENT_PROCESS_START","processId":"217140bc-b997-4b70-a638-bdd3e866ad14","settlement":"Ashkelon","buildingId":null,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:45:45.504Z","level":"INFO","event":"SETTLEMENT_ELIGIBLE_BUILDINGS_FOUND","processId":"217140bc-b997-4b70-a638-bdd3e866ad14","settlement":"Ashkelon","buildingId":1,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:45:45.505Z","level":"INFO","event":"SETTLEMENT_PROCESS_COMPLETE","processId":"217140bc-b997-4b70-a638-bdd3e866ad14","settlement":"Ashkelon","buildingId":null,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:45:47.856Z","level":"INFO","event":"SETTLEMENT_PROCESS_START","processId":"47ab3a9d-bcb3-4ba0-91b8-c3913d57c68b","settlement":"Rishon LeZion","buildingId":null,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:45:47.860Z","level":"INFO","event":"SETTLEMENT_ELIGIBLE_BUILDINGS_FOUND","processId":"47ab3a9d-bcb3-4ba0-91b8-c3913d57c68b","settlement":"Rishon LeZion","buildingId":1,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:45:47.860Z","level":"INFO","event":"SETTLEMENT_PROCESS_COMPLETE","processId":"47ab3a9d-bcb3-4ba0-91b8-c3913d57c68b","settlement":"Rishon LeZion","buildingId":null,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:45:50.533Z","level":"INFO","event":"SETTLEMENT_PROCESS_START","processId":"05bef1c4-4441-4c40-b176-69ad46a999cd","settlement":"Holon","buildingId":null,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:45:50.535Z","level":"INFO","event":"SETTLEMENT_ELIGIBLE_BUILDINGS_FOUND","processId":"05bef1c4-4441-4c40-b176-69ad46a999cd","settlement":"Holon","buildingId":1,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:45:50.536Z","level":"INFO","event":"SETTLEMENT_PROCESS_COMPLETE","processId":"05bef1c4-4441-4c40-b176-69ad46a999cd","settlement":"Holon","buildingId":null,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:01.459Z","level":"INFO","event":"SETTLEMENT_PROCESS_START","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":null,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:01.460Z","level":"INFO","event":"SETTLEMENT_ELIGIBLE_BUILDINGS_FOUND","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":371,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:01.460Z","level":"INFO","event":"BUILDING_PROCESSING_START","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":1,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:01.460Z","level":"INFO","event":"BUILDING_PDF_START","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":1,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:02.611Z","level":"INFO","event":"BUILDING_PDF_END","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":1,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:02.615Z","level":"INFO","event":"BUILDING_NOTIFICATION_START","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":1,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:02.616Z","level":"INFO","event":"BUILDING_NOTIFICATION_SUCCESS","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":1,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:02.616Z","level":"INFO","event":"BUILDING_PROCESSING_COMPLETE","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":1,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:02.617Z","level":"INFO","event":"BUILDING_PROCESSING_START","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":2,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:02.617Z","level":"INFO","event":"BUILDING_PDF_START","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":2,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:03.786Z","level":"INFO","event":"BUILDING_PDF_END","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":2,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:03.791Z","level":"INFO","event":"BUILDING_NOTIFICATION_START","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":2,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:03.792Z","level":"INFO","event":"BUILDING_NOTIFICATION_SUCCESS","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":2,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:03.793Z","level":"INFO","event":"BUILDING_PROCESSING_COMPLETE","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":2,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:03.793Z","level":"INFO","event":"BUILDING_PROCESSING_START","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":3,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:03.793Z","level":"INFO","event":"BUILDING_PDF_START","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":3,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:04.913Z","level":"INFO","event":"BUILDING_PDF_END","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":3,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:04.920Z","level":"INFO","event":"BUILDING_NOTIFICATION_START","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":3,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:04.921Z","level":"INFO","event":"BUILDING_NOTIFICATION_SUCCESS","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":3,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:04.921Z","level":"INFO","event":"BUILDING_PROCESSING_COMPLETE","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":3,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:04.922Z","level":"INFO","event":"BUILDING_PROCESSING_START","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":4,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:04.922Z","level":"INFO","event":"BUILDING_PDF_START","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":4,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:06.044Z","level":"INFO","event":"BUILDING_PDF_END","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":4,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:06.050Z","level":"INFO","event":"BUILDING_NOTIFICATION_START","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":4,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:06.051Z","level":"INFO","event":"BUILDING_NOTIFICATION_SUCCESS","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":4,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:06.051Z","level":"INFO","event":"BUILDING_PROCESSING_COMPLETE","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":4,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:06.051Z","level":"INFO","event":"BUILDING_PROCESSING_START","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":5,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:06.052Z","level":"INFO","event":"BUILDING_PDF_START","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":5,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:07.142Z","level":"INFO","event":"BUILDING_PDF_END","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":5,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:07.145Z","level":"INFO","event":"BUILDING_NOTIFICATION_START","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":5,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:07.145Z","level":"INFO","event":"BUILDING_NOTIFICATION_SUCCESS","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":5,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:07.145Z","level":"INFO","event":"BUILDING_PROCESSING_COMPLETE","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":5,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:07.146Z","level":"INFO","event":"BUILDING_PROCESSING_START","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":6,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:07.146Z","level":"INFO","event":"BUILDING_PDF_START","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":6,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:08.284Z","level":"INFO","event":"BUILDING_PDF_END","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":6,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:08.287Z","level":"INFO","event":"BUILDING_NOTIFICATION_START","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":6,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:08.288Z","level":"INFO","event":"BUILDING_NOTIFICATION_SUCCESS","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":6,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:08.288Z","level":"INFO","event":"BUILDING_PROCESSING_COMPLETE","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":6,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:08.288Z","level":"INFO","event":"BUILDING_PROCESSING_START","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":7,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:08.289Z","level":"INFO","event":"BUILDING_PDF_START","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":7,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:09.398Z","level":"INFO","event":"BUILDING_PDF_END","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":7,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:09.403Z","level":"INFO","event":"BUILDING_NOTIFICATION_START","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":7,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:09.404Z","level":"INFO","event":"BUILDING_NOTIFICATION_SUCCESS","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":7,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:09.405Z","level":"INFO","event":"BUILDING_PROCESSING_COMPLETE","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":7,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:09.406Z","level":"INFO","event":"BUILDING_PROCESSING_START","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":8,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:09.406Z","level":"INFO","event":"BUILDING_PDF_START","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":8,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:10.584Z","level":"INFO","event":"BUILDING_PDF_END","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":8,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:10.588Z","level":"INFO","event":"BUILDING_NOTIFICATION_START","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":8,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:10.590Z","level":"INFO","event":"BUILDING_NOTIFICATION_SUCCESS","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":8,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:10.590Z","level":"INFO","event":"BUILDING_PROCESSING_COMPLETE","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":8,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:10.591Z","level":"INFO","event":"BUILDING_PROCESSING_START","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":9,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:10.591Z","level":"INFO","event":"BUILDING_PDF_START","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":9,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:11.694Z","level":"INFO","event":"BUILDING_PDF_END","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":9,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:11.700Z","level":"INFO","event":"BUILDING_NOTIFICATION_START","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":9,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:11.700Z","level":"INFO","event":"BUILDING_NOTIFICATION_SUCCESS","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":9,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:11.701Z","level":"INFO","event":"BUILDING_PROCESSING_COMPLETE","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":9,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:11.701Z","level":"INFO","event":"BUILDING_PROCESSING_START","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":21,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:11.701Z","level":"INFO","event":"BUILDING_PDF_START","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":21,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:12.832Z","level":"INFO","event":"BUILDING_PDF_END","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":21,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:12.835Z","level":"INFO","event":"BUILDING_NOTIFICATION_START","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":21,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:12.836Z","level":"INFO","event":"BUILDING_NOTIFICATION_SUCCESS","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":21,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:12.836Z","level":"INFO","event":"BUILDING_PROCESSING_COMPLETE","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":21,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:12.836Z","level":"INFO","event":"BUILDING_PROCESSING_START","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":27,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:12.836Z","level":"INFO","event":"BUILDING_PDF_START","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":27,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:13.947Z","level":"INFO","event":"BUILDING_PDF_END","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":27,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:13.951Z","level":"INFO","event":"BUILDING_PROCESSING_COMPLETE","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":27,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:13.951Z","level":"INFO","event":"BUILDING_PROCESSING_START","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":28,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:13.951Z","level":"INFO","event":"BUILDING_PDF_START","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":28,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:15.104Z","level":"INFO","event":"BUILDING_PDF_END","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":28,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:15.109Z","level":"INFO","event":"BUILDING_PROCESSING_COMPLETE","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":28,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:15.109Z","level":"INFO","event":"BUILDING_PROCESSING_START","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":40,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:15.109Z","level":"INFO","event":"BUILDING_PDF_START","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":40,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:16.255Z","level":"INFO","event":"BUILDING_PDF_END","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":40,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:16.259Z","level":"INFO","event":"BUILDING_PROCESSING_COMPLETE","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":40,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:16.259Z","level":"INFO","event":"BUILDING_PROCESSING_START","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":41,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:16.260Z","level":"INFO","event":"BUILDING_PDF_START","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":41,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:17.352Z","level":"INFO","event":"BUILDING_PDF_END","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":41,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:17.356Z","level":"INFO","event":"BUILDING_PROCESSING_COMPLETE","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":41,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:17.356Z","level":"INFO","event":"BUILDING_PROCESSING_START","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":50,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:17.356Z","level":"INFO","event":"BUILDING_PDF_START","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":50,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:18.453Z","level":"INFO","event":"BUILDING_PDF_END","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":50,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:18.458Z","level":"INFO","event":"BUILDING_NOTIFICATION_START","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":50,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:18.459Z","level":"INFO","event":"BUILDING_NOTIFICATION_SUCCESS","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":50,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:18.459Z","level":"INFO","event":"BUILDING_PROCESSING_COMPLETE","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":50,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:18.460Z","level":"INFO","event":"BUILDING_PROCESSING_START","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":55,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:18.461Z","level":"INFO","event":"BUILDING_PDF_START","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":55,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:19.523Z","level":"INFO","event":"BUILDING_PDF_END","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":55,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:19.526Z","level":"INFO","event":"BUILDING_PROCESSING_COMPLETE","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":55,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:19.527Z","level":"INFO","event":"BUILDING_PROCESSING_START","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":56,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:19.527Z","level":"INFO","event":"BUILDING_PDF_START","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":56,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:20.595Z","level":"INFO","event":"BUILDING_PDF_END","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":56,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:20.597Z","level":"INFO","event":"BUILDING_PROCESSING_COMPLETE","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":56,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:20.598Z","level":"INFO","event":"BUILDING_PROCESSING_START","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":69,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:20.598Z","level":"INFO","event":"BUILDING_PDF_START","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":69,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:21.656Z","level":"INFO","event":"BUILDING_PDF_END","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":69,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:21.659Z","level":"INFO","event":"BUILDING_PROCESSING_COMPLETE","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":69,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:21.660Z","level":"INFO","event":"BUILDING_PROCESSING_START","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":70,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:21.660Z","level":"INFO","event":"BUILDING_PDF_START","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":70,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:22.725Z","level":"INFO","event":"BUILDING_PDF_END","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":70,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:22.727Z","level":"INFO","event":"BUILDING_PROCESSING_COMPLETE","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":70,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:22.727Z","level":"INFO","event":"BUILDING_PROCESSING_START","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":91,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:22.727Z","level":"INFO","event":"BUILDING_PDF_START","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":91,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:23.789Z","level":"INFO","event":"BUILDING_PDF_END","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":91,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:23.791Z","level":"INFO","event":"BUILDING_PROCESSING_COMPLETE","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":91,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:23.792Z","level":"INFO","event":"BUILDING_PROCESSING_START","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":92,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:23.792Z","level":"INFO","event":"BUILDING_PDF_START","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":92,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:24.853Z","level":"INFO","event":"BUILDING_PDF_END","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":92,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:24.857Z","level":"INFO","event":"BUILDING_PROCESSING_COMPLETE","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":92,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:24.857Z","level":"INFO","event":"BUILDING_PROCESSING_START","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":113,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:24.858Z","level":"INFO","event":"BUILDING_PDF_START","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":113,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:25.930Z","level":"INFO","event":"BUILDING_PDF_END","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":113,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:25.934Z","level":"INFO","event":"BUILDING_PROCESSING_COMPLETE","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":113,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:25.935Z","level":"INFO","event":"BUILDING_PROCESSING_START","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":114,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:25.935Z","level":"INFO","event":"BUILDING_PDF_START","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":114,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:27.004Z","level":"INFO","event":"BUILDING_PDF_END","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":114,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:27.006Z","level":"INFO","event":"BUILDING_PROCESSING_COMPLETE","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":114,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:27.007Z","level":"INFO","event":"BUILDING_PROCESSING_START","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":136,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:27.007Z","level":"INFO","event":"BUILDING_PDF_START","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":136,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:28.093Z","level":"INFO","event":"BUILDING_PDF_END","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":136,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:28.096Z","level":"INFO","event":"BUILDING_PROCESSING_COMPLETE","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":136,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:28.097Z","level":"INFO","event":"BUILDING_PROCESSING_START","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":137,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:28.097Z","level":"INFO","event":"BUILDING_PDF_START","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":137,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:29.154Z","level":"INFO","event":"BUILDING_PDF_END","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":137,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:29.158Z","level":"INFO","event":"BUILDING_PROCESSING_COMPLETE","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":137,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:29.159Z","level":"INFO","event":"BUILDING_PROCESSING_START","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":159,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:29.159Z","level":"INFO","event":"BUILDING_PDF_START","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":159,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:30.247Z","level":"INFO","event":"BUILDING_PDF_END","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":159,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:30.252Z","level":"INFO","event":"BUILDING_PROCESSING_COMPLETE","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":159,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:30.252Z","level":"INFO","event":"BUILDING_PROCESSING_START","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":160,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:30.252Z","level":"INFO","event":"BUILDING_PDF_START","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":160,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:31.324Z","level":"INFO","event":"BUILDING_PDF_END","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":160,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:31.326Z","level":"INFO","event":"BUILDING_PROCESSING_COMPLETE","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":160,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:31.326Z","level":"INFO","event":"BUILDING_PROCESSING_START","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":182,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:31.327Z","level":"INFO","event":"BUILDING_PDF_START","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":182,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:32.405Z","level":"INFO","event":"BUILDING_PDF_END","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":182,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:32.408Z","level":"INFO","event":"BUILDING_PROCESSING_COMPLETE","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":182,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:32.408Z","level":"INFO","event":"BUILDING_PROCESSING_START","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":183,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:32.409Z","level":"INFO","event":"BUILDING_PDF_START","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":183,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:33.472Z","level":"INFO","event":"BUILDING_PDF_END","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":183,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:33.477Z","level":"INFO","event":"BUILDING_PROCESSING_COMPLETE","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":183,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:33.477Z","level":"INFO","event":"BUILDING_PROCESSING_START","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":201,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:33.478Z","level":"INFO","event":"BUILDING_PDF_START","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":201,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:34.555Z","level":"INFO","event":"BUILDING_PDF_END","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":201,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:34.559Z","level":"INFO","event":"BUILDING_PROCESSING_COMPLETE","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":201,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:34.559Z","level":"INFO","event":"BUILDING_PROCESSING_START","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":206,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T18:46:34.560Z","level":"INFO","event":"BUILDING_PDF_START","processId":"1bfdb646-d7e8-404e-9e87-0f5dcfec72c4","settlement":null,"buildingId":206,"attempt":null,"error":null}

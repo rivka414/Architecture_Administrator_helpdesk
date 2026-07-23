@@ -4,43 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Damage Reports</title>
-    <style>
-      body { font-family: Arial, sans-serif; margin: 0; background: #f4f6f8; color: #222; }
-      nav { background: #1f4f7a; color: white; padding: 1rem 2rem; }
-      main { max-width: 900px; margin: 2rem auto; padding: 0 1rem 2rem; }
-      .card { background: white; padding: 1rem 1.25rem; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.08); margin-bottom: 1rem; }
-      button, input, select, textarea { font: inherit; padding: 0.6rem; border-radius: 6px; border: 1px solid #c7c7c7; }
-      button { background: #1f4f7a; color: white; border: none; cursor: pointer; }
-      .hidden { display: none; }
-      .list-controls { margin-bottom: 0.75rem; }
-      table { width: 100%; border-collapse: collapse; background: white; }
-      th, td { border: 1px solid #d9d9d9; padding: 0.6rem; text-align: left; }
-      th { background: #eef4f8; }
-      .status { font-weight: bold; }
-      .status.WAITING_FOR_VALIDATION { color: #8a4b00; }
-      .status.NEW { color: #c47b00; }
-      .status.IN_REVIEW { color: #0b6b2f; }
-      .success-message { background: #e8f5e9; color: #1b5e20; border: 1px solid #81c784; padding: 0.6rem 0.75rem; border-radius: 6px; margin-bottom: 0.75rem; }
-      .modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; z-index: 1000; }
-      .modal { background: white; padding: 2rem; border-radius: 8px; text-align: center; max-width: 400px; }
-      .spinner { border: 4px solid #f3f3f3; border-top: 4px solid #1f4f7a; border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin: 1rem auto; }
-      @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-      .document-icon { cursor: pointer; color: #1f4f7a; font-size: 1.2rem; text-decoration: none; }
-      .document-icon:hover { text-decoration: underline; }
-      .login-error { background: #fdecea; color: #c62828; border: 1px solid #f5c6cb; padding: 0.5rem; border-radius: 6px; margin-bottom: 0.75rem; display: none; }
-      .user-ref-table { width: 100%; border-collapse: collapse; margin-top: 0.5rem; }
-      .user-ref-table th, .user-ref-table td { border: 1px solid #d9d9d9; padding: 0.4rem 0.6rem; text-align: left; font-size: 0.85rem; }
-      .user-ref-table th { background: #eef4f8; }
-    </style>
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <nav>
-      <div style="display:flex; justify-content:space-between; align-items:center;">
-        <h1 style="margin:0;">Damage Reports</h1>
-        <div id="navUserSection" class="hidden">
-          <span id="navUserName" style="margin-left:1rem;"></span>
-          <button id="logoutButton" style="margin-left:0.5rem;">Logout</button>
-        </div>
+      <h1>Damage Reports</h1>
+      <div id="navUserSection" class="hidden">
+        <span id="navUserName"></span>
+        <button id="logoutButton">Logout</button>
       </div>
     </nav>
     <main>
@@ -48,11 +19,17 @@
         <h2>Login</h2>
         <div id="loginError" class="login-error"></div>
         <form id="loginForm">
-          <div><label>Username</label><br /><input id="loginUsername" type="text" required autocomplete="off" /></div>
-          <div style="margin-top:0.5rem;"><label>Password</label><br /><input id="loginPassword" type="password" required /></div>
-          <div style="margin-top:0.75rem;"><button type="submit">Login</button></div>
+          <div>
+            <label>Username</label>
+            <input id="loginUsername" type="text" required autocomplete="off" />
+          </div>
+          <div>
+            <label>Password</label>
+            <input id="loginPassword" type="password" required />
+          </div>
+          <button type="submit">Login</button>
         </form>
-        <div style="margin-top:1.5rem; padding:0.75rem; background:#f0f4f8; border-radius:6px;">
+        <div class="form-section" style="margin-top:1.5rem;">
           <strong>Available Users:</strong>
           <table class="user-ref-table">
             <thead><tr><th>Name</th><th>Username</th><th>Password</th><th>Role</th><th>Settlement</th></tr></thead>
@@ -60,128 +37,197 @@
           </table>
         </div>
       </div>
+
       <div id="listScreen" class="card">
         <h2>Reports List</h2>
-        <div class="list-controls">
+        <div class="toolbar">
           <button id="createButton">Create Report</button>
-          <button id="messageCenterButton" style="margin-left:0.5rem;">Message Center</button>
-          <button id="appraisersPortalButton" style="margin-left:0.5rem;">Appraisers Portal</button>
-          <button id="localAuthorityPortalButton" style="margin-left:0.5rem;">Local Authority Portal</button>
-          <button id="settlementProcessesButton" style="margin-left:0.5rem;">Settlement Processes</button>
-          <label style="margin-left:0.75rem;"><input type="checkbox" id="waitingFilter" /> Show only buildings waiting in line for work</label>
-          <label style="margin-left:0.75rem;"><input type="checkbox" id="budgetReadyFilter" /> Show only buildings ready for budget release</label>
-          <label style="margin-left:0.75rem;">
+          <button id="messageCenterButton" class="btn-secondary">Message Center</button>
+          <button id="appraisersPortalButton" class="btn-secondary">Appraisers Portal</button>
+          <button id="localAuthorityPortalButton" class="btn-secondary">Local Authority Portal</button>
+          <button id="settlementProcessesButton" class="btn-secondary">Settlement Processes</button>
+          <button id="systemHealthButton" class="btn-secondary">System Health</button>
+        </div>
+        <div class="filter-bar">
+          <label><input type="checkbox" id="waitingFilter" /> Show only buildings waiting in line for work</label>
+          <label><input type="checkbox" id="budgetReadyFilter" /> Show only buildings ready for budget release</label>
+          <label>
             <select id="settlementFilter">
               <option value="">All Settlements</option>
             </select>
           </label>
-          <button id="batchGenerateButton" style="margin-left:0.75rem;">Generate occupancy files for all eligible buildings</button>
+          <button id="batchGenerateButton">Generate occupancy files for all eligible buildings</button>
         </div>
-        <div id="settlementSummary" class="hidden" style="margin-bottom:1rem; padding:0.75rem; background:#e8f4f8; border-radius:6px; border:1px solid #b3d4e0;"></div>
+        <div id="settlementSummary" class="hidden"></div>
         <div id="reportList"></div>
       </div>
 
       <div id="createScreen" class="card hidden">
         <h2>Create Report</h2>
         <form id="createForm">
-          <div><label>Reporter Name</label><br /><input name="reporterName" required /></div>
-          <div style="margin-top:0.5rem;"><label>Address</label><br /><input name="address" required /></div>
-          <div style="margin-top:0.5rem;"><label>Damage Type</label><br /><input name="damageType" required /></div>
-          <div style="margin-top:0.5rem;"><label>Description</label><br /><textarea name="description" required></textarea></div>
-          <div style="margin-top:0.5rem;"><label>Damage photos exist</label><br /><select name="damagePhotosExist"><option value="true">Yes</option><option value="false">No</option></select></div>
-          <div style="margin-top:0.5rem;"><label>Engineer report exists</label><br /><select name="engineerReportExists"><option value="true">Yes</option><option value="false">No</option></select></div>
-          <div style="margin-top:0.5rem;"><label>Eligibility check performed</label><br /><select name="eligibilityCheckPerformed"><option value="true">Yes</option><option value="false">No</option></select></div>
-          <div style="margin-top:0.5rem;"><label>Social approval</label><br /><select name="socialApproval"><option value="true">Yes</option><option value="false">No</option></select></div>
-          <div style="margin-top:0.5rem;"><label>Apartments in building</label><br /><input name="apartmentsInBuilding" type="number" min="0" value="0" /></div>
-          <div style="margin-top:0.5rem;"><label>Family Email</label><br /><input name="familyEmail" type="email" /></div>
-          <div style="margin-top:0.75rem;"><button type="submit">Save Report</button> <button type="button" id="cancelCreate">Cancel</button></div>
+          <div>
+            <label>Reporter Name</label>
+            <input name="reporterName" required />
+          </div>
+          <div>
+            <label>Address</label>
+            <input name="address" required />
+          </div>
+          <div>
+            <label>Damage Type</label>
+            <input name="damageType" required />
+          </div>
+          <div>
+            <label>Description</label>
+            <textarea name="description" required></textarea>
+          </div>
+          <div>
+            <label>Damage photos exist</label>
+            <select name="damagePhotosExist"><option value="true">Yes</option><option value="false">No</option></select>
+          </div>
+          <div>
+            <label>Engineer report exists</label>
+            <select name="engineerReportExists"><option value="true">Yes</option><option value="false">No</option></select>
+          </div>
+          <div>
+            <label>Eligibility check performed</label>
+            <select name="eligibilityCheckPerformed"><option value="true">Yes</option><option value="false">No</option></select>
+          </div>
+          <div>
+            <label>Social approval</label>
+            <select name="socialApproval"><option value="true">Yes</option><option value="false">No</option></select>
+          </div>
+          <div>
+            <label>Apartments in building</label>
+            <input name="apartmentsInBuilding" type="number" min="0" value="0" />
+          </div>
+          <div>
+            <label>Family Email</label>
+            <input name="familyEmail" type="email" />
+          </div>
+          <div class="form-actions">
+            <button type="submit">Save Report</button>
+            <button type="button" id="cancelCreate" class="btn-secondary">Cancel</button>
+          </div>
         </form>
       </div>
 
       <div id="detailsScreen" class="card hidden">
         <h2>Report Details</h2>
         <div id="detailsContent"></div>
-        <div style="margin-top:1rem;">
-          <label>Status</label>
-          <select id="statusSelect">
-            <option value="WAITING_FOR_VALIDATION">WAITING_FOR_VALIDATION</option>
-            <option value="NEW">NEW</option>
-            <option value="IN_REVIEW">IN_REVIEW</option>
-          </select>
-          <button id="saveStatusButton" style="margin-left:0.5rem;">Update Status</button>
-          <button id="backButton" style="margin-left:0.5rem;">Back</button>
+        <div style="margin-top:1rem; display:flex; align-items:center; gap:0.75rem; flex-wrap:wrap;">
+          <label style="font-weight:500; font-size:0.85rem; color:#475569;">Status</label>
+          <select id="statusSelect"></select>
+          <button id="saveStatusButton">Update Status</button>
+          <button id="backButton" class="btn-secondary">Back</button>
         </div>
-        <div id="actionHistorySection" class="hidden" style="margin-top:1rem; padding:0.75rem; background:#f0f4f8; border-radius:6px;">
-          <h3 style="margin-top:0;">Action History</h3>
+        <div id="actionHistorySection" class="action-history hidden">
+          <h3>Action History</h3>
           <div id="actionHistoryList"></div>
         </div>
       </div>
 
       <div id="messageCenterScreen" class="card hidden">
         <h2>Message Center</h2>
-        <div style="margin-bottom:1rem; padding:0.75rem; background:#f0f4f8; border-radius:6px;">
-          <label><strong>Notification Server Status:</strong></label>
-          <select id="notificationModeSelect" style="margin-left:0.5rem;">
+        <div class="notification-mode-bar">
+          <label>Notification Server Status:</label>
+          <select id="notificationModeSelect">
             <option value="success">Success</option>
             <option value="always_fail">Always Fail</option>
             <option value="fail_first">Fail First Attempt</option>
             <option value="random">Random Failure (~30%)</option>
             <option value="timeout">Response Lost (Timeout)</option>
           </select>
-          <span id="notificationModeIndicator" style="margin-left:0.5rem; font-weight:bold;"></span>
+          <span id="notificationModeIndicator"></span>
         </div>
         <div id="notificationsList"></div>
-        <button id="backFromMessageCenter" style="margin-top:1rem;">Back to Reports</button>
+        <button id="backFromMessageCenter" class="btn-secondary" style="margin-top:1rem;">Back to Reports</button>
       </div>
 
       <div id="appraisersPortalScreen" class="card hidden">
         <h2>Appraisers Portal</h2>
         <div id="appraisersPortalList"></div>
-        <div id="appraisalForm" class="hidden" style="margin-top:1rem;">
+        <div id="appraisalForm" class="form-section hidden">
           <h3>Damage Assessment</h3>
           <p id="appraisalBuildingInfo"></p>
-          <div style="margin-top:0.5rem;"><label>Damage Level</label><br />
+          <div style="margin-top:0.75rem;">
+            <label>Damage Level</label>
             <select id="appraisalDamageLevel">
               <option value="light">Light</option>
               <option value="medium">Medium</option>
               <option value="severe">Severe</option>
             </select>
           </div>
-          <div style="margin-top:0.5rem;"><label>Appraiser Comments</label><br /><textarea id="appraisalComments" rows="4"></textarea></div>
-          <div style="margin-top:0.5rem;"><label>Inspection Date</label><br /><input id="appraisalDate" type="date" /></div>
-          <div style="margin-top:0.5rem;"><label><input id="appraisalReinspection" type="checkbox" /> Re-inspection required</label></div>
-          <div style="margin-top:0.75rem;">
+          <div>
+            <label>Appraiser Comments</label>
+            <textarea id="appraisalComments" rows="4"></textarea>
+          </div>
+          <div>
+            <label>Inspection Date</label>
+            <input id="appraisalDate" type="date" />
+          </div>
+          <div class="form-checkbox">
+            <input id="appraisalReinspection" type="checkbox" />
+            <label for="appraisalReinspection">Re-inspection required</label>
+          </div>
+          <div class="form-actions">
             <button id="saveAppraisalButton">Save Assessment</button>
-            <button id="cancelAppraisalButton" style="margin-left:0.5rem;">Cancel</button>
+            <button id="cancelAppraisalButton" class="btn-secondary">Cancel</button>
           </div>
         </div>
-        <button id="backFromAppraisersPortal" style="margin-top:1rem;">Back to Reports</button>
+        <button id="backFromAppraisersPortal" class="btn-secondary" style="margin-top:1rem;">Back to Reports</button>
       </div>
 
       <div id="localAuthorityPortalScreen" class="card hidden">
         <h2>Local Authority Portal</h2>
         <div id="localAuthorityPortalList"></div>
-        <div id="permitApprovalForm" class="hidden" style="margin-top:1rem;">
+        <div id="permitApprovalForm" class="form-section hidden">
           <h3>Infrastructure Readiness Confirmation</h3>
           <p id="permitBuildingInfo"></p>
-          <div style="margin-top:0.5rem;"><label><input id="permitWaterSupply" type="checkbox" /> Proper water supply</label></div>
-          <div style="margin-top:0.5rem;"><label><input id="permitElectricitySupply" type="checkbox" /> Proper electricity supply</label></div>
-          <div style="margin-top:0.5rem;"><label><input id="permitAccessRoads" type="checkbox" /> Open access roads</label></div>
-          <div style="margin-top:0.5rem;"><label><input id="permitEnvironmentalCleared" type="checkbox" /> Environmental hazards have been cleared</label></div>
-          <div style="margin-top:0.5rem;"><label>Local Authority Comments</label><br /><textarea id="permitComments" rows="4"></textarea></div>
-          <div style="margin-top:0.5rem;"><label><input id="permitApproved" type="checkbox" /> Local authority approval</label></div>
           <div style="margin-top:0.75rem;">
+            <div class="form-checkbox">
+              <input id="permitWaterSupply" type="checkbox" />
+              <label for="permitWaterSupply">Proper water supply</label>
+            </div>
+            <div class="form-checkbox">
+              <input id="permitElectricitySupply" type="checkbox" />
+              <label for="permitElectricitySupply">Proper electricity supply</label>
+            </div>
+            <div class="form-checkbox">
+              <input id="permitAccessRoads" type="checkbox" />
+              <label for="permitAccessRoads">Open access roads</label>
+            </div>
+            <div class="form-checkbox">
+              <input id="permitEnvironmentalCleared" type="checkbox" />
+              <label for="permitEnvironmentalCleared">Environmental hazards have been cleared</label>
+            </div>
+          </div>
+          <div>
+            <label>Local Authority Comments</label>
+            <textarea id="permitComments" rows="4"></textarea>
+          </div>
+          <div class="form-checkbox">
+            <input id="permitApproved" type="checkbox" />
+            <label for="permitApproved">Local authority approval</label>
+          </div>
+          <div class="form-actions">
             <button id="savePermitApprovalButton">Save</button>
-            <button id="cancelPermitApprovalButton" style="margin-left:0.5rem;">Cancel</button>
+            <button id="cancelPermitApprovalButton" class="btn-secondary">Cancel</button>
           </div>
         </div>
-        <button id="backFromLocalAuthorityPortal" style="margin-top:1rem;">Back to Reports</button>
+        <button id="backFromLocalAuthorityPortal" class="btn-secondary" style="margin-top:1rem;">Back to Reports</button>
       </div>
 
       <div id="settlementProcessesScreen" class="card hidden">
         <h2>Settlement Processes</h2>
         <div id="settlementProcessesList"></div>
-        <button id="backFromSettlementProcesses" style="margin-top:1rem;">Back to Reports</button>
+        <button id="backFromSettlementProcesses" class="btn-secondary" style="margin-top:1rem;">Back to Reports</button>
+      </div>
+
+      <div id="systemHealthScreen" class="card hidden">
+        <h2>System Health</h2>
+        <div id="systemHealthContent"></div>
+        <button id="backFromSystemHealth" class="btn-secondary" style="margin-top:1rem;">Back to Reports</button>
       </div>
     </main>
 
