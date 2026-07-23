@@ -25,5 +25,77 @@
     "entityType": "building",
     "entityId": 1,
     "timestamp": "2026-07-23T18:45:26.978Z"
+  },
+  {
+    "id": 4,
+    "userId": 4,
+    "userName": "Hanna Gold",
+    "action": "Status updated to: NEW",
+    "entityType": "building",
+    "entityId": 382,
+    "timestamp": "2026-07-23T18:50:51.208Z"
+  },
+  {
+    "id": 5,
+    "userId": 1,
+    "userName": "David Cohen",
+    "action": "Open Budget Request",
+    "entityType": "building",
+    "entityId": 383,
+    "timestamp": "2026-07-23T18:50:51.215Z"
+  },
+  {
+    "id": 6,
+    "userId": 2,
+    "userName": "Sarah Levy",
+    "action": "Update Appraisal",
+    "entityType": "building",
+    "entityId": 384,
+    "timestamp": "2026-07-23T18:50:51.223Z"
+  },
+  {
+    "id": 7,
+    "userId": 1,
+    "userName": "David Cohen",
+    "action": "Update Permit Approval",
+    "entityType": "building",
+    "entityId": 385,
+    "timestamp": "2026-07-23T18:50:51.231Z"
+  },
+  {
+    "id": 8,
+    "userId": 4,
+    "userName": "Hanna Gold",
+    "action": "Status updated to: NEW",
+    "entityType": "building",
+    "entityId": 407,
+    "timestamp": "2026-07-23T18:58:47.199Z"
+  },
+  {
+    "id": 9,
+    "userId": 1,
+    "userName": "David Cohen",
+    "action": "Open Budget Request",
+    "entityType": "building",
+    "entityId": 408,
+    "timestamp": "2026-07-23T18:58:47.206Z"
+  },
+  {
+    "id": 10,
+    "userId": 2,
+    "userName": "Sarah Levy",
+    "action": "Update Appraisal",
+    "entityType": "building",
+    "entityId": 409,
+    "timestamp": "2026-07-23T18:58:47.214Z"
+  },
+  {
+    "id": 11,
+    "userId": 1,
+    "userName": "David Cohen",
+    "action": "Update Permit Approval",
+    "entityType": "building",
+    "entityId": 410,
+    "timestamp": "2026-07-23T18:58:47.221Z"
   }
 ]

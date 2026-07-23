@@ -260,20 +260,23 @@ function renderNotifications(notifications) {
     const dt = msg.dateTime ? new Date(msg.dateTime).toLocaleString() : '';
     const statusClass = msg.status === 'SENT' ? 'status-sent' : 'status-failed';
     row.innerHTML = `
-      <td>${msg.messageId}</td>
-      <td>#${msg.buildingId}</td>
+      <td class="col-compact">${msg.messageId}</td>
+      <td class="col-id">#${msg.buildingId}</td>
       <td>${msg.buildingAddress}</td>
       <td>${msg.email}</td>
       <td>${msg.subject}</td>
       <td>${dt}</td>
-      <td><span class="status ${statusClass}">${msg.status}</span></td>
-      <td>${msg.idempotencyKey || ''}</td>
+      <td class="col-compact"><span class="status ${statusClass}">${msg.status}</span></td>
+      <td class="col-compact">${msg.idempotencyKey || ''}</td>
     `;
     tbody.appendChild(row);
   });
 
   notificationsList.innerHTML = '';
-  notificationsList.appendChild(table);
+  const wrapper = document.createElement('div');
+  wrapper.className = 'table-scroll';
+  wrapper.appendChild(table);
+  notificationsList.appendChild(wrapper);
 }
 
 function renderAppraisersPortal() {
@@ -303,18 +306,21 @@ function renderAppraisersPortal() {
     const locality = report.address ? report.address.split(',')[0].trim() : '';
     const hasAppraisal = report.appraisal ? 'Yes' : 'No';
     row.innerHTML = `
-      <td>#${report.id}</td>
+      <td class="col-id">#${report.id}</td>
       <td>${report.address}</td>
       <td>${locality}</td>
-      <td><span class="status ${report.status}">${report.status}</span></td>
-      <td>${hasAppraisal}</td>
+      <td class="col-compact"><span class="status ${report.status}">${report.status}</span></td>
+      <td class="col-compact">${hasAppraisal}</td>
       <td><a href="#" class="appraisal-link" data-id="${report.id}">Enter Assessment</a></td>
     `;
     tbody.appendChild(row);
   });
 
   appraisersPortalList.innerHTML = '';
-  appraisersPortalList.appendChild(table);
+  const wrapper = document.createElement('div');
+  wrapper.className = 'table-scroll';
+  wrapper.appendChild(table);
+  appraisersPortalList.appendChild(wrapper);
 }
 
 function openAppraisalForm(reportId) {
@@ -393,18 +399,21 @@ function renderLocalAuthorityPortal() {
     const locality = report.address ? report.address.split(',')[0].trim() : '';
     const hasApproval = report.permitApproval ? 'Yes' : 'No';
     row.innerHTML = `
-      <td>#${report.id}</td>
+      <td class="col-id">#${report.id}</td>
       <td>${report.address}</td>
       <td>${locality}</td>
-      <td><span class="status ${report.status}">${report.status}</span></td>
-      <td>${hasApproval}</td>
+      <td class="col-compact"><span class="status ${report.status}">${report.status}</span></td>
+      <td class="col-compact">${hasApproval}</td>
       <td><a href="#" class="permit-link" data-id="${report.id}">Update Infrastructure</a></td>
     `;
     tbody.appendChild(row);
   });
 
   localAuthorityPortalList.innerHTML = '';
-  localAuthorityPortalList.appendChild(table);
+  const wrapper = document.createElement('div');
+  wrapper.className = 'table-scroll';
+  wrapper.appendChild(table);
+  localAuthorityPortalList.appendChild(wrapper);
 }
 
 function openPermitApprovalForm(reportId) {
@@ -648,20 +657,23 @@ function renderReports() {
     const fileUrl = generatedFiles[report.id];
     const eligible = isEligibleForOpening(report);
     row.innerHTML = `
-      <td>#${report.id}</td>
+      <td class="col-id">#${report.id}</td>
       <td>${report.reporterName}</td>
-      <td><span class="status ${report.status}">${report.status}</span></td>
-      <td>${isWaitingInLine(report) ? 'Yes' : 'No'}</td>
-      <td>${isReadyForBudgetRelease(report) ? 'Yes' : 'No'}</td>
-      <td>${report.returnHomeFileGenerated ? 'Yes' : (canGenerateReoccupationFile(report) ? `<a href="#" class="generate-file-link" data-id="${report.id}">Generate a re-occupation file</a>` : '—')}</td>
-      <td>${fileUrl ? `<a href="${fileUrl}" target="_blank" class="document-icon">📄</a>` : '—'}</td>
-      <td>${eligible ? 'Yes' : 'No'}</td>
+      <td class="col-compact"><span class="status ${report.status}">${report.status}</span></td>
+      <td class="col-compact">${isWaitingInLine(report) ? 'Yes' : 'No'}</td>
+      <td class="col-compact">${isReadyForBudgetRelease(report) ? 'Yes' : 'No'}</td>
+      <td class="col-compact">${report.returnHomeFileGenerated ? 'Yes' : (canGenerateReoccupationFile(report) ? `<a href="#" class="generate-file-link" data-id="${report.id}">Generate</a>` : '—')}</td>
+      <td class="col-compact">${fileUrl ? `<a href="${fileUrl}" target="_blank" class="document-icon">📄</a>` : '—'}</td>
+      <td class="col-compact">${eligible ? 'Yes' : 'No'}</td>
       <td><a href="#" data-id="${report.id}">View</a></td>
     `;
     tbody.appendChild(row);
   });
 
-  reportList.appendChild(table);
+  const wrapper = document.createElement('div');
+  wrapper.className = 'table-scroll';
+  wrapper.appendChild(table);
+  reportList.appendChild(wrapper);
 
   updateBatchGenerateButton();
 }
@@ -803,7 +815,10 @@ function renderActionHistory(actions) {
   });
 
   actionHistoryList.innerHTML = '';
-  actionHistoryList.appendChild(table);
+  const wrapper = document.createElement('div');
+  wrapper.className = 'table-scroll';
+  wrapper.appendChild(table);
+  actionHistoryList.appendChild(wrapper);
 }
 
 function renderDetails(report) {
@@ -1033,14 +1048,14 @@ function renderLogsModal(settlement, logs) {
     showModal(`<h3>Logs: ${settlement}</h3><div class="empty-state"><p>No logs found for this settlement.</p></div><button onclick="hideModal()">Close</button>`);
     return;
   }
-  let html = `<h3>Logs: ${settlement}</h3><div style="max-height:60vh; overflow:auto;">`;
+  let html = `<h3>Logs: ${settlement}</h3><div class="table-scroll" style="max-height:60vh;">`;
   html += '<table><thead><tr><th>Time</th><th>Level</th><th>Event</th><th>Building</th><th>Error</th></tr></thead><tbody>';
   logs.forEach((l) => {
     const time = new Date(l.timestamp).toLocaleString();
     const levelClass = l.level === 'ERROR' ? 'status-failed' : l.level === 'WARN' ? 'status PROCESSING' : 'status-sent';
     const building = l.buildingId != null ? `#${l.buildingId}` : '—';
     const error = l.error || '—';
-    html += `<tr><td>${time}</td><td><span class="status ${levelClass}">${l.level}</span></td><td>${l.event}</td><td>${building}</td><td style="max-width:200px;overflow:hidden;text-overflow:ellipsis;">${error}</td></tr>`;
+    html += `<tr><td>${time}</td><td class="col-compact"><span class="status ${levelClass}">${l.level}</span></td><td>${l.event}</td><td class="col-id">${building}</td><td style="max-width:200px;overflow:hidden;text-overflow:ellipsis;">${error}</td></tr>`;
   });
   html += '</tbody></table></div>';
   html += '<button onclick="hideModal()" style="margin-top:0.75rem;">Close</button>';
@@ -1138,14 +1153,17 @@ function renderSettlementProcesses(processes) {
       <td>${p.startedBy}</td>
       <td>${startedAt}</td>
       <td>${completedAt}</td>
-      <td><span class="${statusClass}">${p.status}</span></td>
+      <td class="col-compact"><span class="${statusClass}">${p.status}</span></td>
       <td><a href="#" class="view-logs-link" data-settlement="${p.settlementName}">View Logs</a></td>
     `;
     tbody.appendChild(row);
   });
 
   settlementProcessesList.innerHTML = '';
-  settlementProcessesList.appendChild(table);
+  const wrapper = document.createElement('div');
+  wrapper.className = 'table-scroll';
+  wrapper.appendChild(table);
+  settlementProcessesList.appendChild(wrapper);
 }
 
 notificationModeSelect.addEventListener('change', () => setNotificationMode(notificationModeSelect.value));

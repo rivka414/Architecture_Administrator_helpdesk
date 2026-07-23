@@ -151,6 +151,7 @@ main {
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem 1.5rem;
+  overflow-x: hidden;
 }
 
 /* ==================== CARD ==================== */
@@ -160,6 +161,8 @@ main {
   box-shadow: var(--shadow-md);
   padding: 1.75rem 2rem;
   border: 1px solid var(--gray-200);
+  max-width: 100%;
+  overflow: hidden;
 }
 
 .card h2 {
@@ -437,8 +440,16 @@ main {
 }
 
 /* ==================== TABLES ==================== */
+.table-scroll {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--gray-200);
+}
+
 .data-table-wrapper {
-  overflow-x: auto;
+  overflow-x: hidden;
   border-radius: var(--radius-md);
   border: 1px solid var(--gray-200);
 }
@@ -446,29 +457,39 @@ main {
 table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 0.875rem;
+  font-size: 0.8rem;
+  table-layout: auto;
 }
 
 thead th {
   background: var(--gray-100);
   color: var(--gray-600);
   font-weight: 600;
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
-  padding: 0.75rem 0.85rem;
+  letter-spacing: 0.03em;
+  padding: 8px 10px;
   text-align: left;
   border-bottom: 2px solid var(--gray-200);
-  white-space: nowrap;
+  white-space: normal;
   position: sticky;
   top: 0;
 }
 
 tbody td {
-  padding: 0.65rem 0.85rem;
+  padding: 8px 10px;
   border-bottom: 1px solid var(--gray-100);
   color: var(--gray-700);
   vertical-align: middle;
+  white-space: nowrap;
+}
+
+td.col-id,
+td.col-compact,
+th.col-id,
+th.col-compact {
+  white-space: nowrap;
+  width: 1%;
 }
 
 tbody tr {
@@ -999,6 +1020,10 @@ form textarea {
   #loginScreen {
     margin: 1.5rem auto;
     padding: 1.5rem;
+  }
+
+  .table-scroll {
+    border-radius: var(--radius-sm);
   }
 }
 

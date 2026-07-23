@@ -40,7 +40,241 @@
     "processId": "1bfdb646-d7e8-404e-9e87-0f5dcfec72c4",
     "startedBy": "Hanna Gold",
     "startedAt": "2026-07-23T18:46:01.458Z",
-    "completedAt": null,
-    "status": "PROCESSING"
+    "completedAt": "2026-07-23T18:46:59.828Z",
+    "status": "COMPLETED"
+  },
+  {
+    "id": 6,
+    "processId": "df8dbd16-9072-4456-b3e7-c72695ee5501",
+    "settlementName": "Jerusalem",
+    "startedBy": "David Cohen",
+    "startedAt": "2026-07-23T18:50:51.316Z",
+    "completedAt": "2026-07-23T18:51:05.037Z",
+    "status": "COMPLETED"
+  },
+  {
+    "id": 7,
+    "processId": "adee32cf-03c9-4a96-9966-c0249d9f77f1",
+    "settlementName": "Haifa",
+    "startedBy": "Test User",
+    "startedAt": "2026-07-23T18:51:05.045Z",
+    "completedAt": "2026-07-23T18:51:07.308Z",
+    "status": "COMPLETED"
+  },
+  {
+    "id": 8,
+    "processId": "2e5648ad-6d32-4057-878d-cf9247693009",
+    "settlementName": "Tel Aviv",
+    "startedBy": "Detail Test",
+    "startedAt": "2026-07-23T18:51:07.313Z",
+    "completedAt": "2026-07-23T18:51:09.498Z",
+    "status": "COMPLETED"
+  },
+  {
+    "id": 9,
+    "processId": "d537c48d-1eb7-4a1b-8b69-64e543446a05",
+    "settlementName": "Beer Sheva",
+    "startedBy": "First",
+    "startedAt": "2026-07-23T18:51:09.511Z",
+    "completedAt": "2026-07-23T18:51:10.637Z",
+    "status": "COMPLETED"
+  },
+  {
+    "id": 10,
+    "processId": "663d3f4b-be42-4040-82a5-66ad63bd3577",
+    "settlementName": "Netanya",
+    "startedBy": "Second",
+    "startedAt": "2026-07-23T18:51:10.641Z",
+    "completedAt": "2026-07-23T18:51:11.735Z",
+    "status": "COMPLETED"
+  },
+  {
+    "id": 11,
+    "processId": "e5cc1f26-f8e7-4e52-b22f-cec198dd64ff",
+    "settlementName": "Jerusalem",
+    "startedBy": "Log Test User",
+    "startedAt": "2026-07-23T18:51:11.750Z",
+    "completedAt": "2026-07-23T18:51:25.061Z",
+    "status": "COMPLETED"
+  },
+  {
+    "id": 12,
+    "processId": "adbafca1-5d9a-4a8a-9212-5a1603b5630d",
+    "settlementName": "Haifa",
+    "startedBy": "Building Log User",
+    "startedAt": "2026-07-23T18:51:25.080Z",
+    "completedAt": "2026-07-23T18:51:27.275Z",
+    "status": "COMPLETED"
+  },
+  {
+    "id": 13,
+    "processId": "49ab07f0-568f-48fc-9260-0035ed96f7b0",
+    "settlementName": "Beer Sheva",
+    "startedBy": "Structure Test",
+    "startedAt": "2026-07-23T18:51:27.280Z",
+    "completedAt": "2026-07-23T18:51:28.398Z",
+    "status": "COMPLETED"
+  },
+  {
+    "id": 14,
+    "processId": "3b4996cf-0cb0-4883-9a17-60543eca324f",
+    "settlementName": "Beer Sheva",
+    "startedBy": "UUID Test",
+    "startedAt": "2026-07-23T18:51:29.519Z",
+    "completedAt": "2026-07-23T18:51:30.628Z",
+    "status": "COMPLETED"
+  },
+  {
+    "id": 15,
+    "processId": "3ea5c455-18a4-4437-a137-45b814c09ccf",
+    "settlementName": "Beer Sheva",
+    "startedBy": "Batch PID",
+    "startedAt": "2026-07-23T18:51:30.639Z",
+    "completedAt": "2026-07-23T18:51:31.734Z",
+    "status": "COMPLETED"
+  },
+  {
+    "id": 16,
+    "processId": "1314c877-f700-4777-b201-8410f8699982",
+    "settlementName": "Beer Sheva",
+    "startedBy": "PID Batch 1",
+    "startedAt": "2026-07-23T18:51:32.856Z",
+    "completedAt": "2026-07-23T18:51:33.986Z",
+    "status": "COMPLETED"
+  },
+  {
+    "id": 17,
+    "processId": "b4f07454-19a4-456d-a976-da99d6f8b104",
+    "settlementName": "Beer Sheva",
+    "startedBy": "PID Batch 2",
+    "startedAt": "2026-07-23T18:51:33.993Z",
+    "completedAt": "2026-07-23T18:51:35.120Z",
+    "status": "COMPLETED"
+  },
+  {
+    "id": 18,
+    "processId": "109c9afe-e9e8-4bf9-950e-213b16879337",
+    "settlementName": "Beer Sheva",
+    "startedBy": "Health Test",
+    "startedAt": "2026-07-23T18:51:35.140Z",
+    "completedAt": "2026-07-23T18:51:36.263Z",
+    "status": "COMPLETED"
+  },
+  {
+    "id": 19,
+    "processId": "28142f7e-ed5a-4f56-ac83-cc72d0d09add",
+    "settlementName": "Jerusalem",
+    "startedBy": "David Cohen",
+    "startedAt": "2026-07-23T18:58:47.304Z",
+    "completedAt": "2026-07-23T18:59:03.075Z",
+    "status": "COMPLETED"
+  },
+  {
+    "id": 20,
+    "processId": "c04ad214-ae62-41b1-bb2d-28473588d691",
+    "settlementName": "Haifa",
+    "startedBy": "Test User",
+    "startedAt": "2026-07-23T18:59:03.087Z",
+    "completedAt": "2026-07-23T18:59:05.333Z",
+    "status": "COMPLETED"
+  },
+  {
+    "id": 21,
+    "processId": "6fb38bea-828c-4456-8fbb-0437607c697d",
+    "settlementName": "Tel Aviv",
+    "startedBy": "Detail Test",
+    "startedAt": "2026-07-23T18:59:05.344Z",
+    "completedAt": "2026-07-23T18:59:07.556Z",
+    "status": "COMPLETED"
+  },
+  {
+    "id": 22,
+    "processId": "996810a1-5831-4d06-82b3-5247caafc86b",
+    "settlementName": "Beer Sheva",
+    "startedBy": "First",
+    "startedAt": "2026-07-23T18:59:07.569Z",
+    "completedAt": "2026-07-23T18:59:08.706Z",
+    "status": "COMPLETED"
+  },
+  {
+    "id": 23,
+    "processId": "5a584e4b-5476-49de-b7e5-a884864a131d",
+    "settlementName": "Netanya",
+    "startedBy": "Second",
+    "startedAt": "2026-07-23T18:59:08.714Z",
+    "completedAt": "2026-07-23T18:59:09.803Z",
+    "status": "COMPLETED"
+  },
+  {
+    "id": 24,
+    "processId": "da9435e1-917b-437d-aba4-76d7dfeeaa3b",
+    "settlementName": "Jerusalem",
+    "startedBy": "Log Test User",
+    "startedAt": "2026-07-23T18:59:09.811Z",
+    "completedAt": "2026-07-23T18:59:24.922Z",
+    "status": "COMPLETED"
+  },
+  {
+    "id": 25,
+    "processId": "5c8cb572-248f-4a19-9136-38284a066c2c",
+    "settlementName": "Haifa",
+    "startedBy": "Building Log User",
+    "startedAt": "2026-07-23T18:59:24.928Z",
+    "completedAt": "2026-07-23T18:59:27.128Z",
+    "status": "COMPLETED"
+  },
+  {
+    "id": 26,
+    "processId": "b61be843-f511-4217-a0cd-984fefd771f9",
+    "settlementName": "Beer Sheva",
+    "startedBy": "Structure Test",
+    "startedAt": "2026-07-23T18:59:27.132Z",
+    "completedAt": "2026-07-23T18:59:28.225Z",
+    "status": "COMPLETED"
+  },
+  {
+    "id": 27,
+    "processId": "660b47e7-a246-42b9-9b92-f2c8a8ba48bd",
+    "settlementName": "Beer Sheva",
+    "startedBy": "UUID Test",
+    "startedAt": "2026-07-23T18:59:29.347Z",
+    "completedAt": "2026-07-23T18:59:30.492Z",
+    "status": "COMPLETED"
+  },
+  {
+    "id": 28,
+    "processId": "e12210bf-6516-4949-b73b-a37f30edfd23",
+    "settlementName": "Beer Sheva",
+    "startedBy": "Batch PID",
+    "startedAt": "2026-07-23T18:59:30.506Z",
+    "completedAt": "2026-07-23T18:59:31.676Z",
+    "status": "COMPLETED"
+  },
+  {
+    "id": 29,
+    "processId": "4a332835-eced-4a16-ba0e-e7e5feba1784",
+    "settlementName": "Beer Sheva",
+    "startedBy": "PID Batch 1",
+    "startedAt": "2026-07-23T18:59:32.837Z",
+    "completedAt": "2026-07-23T18:59:33.937Z",
+    "status": "COMPLETED"
+  },
+  {
+    "id": 30,
+    "processId": "ea1b7d14-8f93-45e7-a19e-8d990f01c7c9",
+    "settlementName": "Beer Sheva",
+    "startedBy": "PID Batch 2",
+    "startedAt": "2026-07-23T18:59:33.942Z",
+    "completedAt": "2026-07-23T18:59:35.021Z",
+    "status": "COMPLETED"
+  },
+  {
+    "id": 31,
+    "processId": "192cc772-38ba-4be2-8a44-5d959d69f06e",
+    "settlementName": "Beer Sheva",
+    "startedBy": "Health Test",
+    "startedAt": "2026-07-23T18:59:35.033Z",
+    "completedAt": "2026-07-23T18:59:36.115Z",
+    "status": "COMPLETED"
   }
 ]
