@@ -27,7 +27,8 @@
       "localAuthorityComments": "",
       "approved": true
     },
-    "returnHomeFileGenerated": true
+    "returnHomeFileGenerated": true,
+    "settlementId": "Tel Aviv"
   },
   {
     "id": 2,
@@ -57,7 +58,8 @@
       "localAuthorityComments": "uj",
       "approved": true
     },
-    "returnHomeFileGenerated": true
+    "returnHomeFileGenerated": true,
+    "settlementId": "Tel Aviv"
   },
   {
     "id": 3,
@@ -75,7 +77,8 @@
     "familyEmail": "david.cohen@example.com",
     "appraisal": null,
     "permitApproval": null,
-    "returnHomeFileGenerated": false
+    "returnHomeFileGenerated": false,
+    "settlementId": "Jerusalem"
   },
   {
     "id": 4,
@@ -93,7 +96,8 @@
     "familyEmail": "sarah.levy@example.com",
     "appraisal": null,
     "permitApproval": null,
-    "returnHomeFileGenerated": false
+    "returnHomeFileGenerated": false,
+    "settlementId": "Jerusalem"
   },
   {
     "id": 5,
@@ -111,7 +115,8 @@
     "familyEmail": "moshe.ben@example.com",
     "appraisal": null,
     "permitApproval": null,
-    "returnHomeFileGenerated": false
+    "returnHomeFileGenerated": false,
+    "settlementId": "Haifa"
   },
   {
     "id": 6,
@@ -129,7 +134,8 @@
     "familyEmail": "rivka.m@example.com",
     "appraisal": null,
     "permitApproval": null,
-    "returnHomeFileGenerated": false
+    "returnHomeFileGenerated": false,
+    "settlementId": "Haifa"
   },
   {
     "id": 7,
@@ -147,7 +153,8 @@
     "familyEmail": "avi.shalom@example.com",
     "appraisal": null,
     "permitApproval": null,
-    "returnHomeFileGenerated": false
+    "returnHomeFileGenerated": false,
+    "settlementId": "Beer Sheva"
   },
   {
     "id": 8,
@@ -165,7 +172,8 @@
     "familyEmail": "hanna.gold@example.com",
     "appraisal": null,
     "permitApproval": null,
-    "returnHomeFileGenerated": false
+    "returnHomeFileGenerated": false,
+    "settlementId": "Netanya"
   },
   {
     "id": 9,
@@ -183,7 +191,8 @@
     "familyEmail": "yosef.a@example.com",
     "appraisal": null,
     "permitApproval": null,
-    "returnHomeFileGenerated": false
+    "returnHomeFileGenerated": false,
+    "settlementId": "Petah Tikva"
   },
   {
     "id": 10,
@@ -201,7 +210,8 @@
     "familyEmail": "michal.bar@example.com",
     "appraisal": null,
     "permitApproval": null,
-    "returnHomeFileGenerated": false
+    "returnHomeFileGenerated": false,
+    "settlementId": "Ramat Gan"
   },
   {
     "id": 11,
@@ -219,7 +229,8 @@
     "familyEmail": "eitan.p@example.com",
     "appraisal": null,
     "permitApproval": null,
-    "returnHomeFileGenerated": false
+    "returnHomeFileGenerated": false,
+    "settlementId": "Ashdod"
   },
   {
     "id": 12,
@@ -237,7 +248,8 @@
     "familyEmail": "tamar.raz@example.com",
     "appraisal": null,
     "permitApproval": null,
-    "returnHomeFileGenerated": false
+    "returnHomeFileGenerated": false,
+    "settlementId": "Holon"
   },
   {
     "id": 13,
@@ -255,7 +267,8 @@
     "familyEmail": "shlomo.d@example.com",
     "appraisal": null,
     "permitApproval": null,
-    "returnHomeFileGenerated": false
+    "returnHomeFileGenerated": false,
+    "settlementId": "Rishon LeZion"
   },
   {
     "id": 14,
@@ -273,7 +286,8 @@
     "familyEmail": "nurit.f@example.com",
     "appraisal": null,
     "permitApproval": null,
-    "returnHomeFileGenerated": false
+    "returnHomeFileGenerated": false,
+    "settlementId": "Ashkelon"
   },
   {
     "id": 15,
@@ -291,7 +305,8 @@
     "familyEmail": "amos.k@example.com",
     "appraisal": null,
     "permitApproval": null,
-    "returnHomeFileGenerated": false
+    "returnHomeFileGenerated": false,
+    "settlementId": "Kfar Saba"
   },
   {
     "id": 16,
@@ -309,7 +324,8 @@
     "familyEmail": "dina.alon@example.com",
     "appraisal": null,
     "permitApproval": null,
-    "returnHomeFileGenerated": false
+    "returnHomeFileGenerated": false,
+    "settlementId": "Herzliya"
   },
   {
     "id": 17,
@@ -327,7 +343,8 @@
     "familyEmail": "gideon.t@example.com",
     "appraisal": null,
     "permitApproval": null,
-    "returnHomeFileGenerated": false
+    "returnHomeFileGenerated": false,
+    "settlementId": "Nahariya"
   },
   {
     "id": 18,
@@ -345,7 +362,8 @@
     "familyEmail": "orly.bd@example.com",
     "appraisal": null,
     "permitApproval": null,
-    "returnHomeFileGenerated": false
+    "returnHomeFileGenerated": false,
+    "settlementId": "Nazareth"
   },
   {
     "id": 19,
@@ -363,7 +381,8 @@
     "familyEmail": "menachem.l@example.com",
     "appraisal": null,
     "permitApproval": null,
-    "returnHomeFileGenerated": false
+    "returnHomeFileGenerated": false,
+    "settlementId": "Eilat"
   },
   {
     "id": 20,
@@ -381,7 +400,8 @@
     "familyEmail": "batya.s@example.com",
     "appraisal": null,
     "permitApproval": null,
-    "returnHomeFileGenerated": false
+    "returnHomeFileGenerated": false,
+    "settlementId": "Tiberias"
   },
   {
     "id": 21,
@@ -399,7 +419,8 @@
     "familyEmail": "raphael.oz@example.com",
     "appraisal": null,
     "permitApproval": null,
-    "returnHomeFileGenerated": false
+    "returnHomeFileGenerated": false,
+    "settlementId": "Zichron Yaakov"
   },
   {
     "id": 22,
@@ -417,7 +438,8 @@
     "familyEmail": "varda.s@example.com",
     "appraisal": null,
     "permitApproval": null,
-    "returnHomeFileGenerated": false
+    "returnHomeFileGenerated": false,
+    "settlementId": "Mitzpe Ramon"
   },
   {
     "id": 23,
@@ -435,7 +457,8 @@
     "familyEmail": "",
     "appraisal": null,
     "permitApproval": null,
-    "returnHomeFileGenerated": false
+    "returnHomeFileGenerated": false,
+    "settlementId": "Main Street 10"
   },
   {
     "id": 24,
@@ -453,7 +476,8 @@
     "familyEmail": "",
     "appraisal": null,
     "permitApproval": null,
-    "returnHomeFileGenerated": false
+    "returnHomeFileGenerated": false,
+    "settlementId": "Park Avenue 7"
   },
   {
     "id": 25,
@@ -471,7 +495,8 @@
     "familyEmail": "",
     "appraisal": null,
     "permitApproval": null,
-    "returnHomeFileGenerated": false
+    "returnHomeFileGenerated": false,
+    "settlementId": "Lake Road 5"
   },
   {
     "id": 26,
@@ -489,7 +514,8 @@
     "familyEmail": "",
     "appraisal": null,
     "permitApproval": null,
-    "returnHomeFileGenerated": false
+    "returnHomeFileGenerated": false,
+    "settlementId": "Hill 8"
   },
   {
     "id": 27,
@@ -507,7 +533,8 @@
     "familyEmail": "",
     "appraisal": null,
     "permitApproval": null,
-    "returnHomeFileGenerated": true
+    "returnHomeFileGenerated": true,
+    "settlementId": "Garden 33"
   },
   {
     "id": 28,
@@ -525,7 +552,8 @@
     "familyEmail": "",
     "appraisal": null,
     "permitApproval": null,
-    "returnHomeFileGenerated": true
+    "returnHomeFileGenerated": true,
+    "settlementId": "North 9"
   },
   {
     "id": 29,
@@ -543,7 +571,8 @@
     "familyEmail": "",
     "appraisal": null,
     "permitApproval": null,
-    "returnHomeFileGenerated": false
+    "returnHomeFileGenerated": false,
+    "settlementId": "Market 22"
   },
   {
     "id": 30,
@@ -561,7 +590,8 @@
     "familyEmail": "",
     "appraisal": null,
     "permitApproval": null,
-    "returnHomeFileGenerated": false
+    "returnHomeFileGenerated": false,
+    "settlementId": "Valley 44"
   },
   {
     "id": 31,
@@ -579,7 +609,8 @@
     "familyEmail": "",
     "appraisal": null,
     "permitApproval": null,
-    "returnHomeFileGenerated": false
+    "returnHomeFileGenerated": false,
+    "settlementId": "Hilltop 9"
   },
   {
     "id": 32,
@@ -597,7 +628,8 @@
     "familyEmail": "",
     "appraisal": null,
     "permitApproval": null,
-    "returnHomeFileGenerated": false
+    "returnHomeFileGenerated": false,
+    "settlementId": "Station 11"
   },
   {
     "id": 33,
@@ -615,7 +647,8 @@
     "familyEmail": "",
     "appraisal": null,
     "permitApproval": null,
-    "returnHomeFileGenerated": false
+    "returnHomeFileGenerated": false,
+    "settlementId": "Test Ave 1"
   },
   {
     "id": 34,
@@ -633,7 +666,8 @@
     "familyEmail": "",
     "appraisal": null,
     "permitApproval": null,
-    "returnHomeFileGenerated": false
+    "returnHomeFileGenerated": false,
+    "settlementId": "Eval Blvd 5"
   },
   {
     "id": 35,
@@ -658,7 +692,8 @@
       "localAuthorityComments": "All good",
       "approved": true
     },
-    "returnHomeFileGenerated": false
+    "returnHomeFileGenerated": false,
+    "settlementId": "Authority Rd 9"
   },
   {
     "id": 36,
@@ -676,7 +711,8 @@
     "familyEmail": "",
     "appraisal": null,
     "permitApproval": null,
-    "returnHomeFileGenerated": false
+    "returnHomeFileGenerated": false,
+    "settlementId": "Main Street 10"
   },
   {
     "id": 37,
@@ -694,7 +730,8 @@
     "familyEmail": "",
     "appraisal": null,
     "permitApproval": null,
-    "returnHomeFileGenerated": false
+    "returnHomeFileGenerated": false,
+    "settlementId": "Park Avenue 7"
   },
   {
     "id": 38,
@@ -712,7 +749,8 @@
     "familyEmail": "",
     "appraisal": null,
     "permitApproval": null,
-    "returnHomeFileGenerated": false
+    "returnHomeFileGenerated": false,
+    "settlementId": "Lake Road 5"
   },
   {
     "id": 39,
@@ -730,7 +768,8 @@
     "familyEmail": "",
     "appraisal": null,
     "permitApproval": null,
-    "returnHomeFileGenerated": false
+    "returnHomeFileGenerated": false,
+    "settlementId": "Hill 8"
   },
   {
     "id": 40,
@@ -748,7 +787,8 @@
     "familyEmail": "",
     "appraisal": null,
     "permitApproval": null,
-    "returnHomeFileGenerated": true
+    "returnHomeFileGenerated": true,
+    "settlementId": "Garden 33"
   },
   {
     "id": 41,
@@ -766,7 +806,8 @@
     "familyEmail": "",
     "appraisal": null,
     "permitApproval": null,
-    "returnHomeFileGenerated": true
+    "returnHomeFileGenerated": true,
+    "settlementId": "North 9"
   },
   {
     "id": 42,
@@ -784,7 +825,8 @@
     "familyEmail": "",
     "appraisal": null,
     "permitApproval": null,
-    "returnHomeFileGenerated": false
+    "returnHomeFileGenerated": false,
+    "settlementId": "Market 22"
   },
   {
     "id": 43,
@@ -802,7 +844,8 @@
     "familyEmail": "",
     "appraisal": null,
     "permitApproval": null,
-    "returnHomeFileGenerated": false
+    "returnHomeFileGenerated": false,
+    "settlementId": "Valley 44"
   },
   {
     "id": 44,
@@ -820,7 +863,8 @@
     "familyEmail": "",
     "appraisal": null,
     "permitApproval": null,
-    "returnHomeFileGenerated": false
+    "returnHomeFileGenerated": false,
+    "settlementId": "Hilltop 9"
   },
   {
     "id": 45,
@@ -838,7 +882,8 @@
     "familyEmail": "",
     "appraisal": null,
     "permitApproval": null,
-    "returnHomeFileGenerated": false
+    "returnHomeFileGenerated": false,
+    "settlementId": "Station 11"
   },
   {
     "id": 46,
@@ -856,7 +901,8 @@
     "familyEmail": "",
     "appraisal": null,
     "permitApproval": null,
-    "returnHomeFileGenerated": false
+    "returnHomeFileGenerated": false,
+    "settlementId": "Change Rd 1"
   },
   {
     "id": 47,
@@ -874,7 +920,8 @@
     "familyEmail": "",
     "appraisal": null,
     "permitApproval": null,
-    "returnHomeFileGenerated": false
+    "returnHomeFileGenerated": false,
+    "settlementId": "Test Ave 1"
   },
   {
     "id": 48,
@@ -892,7 +939,8 @@
     "familyEmail": "",
     "appraisal": null,
     "permitApproval": null,
-    "returnHomeFileGenerated": false
+    "returnHomeFileGenerated": false,
+    "settlementId": "Eval Blvd 5"
   },
   {
     "id": 49,
@@ -917,7 +965,8 @@
       "localAuthorityComments": "All good",
       "approved": true
     },
-    "returnHomeFileGenerated": false
+    "returnHomeFileGenerated": false,
+    "settlementId": "Authority Rd 9"
   },
   {
     "id": 50,
@@ -940,7 +989,8 @@
       "reinspectionRequired": true
     },
     "permitApproval": null,
-    "returnHomeFileGenerated": true
+    "returnHomeFileGenerated": true,
+    "settlementId": "aa"
   },
   {
     "id": 51,
@@ -958,7 +1008,8 @@
     "familyEmail": "",
     "appraisal": null,
     "permitApproval": null,
-    "returnHomeFileGenerated": false
+    "returnHomeFileGenerated": false,
+    "settlementId": "Main Street 10"
   },
   {
     "id": 52,
@@ -976,7 +1027,8 @@
     "familyEmail": "",
     "appraisal": null,
     "permitApproval": null,
-    "returnHomeFileGenerated": false
+    "returnHomeFileGenerated": false,
+    "settlementId": "Park Avenue 7"
   },
   {
     "id": 53,
@@ -994,7 +1046,8 @@
     "familyEmail": "",
     "appraisal": null,
     "permitApproval": null,
-    "returnHomeFileGenerated": false
+    "returnHomeFileGenerated": false,
+    "settlementId": "Lake Road 5"
   },
   {
     "id": 54,
@@ -1012,7 +1065,8 @@
     "familyEmail": "",
     "appraisal": null,
     "permitApproval": null,
-    "returnHomeFileGenerated": false
+    "returnHomeFileGenerated": false,
+    "settlementId": "Hill 8"
   },
   {
     "id": 55,
@@ -1030,7 +1084,8 @@
     "familyEmail": "",
     "appraisal": null,
     "permitApproval": null,
-    "returnHomeFileGenerated": true
+    "returnHomeFileGenerated": true,
+    "settlementId": "Garden 33"
   },
   {
     "id": 56,
@@ -1048,7 +1103,8 @@
     "familyEmail": "",
     "appraisal": null,
     "permitApproval": null,
-    "returnHomeFileGenerated": true
+    "returnHomeFileGenerated": true,
+    "settlementId": "North 9"
   },
   {
     "id": 57,
@@ -1066,7 +1122,8 @@
     "familyEmail": "",
     "appraisal": null,
     "permitApproval": null,
-    "returnHomeFileGenerated": false
+    "returnHomeFileGenerated": false,
+    "settlementId": "Market 22"
   },
   {
     "id": 58,
@@ -1084,7 +1141,8 @@
     "familyEmail": "",
     "appraisal": null,
     "permitApproval": null,
-    "returnHomeFileGenerated": false
+    "returnHomeFileGenerated": false,
+    "settlementId": "Valley 44"
   },
   {
     "id": 59,
@@ -1102,7 +1160,8 @@
     "familyEmail": "",
     "appraisal": null,
     "permitApproval": null,
-    "returnHomeFileGenerated": false
+    "returnHomeFileGenerated": false,
+    "settlementId": "Hilltop 9"
   },
   {
     "id": 60,
@@ -1120,7 +1179,8 @@
     "familyEmail": "",
     "appraisal": null,
     "permitApproval": null,
-    "returnHomeFileGenerated": false
+    "returnHomeFileGenerated": false,
+    "settlementId": "Station 11"
   },
   {
     "id": 61,
@@ -1138,7 +1198,8 @@
     "familyEmail": "",
     "appraisal": null,
     "permitApproval": null,
-    "returnHomeFileGenerated": false
+    "returnHomeFileGenerated": false,
+    "settlementId": "Change Rd 1"
   },
   {
     "id": 62,
@@ -1156,7 +1217,8 @@
     "familyEmail": "",
     "appraisal": null,
     "permitApproval": null,
-    "returnHomeFileGenerated": false
+    "returnHomeFileGenerated": false,
+    "settlementId": "Test Ave 1"
   },
   {
     "id": 63,
@@ -1174,7 +1236,8 @@
     "familyEmail": "",
     "appraisal": null,
     "permitApproval": null,
-    "returnHomeFileGenerated": false
+    "returnHomeFileGenerated": false,
+    "settlementId": "Eval Blvd 5"
   },
   {
     "id": 64,
@@ -1199,7 +1262,8 @@
       "localAuthorityComments": "All good",
       "approved": true
     },
-    "returnHomeFileGenerated": false
+    "returnHomeFileGenerated": false,
+    "settlementId": "Authority Rd 9"
   },
   {
     "id": 65,
@@ -1217,7 +1281,8 @@
     "familyEmail": "",
     "appraisal": null,
     "permitApproval": null,
-    "returnHomeFileGenerated": false
+    "returnHomeFileGenerated": false,
+    "settlementId": "Main Street 10"
   },
   {
     "id": 66,
@@ -1235,7 +1300,8 @@
     "familyEmail": "",
     "appraisal": null,
     "permitApproval": null,
-    "returnHomeFileGenerated": false
+    "returnHomeFileGenerated": false,
+    "settlementId": "Park Avenue 7"
   },
   {
     "id": 67,
@@ -1253,7 +1319,8 @@
     "familyEmail": "",
     "appraisal": null,
     "permitApproval": null,
-    "returnHomeFileGenerated": false
+    "returnHomeFileGenerated": false,
+    "settlementId": "Lake Road 5"
   },
   {
     "id": 68,
@@ -1271,7 +1338,8 @@
     "familyEmail": "",
     "appraisal": null,
     "permitApproval": null,
-    "returnHomeFileGenerated": false
+    "returnHomeFileGenerated": false,
+    "settlementId": "Hill 8"
   },
   {
     "id": 69,
@@ -1289,7 +1357,8 @@
     "familyEmail": "",
     "appraisal": null,
     "permitApproval": null,
-    "returnHomeFileGenerated": true
+    "returnHomeFileGenerated": true,
+    "settlementId": "Garden 33"
   },
   {
     "id": 70,
@@ -1307,7 +1376,8 @@
     "familyEmail": "",
     "appraisal": null,
     "permitApproval": null,
-    "returnHomeFileGenerated": true
+    "returnHomeFileGenerated": true,
+    "settlementId": "North 9"
   },
   {
     "id": 71,
@@ -1325,7 +1395,8 @@
     "familyEmail": "",
     "appraisal": null,
     "permitApproval": null,
-    "returnHomeFileGenerated": false
+    "returnHomeFileGenerated": false,
+    "settlementId": "Market 22"
   },
   {
     "id": 72,
@@ -1343,7 +1414,8 @@
     "familyEmail": "",
     "appraisal": null,
     "permitApproval": null,
-    "returnHomeFileGenerated": false
+    "returnHomeFileGenerated": false,
+    "settlementId": "Valley 44"
   },
   {
     "id": 73,
@@ -1361,7 +1433,8 @@
     "familyEmail": "",
     "appraisal": null,
     "permitApproval": null,
-    "returnHomeFileGenerated": false
+    "returnHomeFileGenerated": false,
+    "settlementId": "Hilltop 9"
   },
   {
     "id": 74,
@@ -1379,7 +1452,8 @@
     "familyEmail": "",
     "appraisal": null,
     "permitApproval": null,
-    "returnHomeFileGenerated": false
+    "returnHomeFileGenerated": false,
+    "settlementId": "Station 11"
   },
   {
     "id": 75,
@@ -1397,7 +1471,8 @@
     "familyEmail": "",
     "appraisal": null,
     "permitApproval": null,
-    "returnHomeFileGenerated": false
+    "returnHomeFileGenerated": false,
+    "settlementId": "Change Rd 1"
   },
   {
     "id": 76,
@@ -1415,7 +1490,8 @@
     "familyEmail": "",
     "appraisal": null,
     "permitApproval": null,
-    "returnHomeFileGenerated": false
+    "returnHomeFileGenerated": false,
+    "settlementId": "Test Ave 1"
   },
   {
     "id": 77,
@@ -1433,7 +1509,8 @@
     "familyEmail": "",
     "appraisal": null,
     "permitApproval": null,
-    "returnHomeFileGenerated": false
+    "returnHomeFileGenerated": false,
+    "settlementId": "Eval Blvd 5"
   },
   {
     "id": 78,
@@ -1451,7 +1528,8 @@
     "familyEmail": "",
     "appraisal": null,
     "permitApproval": null,
-    "returnHomeFileGenerated": false
+    "returnHomeFileGenerated": false,
+    "settlementId": "Authority Rd 9"
   },
   {
     "id": 79,
@@ -1469,7 +1547,8 @@
     "familyEmail": "",
     "appraisal": null,
     "permitApproval": null,
-    "returnHomeFileGenerated": false
+    "returnHomeFileGenerated": false,
+    "settlementId": "Deny Rd 1"
   },
   {
     "id": 80,
@@ -1487,7 +1566,8 @@
     "familyEmail": "",
     "appraisal": null,
     "permitApproval": null,
-    "returnHomeFileGenerated": false
+    "returnHomeFileGenerated": false,
+    "settlementId": "Deny Rd 2"
   },
   {
     "id": 81,
@@ -1505,7 +1585,8 @@
     "familyEmail": "",
     "appraisal": null,
     "permitApproval": null,
-    "returnHomeFileGenerated": false
+    "returnHomeFileGenerated": false,
+    "settlementId": "Deny Rd 3"
   },
   {
     "id": 82,
@@ -1523,7 +1604,8 @@
     "familyEmail": "",
     "appraisal": null,
     "permitApproval": null,
-    "returnHomeFileGenerated": false
+    "returnHomeFileGenerated": false,
+    "settlementId": "Deny Rd 4"
   },
   {
     "id": 83,
@@ -1541,7 +1623,8 @@
     "familyEmail": "",
     "appraisal": null,
     "permitApproval": null,
-    "returnHomeFileGenerated": false
+    "returnHomeFileGenerated": false,
+    "settlementId": "Deny Rd 5"
   },
   {
     "id": 84,
@@ -1559,7 +1642,8 @@
     "familyEmail": "",
     "appraisal": null,
     "permitApproval": null,
-    "returnHomeFileGenerated": false
+    "returnHomeFileGenerated": false,
+    "settlementId": "Deny Rd 6"
   },
   {
     "id": 85,
@@ -1577,7 +1661,8 @@
     "familyEmail": "",
     "appraisal": null,
     "permitApproval": null,
-    "returnHomeFileGenerated": false
+    "returnHomeFileGenerated": false,
+    "settlementId": "Allow Rd 1"
   },
   {
     "id": 86,
@@ -1602,7 +1687,8 @@
       "localAuthorityComments": "",
       "approved": true
     },
-    "returnHomeFileGenerated": false
+    "returnHomeFileGenerated": false,
+    "settlementId": "Allow Rd 2"
   },
   {
     "id": 87,
@@ -1620,7 +1706,8 @@
     "familyEmail": "",
     "appraisal": null,
     "permitApproval": null,
-    "returnHomeFileGenerated": false
+    "returnHomeFileGenerated": false,
+    "settlementId": "Main Street 10"
   },
   {
     "id": 88,
@@ -1638,7 +1725,8 @@
     "familyEmail": "",
     "appraisal": null,
     "permitApproval": null,
-    "returnHomeFileGenerated": false
+    "returnHomeFileGenerated": false,
+    "settlementId": "Park Avenue 7"
   },
   {
     "id": 89,
@@ -1656,7 +1744,8 @@
     "familyEmail": "",
     "appraisal": null,
     "permitApproval": null,
-    "returnHomeFileGenerated": false
+    "returnHomeFileGenerated": false,
+    "settlementId": "Lake Road 5"
   },
   {
     "id": 90,
@@ -1674,7 +1763,8 @@
     "familyEmail": "",
     "appraisal": null,
     "permitApproval": null,
-    "returnHomeFileGenerated": false
+    "returnHomeFileGenerated": false,
+    "settlementId": "Hill 8"
   },
   {
     "id": 91,
@@ -1692,7 +1782,8 @@
     "familyEmail": "",
     "appraisal": null,
     "permitApproval": null,
-    "returnHomeFileGenerated": true
+    "returnHomeFileGenerated": true,
+    "settlementId": "Garden 33"
   },
   {
     "id": 92,
@@ -1710,7 +1801,8 @@
     "familyEmail": "",
     "appraisal": null,
     "permitApproval": null,
-    "returnHomeFileGenerated": true
+    "returnHomeFileGenerated": true,
+    "settlementId": "North 9"
   },
   {
     "id": 93,
@@ -1728,7 +1820,8 @@
     "familyEmail": "",
     "appraisal": null,
     "permitApproval": null,
-    "returnHomeFileGenerated": false
+    "returnHomeFileGenerated": false,
+    "settlementId": "Market 22"
   },
   {
     "id": 94,
@@ -1746,7 +1839,8 @@
     "familyEmail": "",
     "appraisal": null,
     "permitApproval": null,
-    "returnHomeFileGenerated": false
+    "returnHomeFileGenerated": false,
+    "settlementId": "Valley 44"
   },
   {
     "id": 95,
@@ -1764,7 +1858,8 @@
     "familyEmail": "",
     "appraisal": null,
     "permitApproval": null,
-    "returnHomeFileGenerated": false
+    "returnHomeFileGenerated": false,
+    "settlementId": "Hilltop 9"
   },
   {
     "id": 96,
@@ -1782,7 +1877,8 @@
     "familyEmail": "",
     "appraisal": null,
     "permitApproval": null,
-    "returnHomeFileGenerated": false
+    "returnHomeFileGenerated": false,
+    "settlementId": "Station 11"
   },
   {
     "id": 97,
@@ -1800,7 +1896,8 @@
     "familyEmail": "",
     "appraisal": null,
     "permitApproval": null,
-    "returnHomeFileGenerated": false
+    "returnHomeFileGenerated": false,
+    "settlementId": "Change Rd 1"
   },
   {
     "id": 98,
@@ -1818,7 +1915,8 @@
     "familyEmail": "",
     "appraisal": null,
     "permitApproval": null,
-    "returnHomeFileGenerated": false
+    "returnHomeFileGenerated": false,
+    "settlementId": "Test Ave 1"
   },
   {
     "id": 99,
@@ -1836,7 +1934,8 @@
     "familyEmail": "",
     "appraisal": null,
     "permitApproval": null,
-    "returnHomeFileGenerated": false
+    "returnHomeFileGenerated": false,
+    "settlementId": "Eval Blvd 5"
   },
   {
     "id": 100,
@@ -1854,7 +1953,8 @@
     "familyEmail": "",
     "appraisal": null,
     "permitApproval": null,
-    "returnHomeFileGenerated": false
+    "returnHomeFileGenerated": false,
+    "settlementId": "Authority Rd 9"
   },
   {
     "id": 101,
@@ -1872,7 +1972,8 @@
     "familyEmail": "",
     "appraisal": null,
     "permitApproval": null,
-    "returnHomeFileGenerated": false
+    "returnHomeFileGenerated": false,
+    "settlementId": "Deny Rd 1"
   },
   {
     "id": 102,
@@ -1890,7 +1991,8 @@
     "familyEmail": "",
     "appraisal": null,
     "permitApproval": null,
-    "returnHomeFileGenerated": false
+    "returnHomeFileGenerated": false,
+    "settlementId": "Deny Rd 2"
   },
   {
     "id": 103,
@@ -1908,7 +2010,8 @@
     "familyEmail": "",
     "appraisal": null,
     "permitApproval": null,
-    "returnHomeFileGenerated": false
+    "returnHomeFileGenerated": false,
+    "settlementId": "Deny Rd 3"
   },
   {
     "id": 104,
@@ -1926,7 +2029,8 @@
     "familyEmail": "",
     "appraisal": null,
     "permitApproval": null,
-    "returnHomeFileGenerated": false
+    "returnHomeFileGenerated": false,
+    "settlementId": "Deny Rd 4"
   },
   {
     "id": 105,
@@ -1944,7 +2048,8 @@
     "familyEmail": "",
     "appraisal": null,
     "permitApproval": null,
-    "returnHomeFileGenerated": false
+    "returnHomeFileGenerated": false,
+    "settlementId": "Deny Rd 5"
   },
   {
     "id": 106,
@@ -1962,7 +2067,8 @@
     "familyEmail": "",
     "appraisal": null,
     "permitApproval": null,
-    "returnHomeFileGenerated": false
+    "returnHomeFileGenerated": false,
+    "settlementId": "Deny Rd 6"
   },
   {
     "id": 107,
@@ -1980,7 +2086,8 @@
     "familyEmail": "",
     "appraisal": null,
     "permitApproval": null,
-    "returnHomeFileGenerated": false
+    "returnHomeFileGenerated": false,
+    "settlementId": "Allow Rd 1"
   },
   {
     "id": 108,
@@ -2005,6 +2112,895 @@
       "localAuthorityComments": "",
       "approved": true
     },
-    "returnHomeFileGenerated": false
+    "returnHomeFileGenerated": false,
+    "settlementId": "Allow Rd 2"
+  },
+  {
+    "id": 109,
+    "reporterName": "Alice",
+    "address": "Main Street 10",
+    "damageType": "Water",
+    "description": "Leak in the kitchen",
+    "status": "WAITING_FOR_VALIDATION",
+    "damagePhotosExist": false,
+    "engineerReportExists": false,
+    "eligibilityCheckPerformed": false,
+    "socialApproval": false,
+    "apartmentsInBuilding": 0,
+    "budgetRequestOpened": false,
+    "familyEmail": "",
+    "appraisal": null,
+    "permitApproval": null,
+    "returnHomeFileGenerated": false,
+    "settlementId": "Main Street 10"
+  },
+  {
+    "id": 110,
+    "reporterName": "Carol",
+    "address": "Park Avenue 7",
+    "damageType": "Structural",
+    "description": "Wall crack in the lobby",
+    "status": "WAITING_FOR_VALIDATION",
+    "damagePhotosExist": true,
+    "engineerReportExists": true,
+    "eligibilityCheckPerformed": true,
+    "socialApproval": false,
+    "apartmentsInBuilding": 24,
+    "budgetRequestOpened": false,
+    "familyEmail": "",
+    "appraisal": null,
+    "permitApproval": null,
+    "returnHomeFileGenerated": false,
+    "settlementId": "Park Avenue 7"
+  },
+  {
+    "id": 111,
+    "reporterName": "Dina",
+    "address": "Lake Road 5",
+    "damageType": "Fire",
+    "description": "Smoke damage",
+    "status": "WAITING_FOR_VALIDATION",
+    "damagePhotosExist": false,
+    "engineerReportExists": true,
+    "eligibilityCheckPerformed": false,
+    "socialApproval": false,
+    "apartmentsInBuilding": 10,
+    "budgetRequestOpened": false,
+    "familyEmail": "",
+    "appraisal": null,
+    "permitApproval": null,
+    "returnHomeFileGenerated": false,
+    "settlementId": "Lake Road 5"
+  },
+  {
+    "id": 112,
+    "reporterName": "Mina",
+    "address": "Hill 8",
+    "damageType": "Water",
+    "description": "Roof leak",
+    "status": "WAITING_FOR_VALIDATION",
+    "damagePhotosExist": false,
+    "engineerReportExists": false,
+    "eligibilityCheckPerformed": false,
+    "socialApproval": false,
+    "apartmentsInBuilding": 0,
+    "budgetRequestOpened": true,
+    "familyEmail": "",
+    "appraisal": null,
+    "permitApproval": null,
+    "returnHomeFileGenerated": false,
+    "settlementId": "Hill 8"
+  },
+  {
+    "id": 113,
+    "reporterName": "Eli",
+    "address": "Garden 33",
+    "damageType": "Structural",
+    "description": "Foundation issue",
+    "status": "Restoration process completed",
+    "damagePhotosExist": true,
+    "engineerReportExists": true,
+    "eligibilityCheckPerformed": true,
+    "socialApproval": true,
+    "apartmentsInBuilding": 30,
+    "budgetRequestOpened": true,
+    "familyEmail": "",
+    "appraisal": null,
+    "permitApproval": null,
+    "returnHomeFileGenerated": true,
+    "settlementId": "Garden 33"
+  },
+  {
+    "id": 114,
+    "reporterName": "Rina",
+    "address": "North 9",
+    "damageType": "Water",
+    "description": "Basement issue",
+    "status": "Building in the process of restoration",
+    "damagePhotosExist": true,
+    "engineerReportExists": true,
+    "eligibilityCheckPerformed": true,
+    "socialApproval": true,
+    "apartmentsInBuilding": 18,
+    "budgetRequestOpened": true,
+    "familyEmail": "",
+    "appraisal": null,
+    "permitApproval": null,
+    "returnHomeFileGenerated": true,
+    "settlementId": "North 9"
+  },
+  {
+    "id": 115,
+    "reporterName": "Bob",
+    "address": "Market 22",
+    "damageType": "Electrical",
+    "description": "Broken socket",
+    "status": "IN_REVIEW",
+    "damagePhotosExist": false,
+    "engineerReportExists": false,
+    "eligibilityCheckPerformed": false,
+    "socialApproval": false,
+    "apartmentsInBuilding": 0,
+    "budgetRequestOpened": false,
+    "familyEmail": "",
+    "appraisal": null,
+    "permitApproval": null,
+    "returnHomeFileGenerated": false,
+    "settlementId": "Market 22"
+  },
+  {
+    "id": 116,
+    "reporterName": "Tom",
+    "address": "Valley 44",
+    "damageType": "Structural",
+    "description": "Cracked walls",
+    "status": "WAITING_FOR_VALIDATION",
+    "damagePhotosExist": false,
+    "engineerReportExists": false,
+    "eligibilityCheckPerformed": false,
+    "socialApproval": false,
+    "apartmentsInBuilding": 0,
+    "budgetRequestOpened": false,
+    "familyEmail": "",
+    "appraisal": null,
+    "permitApproval": null,
+    "returnHomeFileGenerated": false,
+    "settlementId": "Valley 44"
+  },
+  {
+    "id": 117,
+    "reporterName": "Sara",
+    "address": "Hilltop 9",
+    "damageType": "Water",
+    "description": "Flooding",
+    "status": "WAITING_FOR_VALIDATION",
+    "damagePhotosExist": false,
+    "engineerReportExists": false,
+    "eligibilityCheckPerformed": false,
+    "socialApproval": false,
+    "apartmentsInBuilding": 0,
+    "budgetRequestOpened": false,
+    "familyEmail": "",
+    "appraisal": null,
+    "permitApproval": null,
+    "returnHomeFileGenerated": false,
+    "settlementId": "Hilltop 9"
+  },
+  {
+    "id": 118,
+    "reporterName": "Dan",
+    "address": "Station 11",
+    "damageType": "Structural",
+    "description": "Roof damage",
+    "status": "WAITING_FOR_VALIDATION",
+    "damagePhotosExist": false,
+    "engineerReportExists": false,
+    "eligibilityCheckPerformed": false,
+    "socialApproval": false,
+    "apartmentsInBuilding": 0,
+    "budgetRequestOpened": false,
+    "familyEmail": "",
+    "appraisal": null,
+    "permitApproval": null,
+    "returnHomeFileGenerated": false,
+    "settlementId": "Station 11"
+  },
+  {
+    "id": 119,
+    "reporterName": "Status User",
+    "address": "Change Rd 1",
+    "damageType": "Water",
+    "description": "Leak",
+    "status": "NEW",
+    "damagePhotosExist": false,
+    "engineerReportExists": false,
+    "eligibilityCheckPerformed": false,
+    "socialApproval": false,
+    "apartmentsInBuilding": 0,
+    "budgetRequestOpened": false,
+    "familyEmail": "",
+    "appraisal": null,
+    "permitApproval": null,
+    "returnHomeFileGenerated": false,
+    "settlementId": "Change Rd 1"
+  },
+  {
+    "id": 120,
+    "reporterName": "Action User",
+    "address": "Test Ave 1",
+    "damageType": "Water",
+    "description": "Test",
+    "status": "WAITING_FOR_VALIDATION",
+    "damagePhotosExist": false,
+    "engineerReportExists": false,
+    "eligibilityCheckPerformed": false,
+    "socialApproval": false,
+    "apartmentsInBuilding": 0,
+    "budgetRequestOpened": true,
+    "familyEmail": "",
+    "appraisal": null,
+    "permitApproval": null,
+    "returnHomeFileGenerated": false,
+    "settlementId": "Test Ave 1"
+  },
+  {
+    "id": 121,
+    "reporterName": "Appraiser User",
+    "address": "Eval Blvd 5",
+    "damageType": "Structural",
+    "description": "Cracks",
+    "status": "WAITING_FOR_VALIDATION",
+    "damagePhotosExist": false,
+    "engineerReportExists": false,
+    "eligibilityCheckPerformed": false,
+    "socialApproval": false,
+    "apartmentsInBuilding": 0,
+    "budgetRequestOpened": false,
+    "familyEmail": "",
+    "appraisal": null,
+    "permitApproval": null,
+    "returnHomeFileGenerated": false,
+    "settlementId": "Eval Blvd 5"
+  },
+  {
+    "id": 122,
+    "reporterName": "Permit User",
+    "address": "Authority Rd 9",
+    "damageType": "Fire",
+    "description": "Smoke",
+    "status": "WAITING_FOR_VALIDATION",
+    "damagePhotosExist": false,
+    "engineerReportExists": false,
+    "eligibilityCheckPerformed": false,
+    "socialApproval": false,
+    "apartmentsInBuilding": 0,
+    "budgetRequestOpened": false,
+    "familyEmail": "",
+    "appraisal": null,
+    "permitApproval": null,
+    "returnHomeFileGenerated": false,
+    "settlementId": "Authority Rd 9"
+  },
+  {
+    "id": 123,
+    "reporterName": "Perm Test",
+    "address": "Deny Rd 1",
+    "damageType": "Water",
+    "description": "Test",
+    "status": "WAITING_FOR_VALIDATION",
+    "damagePhotosExist": false,
+    "engineerReportExists": false,
+    "eligibilityCheckPerformed": false,
+    "socialApproval": false,
+    "apartmentsInBuilding": 0,
+    "budgetRequestOpened": false,
+    "familyEmail": "",
+    "appraisal": null,
+    "permitApproval": null,
+    "returnHomeFileGenerated": false,
+    "settlementId": "Deny Rd 1"
+  },
+  {
+    "id": 124,
+    "reporterName": "Perm Test 2",
+    "address": "Deny Rd 2",
+    "damageType": "Fire",
+    "description": "Test",
+    "status": "WAITING_FOR_VALIDATION",
+    "damagePhotosExist": false,
+    "engineerReportExists": false,
+    "eligibilityCheckPerformed": false,
+    "socialApproval": false,
+    "apartmentsInBuilding": 0,
+    "budgetRequestOpened": false,
+    "familyEmail": "",
+    "appraisal": null,
+    "permitApproval": null,
+    "returnHomeFileGenerated": false,
+    "settlementId": "Deny Rd 2"
+  },
+  {
+    "id": 125,
+    "reporterName": "Perm Test 3",
+    "address": "Deny Rd 3",
+    "damageType": "Structural",
+    "description": "Test",
+    "status": "WAITING_FOR_VALIDATION",
+    "damagePhotosExist": true,
+    "engineerReportExists": true,
+    "eligibilityCheckPerformed": true,
+    "socialApproval": false,
+    "apartmentsInBuilding": 0,
+    "budgetRequestOpened": false,
+    "familyEmail": "",
+    "appraisal": null,
+    "permitApproval": null,
+    "returnHomeFileGenerated": false,
+    "settlementId": "Deny Rd 3"
+  },
+  {
+    "id": 126,
+    "reporterName": "Perm Test 4",
+    "address": "Deny Rd 4",
+    "damageType": "Water",
+    "description": "Test",
+    "status": "WAITING_FOR_VALIDATION",
+    "damagePhotosExist": true,
+    "engineerReportExists": true,
+    "eligibilityCheckPerformed": true,
+    "socialApproval": false,
+    "apartmentsInBuilding": 0,
+    "budgetRequestOpened": false,
+    "familyEmail": "",
+    "appraisal": null,
+    "permitApproval": null,
+    "returnHomeFileGenerated": false,
+    "settlementId": "Deny Rd 4"
+  },
+  {
+    "id": 127,
+    "reporterName": "No Role",
+    "address": "Deny Rd 5",
+    "damageType": "Water",
+    "description": "Test",
+    "status": "WAITING_FOR_VALIDATION",
+    "damagePhotosExist": false,
+    "engineerReportExists": false,
+    "eligibilityCheckPerformed": false,
+    "socialApproval": false,
+    "apartmentsInBuilding": 0,
+    "budgetRequestOpened": false,
+    "familyEmail": "",
+    "appraisal": null,
+    "permitApproval": null,
+    "returnHomeFileGenerated": false,
+    "settlementId": "Deny Rd 5"
+  },
+  {
+    "id": 128,
+    "reporterName": "No Action",
+    "address": "Deny Rd 6",
+    "damageType": "Fire",
+    "description": "Test",
+    "status": "WAITING_FOR_VALIDATION",
+    "damagePhotosExist": false,
+    "engineerReportExists": false,
+    "eligibilityCheckPerformed": false,
+    "socialApproval": false,
+    "apartmentsInBuilding": 0,
+    "budgetRequestOpened": false,
+    "familyEmail": "",
+    "appraisal": null,
+    "permitApproval": null,
+    "returnHomeFileGenerated": false,
+    "settlementId": "Deny Rd 6"
+  },
+  {
+    "id": 129,
+    "reporterName": "Ministry Test",
+    "address": "Allow Rd 1",
+    "damageType": "Water",
+    "description": "Test",
+    "status": "WAITING_FOR_VALIDATION",
+    "damagePhotosExist": false,
+    "engineerReportExists": false,
+    "eligibilityCheckPerformed": false,
+    "socialApproval": false,
+    "apartmentsInBuilding": 0,
+    "budgetRequestOpened": false,
+    "familyEmail": "",
+    "appraisal": null,
+    "permitApproval": null,
+    "returnHomeFileGenerated": false,
+    "settlementId": "Allow Rd 1"
+  },
+  {
+    "id": 130,
+    "reporterName": "Ministry Test 2",
+    "address": "Allow Rd 2",
+    "damageType": "Structural",
+    "description": "Test",
+    "status": "WAITING_FOR_VALIDATION",
+    "damagePhotosExist": false,
+    "engineerReportExists": false,
+    "eligibilityCheckPerformed": false,
+    "socialApproval": false,
+    "apartmentsInBuilding": 0,
+    "budgetRequestOpened": false,
+    "familyEmail": "",
+    "appraisal": null,
+    "permitApproval": {
+      "waterSupply": true,
+      "electricitySupply": true,
+      "accessRoads": true,
+      "environmentalCleared": true,
+      "localAuthorityComments": "",
+      "approved": true
+    },
+    "returnHomeFileGenerated": false,
+    "settlementId": "Allow Rd 2"
+  },
+  {
+    "id": 131,
+    "reporterName": "Settlement Block",
+    "address": "Jerusalem, Test St 1",
+    "damageType": "Water",
+    "description": "Test",
+    "status": "WAITING_FOR_VALIDATION",
+    "damagePhotosExist": false,
+    "engineerReportExists": false,
+    "eligibilityCheckPerformed": false,
+    "socialApproval": false,
+    "apartmentsInBuilding": 0,
+    "budgetRequestOpened": false,
+    "familyEmail": "",
+    "appraisal": null,
+    "permitApproval": null,
+    "returnHomeFileGenerated": false,
+    "settlementId": "Jerusalem"
+  },
+  {
+    "id": 132,
+    "reporterName": "Alice",
+    "address": "Main Street 10",
+    "damageType": "Water",
+    "description": "Leak in the kitchen",
+    "status": "WAITING_FOR_VALIDATION",
+    "damagePhotosExist": false,
+    "engineerReportExists": false,
+    "eligibilityCheckPerformed": false,
+    "socialApproval": false,
+    "apartmentsInBuilding": 0,
+    "budgetRequestOpened": false,
+    "familyEmail": "",
+    "appraisal": null,
+    "permitApproval": null,
+    "returnHomeFileGenerated": false,
+    "settlementId": "Main Street 10"
+  },
+  {
+    "id": 133,
+    "reporterName": "Carol",
+    "address": "Park Avenue 7",
+    "damageType": "Structural",
+    "description": "Wall crack in the lobby",
+    "status": "WAITING_FOR_VALIDATION",
+    "damagePhotosExist": true,
+    "engineerReportExists": true,
+    "eligibilityCheckPerformed": true,
+    "socialApproval": false,
+    "apartmentsInBuilding": 24,
+    "budgetRequestOpened": false,
+    "familyEmail": "",
+    "appraisal": null,
+    "permitApproval": null,
+    "returnHomeFileGenerated": false,
+    "settlementId": "Park Avenue 7"
+  },
+  {
+    "id": 134,
+    "reporterName": "Dina",
+    "address": "Lake Road 5",
+    "damageType": "Fire",
+    "description": "Smoke damage",
+    "status": "WAITING_FOR_VALIDATION",
+    "damagePhotosExist": false,
+    "engineerReportExists": true,
+    "eligibilityCheckPerformed": false,
+    "socialApproval": false,
+    "apartmentsInBuilding": 10,
+    "budgetRequestOpened": false,
+    "familyEmail": "",
+    "appraisal": null,
+    "permitApproval": null,
+    "returnHomeFileGenerated": false,
+    "settlementId": "Lake Road 5"
+  },
+  {
+    "id": 135,
+    "reporterName": "Mina",
+    "address": "Hill 8",
+    "damageType": "Water",
+    "description": "Roof leak",
+    "status": "WAITING_FOR_VALIDATION",
+    "damagePhotosExist": false,
+    "engineerReportExists": false,
+    "eligibilityCheckPerformed": false,
+    "socialApproval": false,
+    "apartmentsInBuilding": 0,
+    "budgetRequestOpened": true,
+    "familyEmail": "",
+    "appraisal": null,
+    "permitApproval": null,
+    "returnHomeFileGenerated": false,
+    "settlementId": "Hill 8"
+  },
+  {
+    "id": 136,
+    "reporterName": "Eli",
+    "address": "Garden 33",
+    "damageType": "Structural",
+    "description": "Foundation issue",
+    "status": "Restoration process completed",
+    "damagePhotosExist": true,
+    "engineerReportExists": true,
+    "eligibilityCheckPerformed": true,
+    "socialApproval": true,
+    "apartmentsInBuilding": 30,
+    "budgetRequestOpened": true,
+    "familyEmail": "",
+    "appraisal": null,
+    "permitApproval": null,
+    "returnHomeFileGenerated": true,
+    "settlementId": "Garden 33"
+  },
+  {
+    "id": 137,
+    "reporterName": "Rina",
+    "address": "North 9",
+    "damageType": "Water",
+    "description": "Basement issue",
+    "status": "Building in the process of restoration",
+    "damagePhotosExist": true,
+    "engineerReportExists": true,
+    "eligibilityCheckPerformed": true,
+    "socialApproval": true,
+    "apartmentsInBuilding": 18,
+    "budgetRequestOpened": true,
+    "familyEmail": "",
+    "appraisal": null,
+    "permitApproval": null,
+    "returnHomeFileGenerated": true,
+    "settlementId": "North 9"
+  },
+  {
+    "id": 138,
+    "reporterName": "Bob",
+    "address": "Market 22",
+    "damageType": "Electrical",
+    "description": "Broken socket",
+    "status": "IN_REVIEW",
+    "damagePhotosExist": false,
+    "engineerReportExists": false,
+    "eligibilityCheckPerformed": false,
+    "socialApproval": false,
+    "apartmentsInBuilding": 0,
+    "budgetRequestOpened": false,
+    "familyEmail": "",
+    "appraisal": null,
+    "permitApproval": null,
+    "returnHomeFileGenerated": false,
+    "settlementId": "Market 22"
+  },
+  {
+    "id": 139,
+    "reporterName": "Tom",
+    "address": "Valley 44",
+    "damageType": "Structural",
+    "description": "Cracked walls",
+    "status": "WAITING_FOR_VALIDATION",
+    "damagePhotosExist": false,
+    "engineerReportExists": false,
+    "eligibilityCheckPerformed": false,
+    "socialApproval": false,
+    "apartmentsInBuilding": 0,
+    "budgetRequestOpened": false,
+    "familyEmail": "",
+    "appraisal": null,
+    "permitApproval": null,
+    "returnHomeFileGenerated": false,
+    "settlementId": "Valley 44"
+  },
+  {
+    "id": 140,
+    "reporterName": "Sara",
+    "address": "Hilltop 9",
+    "damageType": "Water",
+    "description": "Flooding",
+    "status": "WAITING_FOR_VALIDATION",
+    "damagePhotosExist": false,
+    "engineerReportExists": false,
+    "eligibilityCheckPerformed": false,
+    "socialApproval": false,
+    "apartmentsInBuilding": 0,
+    "budgetRequestOpened": false,
+    "familyEmail": "",
+    "appraisal": null,
+    "permitApproval": null,
+    "returnHomeFileGenerated": false,
+    "settlementId": "Hilltop 9"
+  },
+  {
+    "id": 141,
+    "reporterName": "Dan",
+    "address": "Station 11",
+    "damageType": "Structural",
+    "description": "Roof damage",
+    "status": "WAITING_FOR_VALIDATION",
+    "damagePhotosExist": false,
+    "engineerReportExists": false,
+    "eligibilityCheckPerformed": false,
+    "socialApproval": false,
+    "apartmentsInBuilding": 0,
+    "budgetRequestOpened": false,
+    "familyEmail": "",
+    "appraisal": null,
+    "permitApproval": null,
+    "returnHomeFileGenerated": false,
+    "settlementId": "Station 11"
+  },
+  {
+    "id": 142,
+    "reporterName": "Status User",
+    "address": "Change Rd 1",
+    "damageType": "Water",
+    "description": "Leak",
+    "status": "NEW",
+    "damagePhotosExist": false,
+    "engineerReportExists": false,
+    "eligibilityCheckPerformed": false,
+    "socialApproval": false,
+    "apartmentsInBuilding": 0,
+    "budgetRequestOpened": false,
+    "familyEmail": "",
+    "appraisal": null,
+    "permitApproval": null,
+    "returnHomeFileGenerated": false,
+    "settlementId": "Change Rd 1"
+  },
+  {
+    "id": 143,
+    "reporterName": "Action User",
+    "address": "Test Ave 1",
+    "damageType": "Water",
+    "description": "Test",
+    "status": "WAITING_FOR_VALIDATION",
+    "damagePhotosExist": false,
+    "engineerReportExists": false,
+    "eligibilityCheckPerformed": false,
+    "socialApproval": false,
+    "apartmentsInBuilding": 0,
+    "budgetRequestOpened": true,
+    "familyEmail": "",
+    "appraisal": null,
+    "permitApproval": null,
+    "returnHomeFileGenerated": false,
+    "settlementId": "Test Ave 1"
+  },
+  {
+    "id": 144,
+    "reporterName": "Appraiser User",
+    "address": "Eval Blvd 5",
+    "damageType": "Structural",
+    "description": "Cracks",
+    "status": "WAITING_FOR_VALIDATION",
+    "damagePhotosExist": false,
+    "engineerReportExists": false,
+    "eligibilityCheckPerformed": false,
+    "socialApproval": false,
+    "apartmentsInBuilding": 0,
+    "budgetRequestOpened": false,
+    "familyEmail": "",
+    "appraisal": null,
+    "permitApproval": null,
+    "returnHomeFileGenerated": false,
+    "settlementId": "Eval Blvd 5"
+  },
+  {
+    "id": 145,
+    "reporterName": "Permit User",
+    "address": "Authority Rd 9",
+    "damageType": "Fire",
+    "description": "Smoke",
+    "status": "WAITING_FOR_VALIDATION",
+    "damagePhotosExist": false,
+    "engineerReportExists": false,
+    "eligibilityCheckPerformed": false,
+    "socialApproval": false,
+    "apartmentsInBuilding": 0,
+    "budgetRequestOpened": false,
+    "familyEmail": "",
+    "appraisal": null,
+    "permitApproval": null,
+    "returnHomeFileGenerated": false,
+    "settlementId": "Authority Rd 9"
+  },
+  {
+    "id": 146,
+    "reporterName": "Perm Test",
+    "address": "Deny Rd 1",
+    "damageType": "Water",
+    "description": "Test",
+    "status": "WAITING_FOR_VALIDATION",
+    "damagePhotosExist": false,
+    "engineerReportExists": false,
+    "eligibilityCheckPerformed": false,
+    "socialApproval": false,
+    "apartmentsInBuilding": 0,
+    "budgetRequestOpened": false,
+    "familyEmail": "",
+    "appraisal": null,
+    "permitApproval": null,
+    "returnHomeFileGenerated": false,
+    "settlementId": "Deny Rd 1"
+  },
+  {
+    "id": 147,
+    "reporterName": "Perm Test 2",
+    "address": "Deny Rd 2",
+    "damageType": "Fire",
+    "description": "Test",
+    "status": "WAITING_FOR_VALIDATION",
+    "damagePhotosExist": false,
+    "engineerReportExists": false,
+    "eligibilityCheckPerformed": false,
+    "socialApproval": false,
+    "apartmentsInBuilding": 0,
+    "budgetRequestOpened": false,
+    "familyEmail": "",
+    "appraisal": null,
+    "permitApproval": null,
+    "returnHomeFileGenerated": false,
+    "settlementId": "Deny Rd 2"
+  },
+  {
+    "id": 148,
+    "reporterName": "Perm Test 3",
+    "address": "Deny Rd 3",
+    "damageType": "Structural",
+    "description": "Test",
+    "status": "WAITING_FOR_VALIDATION",
+    "damagePhotosExist": true,
+    "engineerReportExists": true,
+    "eligibilityCheckPerformed": true,
+    "socialApproval": false,
+    "apartmentsInBuilding": 0,
+    "budgetRequestOpened": false,
+    "familyEmail": "",
+    "appraisal": null,
+    "permitApproval": null,
+    "returnHomeFileGenerated": false,
+    "settlementId": "Deny Rd 3"
+  },
+  {
+    "id": 149,
+    "reporterName": "Perm Test 4",
+    "address": "Deny Rd 4",
+    "damageType": "Water",
+    "description": "Test",
+    "status": "WAITING_FOR_VALIDATION",
+    "damagePhotosExist": true,
+    "engineerReportExists": true,
+    "eligibilityCheckPerformed": true,
+    "socialApproval": false,
+    "apartmentsInBuilding": 0,
+    "budgetRequestOpened": false,
+    "familyEmail": "",
+    "appraisal": null,
+    "permitApproval": null,
+    "returnHomeFileGenerated": false,
+    "settlementId": "Deny Rd 4"
+  },
+  {
+    "id": 150,
+    "reporterName": "No Role",
+    "address": "Deny Rd 5",
+    "damageType": "Water",
+    "description": "Test",
+    "status": "WAITING_FOR_VALIDATION",
+    "damagePhotosExist": false,
+    "engineerReportExists": false,
+    "eligibilityCheckPerformed": false,
+    "socialApproval": false,
+    "apartmentsInBuilding": 0,
+    "budgetRequestOpened": false,
+    "familyEmail": "",
+    "appraisal": null,
+    "permitApproval": null,
+    "returnHomeFileGenerated": false,
+    "settlementId": "Deny Rd 5"
+  },
+  {
+    "id": 151,
+    "reporterName": "No Action",
+    "address": "Deny Rd 6",
+    "damageType": "Fire",
+    "description": "Test",
+    "status": "WAITING_FOR_VALIDATION",
+    "damagePhotosExist": false,
+    "engineerReportExists": false,
+    "eligibilityCheckPerformed": false,
+    "socialApproval": false,
+    "apartmentsInBuilding": 0,
+    "budgetRequestOpened": false,
+    "familyEmail": "",
+    "appraisal": null,
+    "permitApproval": null,
+    "returnHomeFileGenerated": false,
+    "settlementId": "Deny Rd 6"
+  },
+  {
+    "id": 152,
+    "reporterName": "Ministry Test",
+    "address": "Allow Rd 1",
+    "damageType": "Water",
+    "description": "Test",
+    "status": "WAITING_FOR_VALIDATION",
+    "damagePhotosExist": false,
+    "engineerReportExists": false,
+    "eligibilityCheckPerformed": false,
+    "socialApproval": false,
+    "apartmentsInBuilding": 0,
+    "budgetRequestOpened": false,
+    "familyEmail": "",
+    "appraisal": null,
+    "permitApproval": null,
+    "returnHomeFileGenerated": false,
+    "settlementId": "Allow Rd 1"
+  },
+  {
+    "id": 153,
+    "reporterName": "Ministry Test 2",
+    "address": "Allow Rd 2",
+    "damageType": "Structural",
+    "description": "Test",
+    "status": "WAITING_FOR_VALIDATION",
+    "damagePhotosExist": false,
+    "engineerReportExists": false,
+    "eligibilityCheckPerformed": false,
+    "socialApproval": false,
+    "apartmentsInBuilding": 0,
+    "budgetRequestOpened": false,
+    "familyEmail": "",
+    "appraisal": null,
+    "permitApproval": {
+      "waterSupply": true,
+      "electricitySupply": true,
+      "accessRoads": true,
+      "environmentalCleared": true,
+      "localAuthorityComments": "",
+      "approved": true
+    },
+    "returnHomeFileGenerated": false,
+    "settlementId": "Allow Rd 2"
+  },
+  {
+    "id": 154,
+    "reporterName": "Settlement Block",
+    "address": "Jerusalem, Test St 1",
+    "damageType": "Water",
+    "description": "Test",
+    "status": "WAITING_FOR_VALIDATION",
+    "damagePhotosExist": false,
+    "engineerReportExists": false,
+    "eligibilityCheckPerformed": false,
+    "socialApproval": false,
+    "apartmentsInBuilding": 0,
+    "budgetRequestOpened": false,
+    "familyEmail": "",
+    "appraisal": null,
+    "permitApproval": null,
+    "returnHomeFileGenerated": false,
+    "settlementId": "Jerusalem"
   }
 ]

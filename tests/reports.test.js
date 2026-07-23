@@ -273,7 +273,7 @@ test('PATCH /reports/:id/permit-approval saves local authority approval data', a
 
   const response = await fetch(`${baseUrl}/reports/${created.id}/permit-approval`, {
     method: 'PATCH',
-    headers: { 'Content-Type': 'application/json', 'X-User-Role': 'MUNICIPALITY' },
+    headers: { 'Content-Type': 'application/json', 'X-User-Role': 'MINISTRY' },
     body: JSON.stringify({
       waterSupply: true,
       electricitySupply: true,
@@ -439,7 +439,7 @@ test('PATCH /reports/:id/permit-approval logs action when user headers are provi
 
   await fetch(`${baseUrl}/reports/${created.id}/permit-approval`, {
     method: 'PATCH',
-    headers: { 'Content-Type': 'application/json', 'X-User-Id': '3', 'X-User-Name': 'Moshe Ben', 'X-User-Role': 'MUNICIPALITY' },
+    headers: { 'Content-Type': 'application/json', 'X-User-Id': '1', 'X-User-Name': 'David Cohen', 'X-User-Role': 'MINISTRY' },
     body: JSON.stringify({
       waterSupply: true,
       electricitySupply: true,
@@ -453,7 +453,7 @@ test('PATCH /reports/:id/permit-approval logs action when user headers are provi
   const actionsResponse = await fetch(`${baseUrl}/buildings/${created.id}/actions`);
   const actions = await actionsResponse.json();
   assert.ok(actions.length > 0);
-  assert.equal(actions[0].userName, 'Moshe Ben');
+  assert.equal(actions[0].userName, 'David Cohen');
   assert.equal(actions[0].action, 'Update Permit Approval');
 });
 
@@ -699,4 +699,108 @@ test('MINISTRY user can update permit-approval', async () => {
   });
 
   assert.equal(response.status, 200);
+});
+
+test('MUNICIPALITY user only sees buildings in their settlement', async () => {
+  const response = await fetch(`${baseUrl}/reports`, {
+    headers: { 'X-User-Role': 'MUNICIPALITY', 'X-User-Settlement': 'Jerusalem' },
+  });
+  assert.equal(response.status, 200);
+  const body = await response.json();
+  assert.ok(Array.isArray(body));
+  body.forEach((report) => {
+    assert.equal(report.settlementId, 'Jerusalem');
+  });
+});
+
+test('MUNICIPALITY user is denied viewing building outside their settlement (returns 403)', async () => {
+  const response = await fetch(`${baseUrl}/reports/1`, {
+    headers: { 'X-User-Role': 'MUNICIPALITY', 'X-User-Settlement': 'Jerusalem' },
+  });
+  assert.equal(response.status, 403);
+  const body = await response.json();
+  assert.ok(body.error.includes('Access denied'));
+});
+
+test('MUNICIPALITY user can view building in their settlement', async () => {
+  const response = await fetch(`${baseUrl}/reports/3`, {
+    headers: { 'X-User-Role': 'MUNICIPALITY', 'X-User-Settlement': 'Jerusalem' },
+  });
+  assert.equal(response.status, 200);
+  const body = await response.json();
+  assert.equal(body.id, 3);
+  assert.equal(body.settlementId, 'Jerusalem');
+});
+
+test('MUNICIPALITY user is denied updating status of building outside their settlement', async () => {
+  const response = await fetch(`${baseUrl}/reports/1/status`, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json', 'X-User-Role': 'MUNICIPALITY', 'X-User-Settlement': 'Jerusalem' },
+    body: JSON.stringify({ status: 'NEW' }),
+  });
+  assert.equal(response.status, 403);
+  const body = await response.json();
+  assert.ok(body.error.includes('Access denied'));
+});
+
+test('MUNICIPALITY user is denied updating permit-approval for building outside their settlement', async () => {
+  const response = await fetch(`${baseUrl}/reports/1/permit-approval`, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json', 'X-User-Role': 'MUNICIPALITY', 'X-User-Settlement': 'Jerusalem' },
+    body: JSON.stringify({ waterSupply: true, electricitySupply: true, accessRoads: true, environmentalCleared: true, approved: true }),
+  });
+  assert.equal(response.status, 403);
+  const body = await response.json();
+  assert.ok(body.error.includes('Access denied'));
+});
+
+test('MUNICIPALITY user without settlement header is denied building access', async () => {
+  const response = await fetch(`${baseUrl}/reports/3`, {
+    headers: { 'X-User-Role': 'MUNICIPALITY' },
+  });
+  assert.equal(response.status, 403);
+  const body = await response.json();
+  assert.ok(body.error.includes('Settlement information required'));
+});
+
+test('MINISTRY user can access any building regardless of settlement', async () => {
+  const response = await fetch(`${baseUrl}/reports/1`, {
+    headers: { 'X-User-Role': 'MINISTRY' },
+  });
+  assert.equal(response.status, 200);
+  const body = await response.json();
+  assert.equal(body.id, 1);
+});
+
+test('APPRAISER user can access any building regardless of settlement', async () => {
+  const response = await fetch(`${baseUrl}/reports/1`, {
+    headers: { 'X-User-Role': 'APPRAISER' },
+  });
+  assert.equal(response.status, 200);
+  const body = await response.json();
+  assert.equal(body.id, 1);
+});
+
+test('No action record is created when operation is blocked by settlement', async () => {
+  const createResponse = await fetch(`${baseUrl}/reports`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      reporterName: 'Settlement Block',
+      address: 'Jerusalem, Test St 1',
+      damageType: 'Water',
+      description: 'Test',
+    }),
+  });
+  const created = await createResponse.json();
+
+  await fetch(`${baseUrl}/reports/${created.id}/status`, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json', 'X-User-Role': 'MUNICIPALITY', 'X-User-Settlement': 'Tel Aviv' },
+    body: JSON.stringify({ status: 'NEW' }),
+  });
+
+  const actionsResponse = await fetch(`${baseUrl}/buildings/${created.id}/actions`);
+  const actions = await actionsResponse.json();
+  assert.equal(actions.length, 0);
 });

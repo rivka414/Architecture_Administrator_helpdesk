@@ -31,8 +31,8 @@ function createApp() {
 
   app.use(createUsersRoutes(express, usersService));
   app.use(createActionsRoutes(express, actionsService));
-  app.use(createAssessmentsRoutes(express, assessmentsService, actionsService));
-  app.use(createApprovalsRoutes(express, approvalsService, actionsService));
+  app.use(createAssessmentsRoutes(express, assessmentsService, actionsService, buildingsService));
+  app.use(createApprovalsRoutes(express, approvalsService, actionsService, buildingsService));
   app.use(createBuildingsRoutes(express, buildingsService, habitationFileService, notificationService, actionsService));
 
   app.post('/notifications/send', (req, res) => {

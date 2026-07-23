@@ -1,7 +1,9 @@
 [
   { "id": 1, "fullName": "David Cohen", "username": "david.cohen", "password": "david123", "role": "MINISTRY" },
   { "id": 2, "fullName": "Sarah Levy", "username": "sarah.levy", "password": "sarah123", "role": "APPRAISER" },
-  { "id": 3, "fullName": "Moshe Ben", "username": "moshe.ben", "password": "moshe123", "role": "MUNICIPALITY" },
+  { "id": 3, "fullName": "Moshe Ben", "username": "moshe.ben", "password": "moshe123", "role": "MUNICIPALITY", "settlementId": "Jerusalem" },
   { "id": 4, "fullName": "Hanna Gold", "username": "hanna.gold", "password": "hanna123", "role": "MINISTRY" },
-  { "id": 5, "fullName": "Yosef Avital", "username": "yosef.avital", "password": "yosef123", "role": "APPRAISER" }
+  { "id": 5, "fullName": "Yosef Avital", "username": "yosef.avital", "password": "yosef123", "role": "APPRAISER" },
+  { "id": 6, "fullName": "Rachel Shapira", "username": "rachel.shapira", "password": "rachel123", "role": "MUNICIPALITY", "settlementId": "Tel Aviv" },
+  { "id": 7, "fullName": "Yaakov Katz", "username": "yaakov.katz", "password": "yaakov123", "role": "MUNICIPALITY", "settlementId": "Tiberias" }
 ]

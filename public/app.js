@@ -98,7 +98,8 @@ function renderUserRefTable(users) {
   userRefTableBody.innerHTML = '';
   users.forEach((user) => {
     const row = document.createElement('tr');
-    row.innerHTML = `<td>${user.fullName}</td><td>${user.username}</td><td>${user.password}</td><td>${user.role}</td>`;
+    const settlement = user.settlementId || '—';
+    row.innerHTML = `<td>${user.fullName}</td><td>${user.username}</td><td>${user.password}</td><td>${user.role}</td><td>${settlement}</td>`;
     userRefTableBody.appendChild(row);
   });
 }
@@ -135,7 +136,8 @@ async function handleLogin(event) {
 function login(user) {
   currentUser = user;
   saveSession(user);
-  navUserName.textContent = `${user.fullName} (${user.role})`;
+  const roleDisplay = user.settlementId ? `${user.role} - ${user.settlementId}` : user.role;
+  navUserName.textContent = `${user.fullName} (${roleDisplay})`;
   navUserSection.classList.remove('hidden');
   loginForm.reset();
   loginError.style.display = 'none';
@@ -161,11 +163,15 @@ function updatePortalButtons() {
 
 function authHeaders() {
   if (!currentUser) return {};
-  return {
+  const headers = {
     'X-User-Id': String(currentUser.id),
     'X-User-Name': currentUser.fullName,
     'X-User-Role': currentUser.role,
   };
+  if (currentUser.settlementId) {
+    headers['X-User-Settlement'] = currentUser.settlementId;
+  }
+  return headers;
 }
 
 function hasRole(role) {
@@ -446,7 +452,7 @@ async function savePermitApproval() {
 }
 
 async function loadReports() {
-  const response = await fetch('/reports');
+  const response = await fetch('/reports', { headers: authHeaders() });
   reports = await response.json();
   populateSettlementFilter();
   renderReports();
@@ -455,8 +461,7 @@ async function loadReports() {
 function populateSettlementFilter() {
   const settlements = new Set();
   reports.forEach(report => {
-    const address = report.address || '';
-    const settlement = address.split(',')[0].trim();
+    const settlement = report.settlementId || extractSettlement(report.address);
     if (settlement) {
       settlements.add(settlement);
     }
@@ -470,7 +475,14 @@ function populateSettlementFilter() {
     option.textContent = settlement;
     settlementFilter.appendChild(option);
   });
-  settlementFilter.value = currentValue;
+
+  if (currentUser && currentUser.role === 'MUNICIPALITY' && currentUser.settlementId) {
+    settlementFilter.value = currentUser.settlementId;
+    settlementFilter.disabled = true;
+  } else {
+    settlementFilter.value = currentValue;
+    settlementFilter.disabled = false;
+  }
 }
 
 function extractSettlement(address) {
@@ -656,7 +668,7 @@ async function batchGenerateFiles() {
   try {
     const response = await fetch('/buildings/batch-return-home-packages', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json', ...authHeaders() },
       body: JSON.stringify(payload)
     });
     
@@ -728,7 +740,7 @@ async function openBudgetRequest(report) {
 }
 
 async function loadActionHistory(buildingId) {
-  const response = await fetch(`/buildings/${buildingId}/actions`);
+  const response = await fetch(`/buildings/${buildingId}/actions`, { headers: authHeaders() });
   const actions = await response.json();
   renderActionHistory(actions);
 }
@@ -835,7 +847,7 @@ function renderDetails(report) {
   const exportButton = document.getElementById('exportButton');
   if (exportButton) {
     exportButton.addEventListener('click', async () => {
-      const response = await fetch(`/buildings/${report.id}/return-home-package`, { method: 'POST' });
+      const response = await fetch(`/buildings/${report.id}/return-home-package`, { method: 'POST', headers: authHeaders() });
       const result = await response.json();
       if (response.ok) {
         pendingSuccessMessage = 'Re-occupation file generated successfully.';
@@ -852,7 +864,7 @@ function renderDetails(report) {
 }
 
 async function openDetails(id) {
-  const response = await fetch(`/reports/${id}`);
+  const response = await fetch(`/reports/${id}`, { headers: authHeaders() });
   const report = await response.json();
   renderDetails(report);
   showScreen(detailsScreen);
@@ -962,7 +974,7 @@ reportList.addEventListener('click', async (event) => {
   const fileLink = event.target.closest('a.generate-file-link');
   if (fileLink) {
     event.preventDefault();
-    const response = await fetch(`/buildings/${fileLink.dataset.id}/return-home-package`, { method: 'POST' });
+    const response = await fetch(`/buildings/${fileLink.dataset.id}/return-home-package`, { method: 'POST', headers: authHeaders() });
     const result = await response.json();
     if (response.ok) {
       window.open(result.url, '_blank');
@@ -989,7 +1001,8 @@ loginForm.addEventListener('submit', handleLogin);
 const savedUser = loadSession();
 if (savedUser) {
   currentUser = savedUser;
-  navUserName.textContent = `${savedUser.fullName} (${savedUser.role})`;
+  const roleDisplay = savedUser.settlementId ? `${savedUser.role} - ${savedUser.settlementId}` : savedUser.role;
+  navUserName.textContent = `${savedUser.fullName} (${roleDisplay})`;
   navUserSection.classList.remove('hidden');
   updatePortalButtons();
   showScreen(listScreen);

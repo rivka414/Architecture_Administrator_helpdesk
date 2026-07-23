@@ -1,9 +1,9 @@
-const { requireRole } = require('../roles/rolesHelper');
+const { requireRole, requireSettlementAccess } = require('../roles/rolesHelper');
 
-function createApprovalsRoutes(express, approvalsService, actionsService) {
+function createApprovalsRoutes(express, approvalsService, actionsService, buildingsService) {
   const router = express.Router();
 
-  router.get('/reports/:id/permit-approval', (req, res) => {
+  router.get('/reports/:id/permit-approval', requireSettlementAccess(buildingsService), (req, res) => {
     const approval = approvalsService.getApproval(req.params.id);
     if (approval === null) {
       return res.status(404).json({ error: 'Building not found' });
@@ -11,7 +11,7 @@ function createApprovalsRoutes(express, approvalsService, actionsService) {
     res.json({ permitApproval: approval });
   });
 
-  router.patch('/reports/:id/permit-approval', requireRole('MINISTRY', 'MUNICIPALITY'), (req, res) => {
+  router.patch('/reports/:id/permit-approval', requireRole('MINISTRY', 'MUNICIPALITY'), requireSettlementAccess(buildingsService), (req, res) => {
     const result = approvalsService.saveApproval(req.params.id, req.body);
     if (result === null) {
       return res.status(404).json({ error: 'Building not found' });

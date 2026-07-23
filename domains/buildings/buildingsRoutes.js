@@ -1,9 +1,14 @@
-const { requireRole } = require('../roles/rolesHelper');
+const { requireRole, requireSettlementAccess } = require('../roles/rolesHelper');
 
 function createBuildingsRoutes(express, buildingsService, habitationFileService, notificationService, actionsService) {
   const router = express.Router();
 
   router.get('/reports', (req, res) => {
+    const role = req.headers['x-user-role'];
+    const userSettlement = req.headers['x-user-settlement'];
+    if (role === 'MUNICIPALITY' && userSettlement) {
+      return res.json(buildingsService.getAllForSettlement(userSettlement));
+    }
     res.json(buildingsService.getAll());
   });
 
@@ -15,13 +20,13 @@ function createBuildingsRoutes(express, buildingsService, habitationFileService,
     res.status(201).json(result.report);
   });
 
-  router.get('/reports/:id', (req, res) => {
+  router.get('/reports/:id', requireSettlementAccess(buildingsService), (req, res) => {
     const report = buildingsService.getById(req.params.id);
     if (!report) return res.status(404).json({ error: 'Report not found' });
     res.json(report);
   });
 
-  router.patch('/reports/:id/status', (req, res) => {
+  router.patch('/reports/:id/status', requireSettlementAccess(buildingsService), (req, res) => {
     const result = buildingsService.updateStatus(req.params.id, req.body.status);
     if (result.error === 'not_found') return res.status(404).json({ error: 'Report not found' });
     if (result.error) return res.status(400).json({ error: result.error });
@@ -44,7 +49,7 @@ function createBuildingsRoutes(express, buildingsService, habitationFileService,
     res.json(result.report);
   });
 
-  router.post('/buildings/:id/return-home-package', async (req, res) => {
+  router.post('/buildings/:id/return-home-package', requireSettlementAccess(buildingsService), async (req, res) => {
     const context = buildingsService.generateReturnHomePackage(req.params.id, habitationFileService, notificationService);
     if (context.error === 'not_found') return res.status(404).json({ error: 'Report not found' });
     const report = context.report;
@@ -79,7 +84,10 @@ function createBuildingsRoutes(express, buildingsService, habitationFileService,
 
   router.post('/buildings/batch-return-home-packages', async (req, res) => {
     const { settlement } = req.body;
-    const filteredReports = buildingsService.getSettlementReports(settlement);
+    const role = req.headers['x-user-role'];
+    const userSettlement = req.headers['x-user-settlement'];
+    const effectiveSettlement = (role === 'MUNICIPALITY' && userSettlement) ? userSettlement : settlement;
+    const filteredReports = buildingsService.getSettlementReports(effectiveSettlement);
     const generatedFiles = [];
 
     for (const report of filteredReports) {
@@ -116,11 +124,19 @@ function createBuildingsRoutes(express, buildingsService, habitationFileService,
   });
 
   router.get('/buildings/settlement-summary/:settlement', (req, res) => {
-    const summary = buildingsService.getSettlementSummary(req.params.settlement);
+    const role = req.headers['x-user-role'];
+    const userSettlement = req.headers['x-user-settlement'];
+    const requestedSettlement = req.params.settlement;
+
+    if (role === 'MUNICIPALITY' && userSettlement && requestedSettlement !== userSettlement) {
+      return res.status(403).json({ error: 'Access denied: cannot view summary for another settlement' });
+    }
+
+    const summary = buildingsService.getSettlementSummary(requestedSettlement);
     res.json(summary);
   });
 
-  router.get('/buildings/eligibility/:id', (req, res) => {
+  router.get('/buildings/eligibility/:id', requireSettlementAccess(buildingsService), (req, res) => {
     const eligible = buildingsService.isEligibleForOpening(req.params.id);
     res.json({ eligible });
   });

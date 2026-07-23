@@ -1,9 +1,9 @@
-const { requireRole } = require('../roles/rolesHelper');
+const { requireRole, requireSettlementAccess } = require('../roles/rolesHelper');
 
-function createAssessmentsRoutes(express, assessmentsService, actionsService) {
+function createAssessmentsRoutes(express, assessmentsService, actionsService, buildingsService) {
   const router = express.Router();
 
-  router.get('/reports/:id/appraisal', (req, res) => {
+  router.get('/reports/:id/appraisal', requireSettlementAccess(buildingsService), (req, res) => {
     const assessment = assessmentsService.getAssessment(req.params.id);
     if (assessment === null) {
       return res.status(404).json({ error: 'Building not found' });
