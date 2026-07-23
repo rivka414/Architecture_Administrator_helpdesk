@@ -98,7 +98,7 @@ function renderUserRefTable(users) {
   userRefTableBody.innerHTML = '';
   users.forEach((user) => {
     const row = document.createElement('tr');
-    row.innerHTML = `<td>${user.fullName}</td><td>${user.username}</td><td>${user.password}</td>`;
+    row.innerHTML = `<td>${user.fullName}</td><td>${user.username}</td><td>${user.password}</td><td>${user.role}</td>`;
     userRefTableBody.appendChild(row);
   });
 }
@@ -135,10 +135,11 @@ async function handleLogin(event) {
 function login(user) {
   currentUser = user;
   saveSession(user);
-  navUserName.textContent = user.fullName;
+  navUserName.textContent = `${user.fullName} (${user.role})`;
   navUserSection.classList.remove('hidden');
   loginForm.reset();
   loginError.style.display = 'none';
+  updatePortalButtons();
   showScreen(listScreen);
   loadReports();
 }
@@ -151,12 +152,28 @@ function logout() {
   showScreen(loginScreen);
 }
 
+function updatePortalButtons() {
+  if (!currentUser) return;
+  const role = currentUser.role;
+  appraisersPortalButton.style.display = (role === 'APPRAISER' || role === 'MINISTRY') ? '' : 'none';
+  localAuthorityPortalButton.style.display = (role === 'MINISTRY' || role === 'MUNICIPALITY') ? '' : 'none';
+}
+
 function authHeaders() {
   if (!currentUser) return {};
   return {
     'X-User-Id': String(currentUser.id),
     'X-User-Name': currentUser.fullName,
+    'X-User-Role': currentUser.role,
   };
+}
+
+function hasRole(role) {
+  return currentUser && currentUser.role === role;
+}
+
+function canDoAction(...roles) {
+  return currentUser && roles.includes(currentUser.role);
 }
 
 async function loadNotifications() {
@@ -799,9 +816,9 @@ function renderDetails(report) {
       </div>
     ` : ''}
     <div style="margin-top:0.75rem;">
-      <button id="budgetRequestButton" ${canOpenBudgetRequest(report) ? '' : 'disabled'}>Open Budget Request</button>
+      <button id="budgetRequestButton" ${(canOpenBudgetRequest(report) && canDoAction('MINISTRY')) ? '' : 'disabled'}>Open Budget Request</button>
       ${canGenerateReoccupationFile(report) ? '<button id="exportButton" style="margin-left:0.5rem;">Generate a re-occupation file</button>' : ''}
-      ${canOpenBudgetRequest(report) ? '' : '<p style="color:#8a4b00; margin-top:0.35rem;">Budget request is blocked until all required information is present and social approval is provided when required.</p>'}
+      ${!canDoAction('MINISTRY') ? '<p style="color:#c62828; margin-top:0.35rem;">Only MINISTRY users can open budget requests.</p>' : (canOpenBudgetRequest(report) ? '' : '<p style="color:#8a4b00; margin-top:0.35rem;">Budget request is blocked until all required information is present and social approval is provided when required.</p>')}
     </div>
   `;
 
@@ -972,8 +989,9 @@ loginForm.addEventListener('submit', handleLogin);
 const savedUser = loadSession();
 if (savedUser) {
   currentUser = savedUser;
-  navUserName.textContent = savedUser.fullName;
+  navUserName.textContent = `${savedUser.fullName} (${savedUser.role})`;
   navUserSection.classList.remove('hidden');
+  updatePortalButtons();
   showScreen(listScreen);
   loadReports();
 } else {

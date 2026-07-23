@@ -1,3 +1,5 @@
+const { requireRole } = require('../roles/rolesHelper');
+
 function createApprovalsRoutes(express, approvalsService, actionsService) {
   const router = express.Router();
 
@@ -9,7 +11,7 @@ function createApprovalsRoutes(express, approvalsService, actionsService) {
     res.json({ permitApproval: approval });
   });
 
-  router.patch('/reports/:id/permit-approval', (req, res) => {
+  router.patch('/reports/:id/permit-approval', requireRole('MINISTRY', 'MUNICIPALITY'), (req, res) => {
     const result = approvalsService.saveApproval(req.params.id, req.body);
     if (result === null) {
       return res.status(404).json({ error: 'Building not found' });

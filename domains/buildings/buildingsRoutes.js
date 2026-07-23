@@ -1,3 +1,5 @@
+const { requireRole } = require('../roles/rolesHelper');
+
 function createBuildingsRoutes(express, buildingsService, habitationFileService, notificationService, actionsService) {
   const router = express.Router();
 
@@ -31,7 +33,7 @@ function createBuildingsRoutes(express, buildingsService, habitationFileService,
     res.json(result.report);
   });
 
-  router.patch('/reports/:id/budget-request', (req, res) => {
+  router.patch('/reports/:id/budget-request', requireRole('MINISTRY'), (req, res) => {
     const result = buildingsService.openBudgetRequest(req.params.id);
     if (result.error === 'not_found') return res.status(404).json({ error: 'Report not found' });
     const userId = req.headers['x-user-id'];

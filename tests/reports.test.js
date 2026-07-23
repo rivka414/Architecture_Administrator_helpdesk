@@ -109,6 +109,7 @@ test('PATCH /reports/:id/budget-request marks a budget request as opened', async
 
   const response = await fetch(`${baseUrl}/reports/${created.id}/budget-request`, {
     method: 'PATCH',
+    headers: { 'X-User-Role': 'MINISTRY' },
   });
 
   assert.equal(response.status, 200);
@@ -217,7 +218,7 @@ test('PATCH /reports/:id/appraisal saves a damage assessment', async () => {
 
   const response = await fetch(`${baseUrl}/reports/${created.id}/appraisal`, {
     method: 'PATCH',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json', 'X-User-Role': 'APPRAISER' },
     body: JSON.stringify({
       damageLevel: 'severe',
       appraiserComments: 'Major structural damage to load-bearing walls',
@@ -250,7 +251,7 @@ test('PATCH /reports/:id/appraisal returns 400 when required fields are missing'
 
   const response = await fetch(`${baseUrl}/reports/${created.id}/appraisal`, {
     method: 'PATCH',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json', 'X-User-Role': 'APPRAISER' },
     body: JSON.stringify({ damageLevel: 'medium' }),
   });
 
@@ -272,7 +273,7 @@ test('PATCH /reports/:id/permit-approval saves local authority approval data', a
 
   const response = await fetch(`${baseUrl}/reports/${created.id}/permit-approval`, {
     method: 'PATCH',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json', 'X-User-Role': 'MUNICIPALITY' },
     body: JSON.stringify({
       waterSupply: true,
       electricitySupply: true,
@@ -305,7 +306,7 @@ test('GET /users returns seeded users with passwords for reference', async () =>
   assert.ok(body[0].password);
 });
 
-test('POST /auth/login with valid credentials returns user', async () => {
+test('POST /auth/login with valid credentials returns user with role', async () => {
   const response = await fetch(`${baseUrl}/auth/login`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -315,6 +316,7 @@ test('POST /auth/login with valid credentials returns user', async () => {
   const body = await response.json();
   assert.equal(body.user.id, 1);
   assert.equal(body.user.fullName, 'David Cohen');
+  assert.equal(body.user.role, 'MINISTRY');
   assert.equal(body.user.password, undefined);
 });
 
@@ -380,6 +382,7 @@ test('PATCH /reports/:id/budget-request logs action when user headers are provid
     headers: {
       'X-User-Id': '1',
       'X-User-Name': 'David Cohen',
+      'X-User-Role': 'MINISTRY',
     },
   });
 
@@ -405,7 +408,7 @@ test('PATCH /reports/:id/appraisal logs action when user headers are provided', 
 
   await fetch(`${baseUrl}/reports/${created.id}/appraisal`, {
     method: 'PATCH',
-    headers: { 'Content-Type': 'application/json', 'X-User-Id': '2', 'X-User-Name': 'Sarah Levy' },
+    headers: { 'Content-Type': 'application/json', 'X-User-Id': '2', 'X-User-Name': 'Sarah Levy', 'X-User-Role': 'APPRAISER' },
     body: JSON.stringify({
       damageLevel: 'light',
       appraiserComments: 'Minor damage',
@@ -436,7 +439,7 @@ test('PATCH /reports/:id/permit-approval logs action when user headers are provi
 
   await fetch(`${baseUrl}/reports/${created.id}/permit-approval`, {
     method: 'PATCH',
-    headers: { 'Content-Type': 'application/json', 'X-User-Id': '3', 'X-User-Name': 'Moshe Ben' },
+    headers: { 'Content-Type': 'application/json', 'X-User-Id': '3', 'X-User-Name': 'Moshe Ben', 'X-User-Role': 'MUNICIPALITY' },
     body: JSON.stringify({
       waterSupply: true,
       electricitySupply: true,
@@ -452,4 +455,248 @@ test('PATCH /reports/:id/permit-approval logs action when user headers are provi
   assert.ok(actions.length > 0);
   assert.equal(actions[0].userName, 'Moshe Ben');
   assert.equal(actions[0].action, 'Update Permit Approval');
+});
+
+test('MUNICIPALITY user is denied updating appraisal (returns 403)', async () => {
+  const createResponse = await fetch(`${baseUrl}/reports`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      reporterName: 'Perm Test',
+      address: 'Deny Rd 1',
+      damageType: 'Water',
+      description: 'Test',
+    }),
+  });
+  const created = await createResponse.json();
+
+  const response = await fetch(`${baseUrl}/reports/${created.id}/appraisal`, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json', 'X-User-Role': 'MUNICIPALITY' },
+    body: JSON.stringify({
+      damageLevel: 'light',
+      appraiserComments: 'Should be denied',
+      inspectionDate: '2026-07-23',
+      reinspectionRequired: false,
+    }),
+  });
+
+  assert.equal(response.status, 403);
+  const body = await response.json();
+  assert.ok(body.error.includes('Permission denied'));
+
+  const getResponse = await fetch(`${baseUrl}/reports/${created.id}/appraisal`);
+  assert.equal(getResponse.status, 404);
+});
+
+test('APPRAISER user is denied updating permit-approval (returns 403)', async () => {
+  const createResponse = await fetch(`${baseUrl}/reports`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      reporterName: 'Perm Test 2',
+      address: 'Deny Rd 2',
+      damageType: 'Fire',
+      description: 'Test',
+    }),
+  });
+  const created = await createResponse.json();
+
+  const response = await fetch(`${baseUrl}/reports/${created.id}/permit-approval`, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json', 'X-User-Role': 'APPRAISER' },
+    body: JSON.stringify({
+      waterSupply: true,
+      electricitySupply: true,
+      accessRoads: true,
+      environmentalCleared: true,
+      localAuthorityComments: 'Should be denied',
+      approved: true,
+    }),
+  });
+
+  assert.equal(response.status, 403);
+  const body = await response.json();
+  assert.ok(body.error.includes('Permission denied'));
+
+  const getResponse = await fetch(`${baseUrl}/reports/${created.id}/permit-approval`);
+  assert.equal(getResponse.status, 404);
+});
+
+test('APPRAISER user is denied opening budget request (returns 403)', async () => {
+  const createResponse = await fetch(`${baseUrl}/reports`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      reporterName: 'Perm Test 3',
+      address: 'Deny Rd 3',
+      damageType: 'Structural',
+      description: 'Test',
+      damagePhotosExist: true,
+      engineerReportExists: true,
+      eligibilityCheckPerformed: true,
+    }),
+  });
+  const created = await createResponse.json();
+
+  const response = await fetch(`${baseUrl}/reports/${created.id}/budget-request`, {
+    method: 'PATCH',
+    headers: { 'X-User-Role': 'APPRAISER' },
+  });
+
+  assert.equal(response.status, 403);
+  const body = await response.json();
+  assert.ok(body.error.includes('Permission denied'));
+
+  const getResponse = await fetch(`${baseUrl}/reports/${created.id}`);
+  const getData = await getResponse.json();
+  assert.equal(getData.budgetRequestOpened, false);
+});
+
+test('MUNICIPALITY user is denied opening budget request (returns 403)', async () => {
+  const createResponse = await fetch(`${baseUrl}/reports`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      reporterName: 'Perm Test 4',
+      address: 'Deny Rd 4',
+      damageType: 'Water',
+      description: 'Test',
+      damagePhotosExist: true,
+      engineerReportExists: true,
+      eligibilityCheckPerformed: true,
+    }),
+  });
+  const created = await createResponse.json();
+
+  const response = await fetch(`${baseUrl}/reports/${created.id}/budget-request`, {
+    method: 'PATCH',
+    headers: { 'X-User-Role': 'MUNICIPALITY' },
+  });
+
+  assert.equal(response.status, 403);
+});
+
+test('User with no role header is denied role-protected operations (returns 403)', async () => {
+  const createResponse = await fetch(`${baseUrl}/reports`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      reporterName: 'No Role',
+      address: 'Deny Rd 5',
+      damageType: 'Water',
+      description: 'Test',
+    }),
+  });
+  const created = await createResponse.json();
+
+  const appraisalResponse = await fetch(`${baseUrl}/reports/${created.id}/appraisal`, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      damageLevel: 'light',
+      appraiserComments: 'Should fail',
+      inspectionDate: '2026-07-23',
+      reinspectionRequired: false,
+    }),
+  });
+  assert.equal(appraisalResponse.status, 403);
+
+  const budgetResponse = await fetch(`${baseUrl}/reports/${created.id}/budget-request`, {
+    method: 'PATCH',
+  });
+  assert.equal(budgetResponse.status, 403);
+
+  const permitResponse = await fetch(`${baseUrl}/reports/${created.id}/permit-approval`, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ waterSupply: true, electricitySupply: true, accessRoads: true, environmentalCleared: true, approved: true }),
+  });
+  assert.equal(permitResponse.status, 403);
+});
+
+test('No action record is created when operation is blocked by role', async () => {
+  const createResponse = await fetch(`${baseUrl}/reports`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      reporterName: 'No Action',
+      address: 'Deny Rd 6',
+      damageType: 'Fire',
+      description: 'Test',
+    }),
+  });
+  const created = await createResponse.json();
+
+  await fetch(`${baseUrl}/reports/${created.id}/appraisal`, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json', 'X-User-Role': 'MUNICIPALITY' },
+    body: JSON.stringify({
+      damageLevel: 'light',
+      appraiserComments: 'Denied',
+      inspectionDate: '2026-07-23',
+      reinspectionRequired: false,
+    }),
+  });
+
+  const actionsResponse = await fetch(`${baseUrl}/buildings/${created.id}/actions`);
+  const actions = await actionsResponse.json();
+  assert.equal(actions.length, 0);
+});
+
+test('MINISTRY user can update appraisal', async () => {
+  const createResponse = await fetch(`${baseUrl}/reports`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      reporterName: 'Ministry Test',
+      address: 'Allow Rd 1',
+      damageType: 'Water',
+      description: 'Test',
+    }),
+  });
+  const created = await createResponse.json();
+
+  const response = await fetch(`${baseUrl}/reports/${created.id}/appraisal`, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json', 'X-User-Role': 'MINISTRY' },
+    body: JSON.stringify({
+      damageLevel: 'medium',
+      appraiserComments: 'Allowed',
+      inspectionDate: '2026-07-23',
+      reinspectionRequired: false,
+    }),
+  });
+
+  assert.equal(response.status, 200);
+  const body = await response.json();
+  assert.ok(body.appraisal);
+});
+
+test('MINISTRY user can update permit-approval', async () => {
+  const createResponse = await fetch(`${baseUrl}/reports`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      reporterName: 'Ministry Test 2',
+      address: 'Allow Rd 2',
+      damageType: 'Structural',
+      description: 'Test',
+    }),
+  });
+  const created = await createResponse.json();
+
+  const response = await fetch(`${baseUrl}/reports/${created.id}/permit-approval`, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json', 'X-User-Role': 'MINISTRY' },
+    body: JSON.stringify({
+      waterSupply: true,
+      electricitySupply: true,
+      accessRoads: true,
+      environmentalCleared: true,
+      approved: true,
+    }),
+  });
+
+  assert.equal(response.status, 200);
 });
