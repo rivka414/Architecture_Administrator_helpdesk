@@ -1,4 +1,4 @@
-function createBuildingsRoutes(express, buildingsService, habitationFileService, notificationService) {
+function createBuildingsRoutes(express, buildingsService, habitationFileService, notificationService, actionsService) {
   const router = express.Router();
 
   router.get('/reports', (req, res) => {
@@ -23,12 +23,22 @@ function createBuildingsRoutes(express, buildingsService, habitationFileService,
     const result = buildingsService.updateStatus(req.params.id, req.body.status);
     if (result.error === 'not_found') return res.status(404).json({ error: 'Report not found' });
     if (result.error) return res.status(400).json({ error: result.error });
+    const userId = req.headers['x-user-id'];
+    const userName = req.headers['x-user-name'];
+    if (userId && userName) {
+      actionsService.log(userId, userName, `Status updated to: ${req.body.status}`, 'building', req.params.id);
+    }
     res.json(result.report);
   });
 
   router.patch('/reports/:id/budget-request', (req, res) => {
     const result = buildingsService.openBudgetRequest(req.params.id);
     if (result.error === 'not_found') return res.status(404).json({ error: 'Report not found' });
+    const userId = req.headers['x-user-id'];
+    const userName = req.headers['x-user-name'];
+    if (userId && userName) {
+      actionsService.log(userId, userName, 'Open Budget Request', 'building', req.params.id);
+    }
     res.json(result.report);
   });
 

@@ -1,0 +1,56 @@
+[
+  {
+    "id": 1,
+    "userId": 1,
+    "userName": "David Cohen",
+    "action": "Open Budget Request",
+    "entityType": "building",
+    "entityId": 1,
+    "timestamp": "2026-07-23T14:58:02.478Z"
+  },
+  {
+    "id": 2,
+    "userId": 1,
+    "userName": "David Cohen",
+    "action": "Status updated to: NEW",
+    "entityType": "building",
+    "entityId": 50,
+    "timestamp": "2026-07-23T14:58:23.826Z"
+  },
+  {
+    "id": 3,
+    "userId": 1,
+    "userName": "David Cohen",
+    "action": "Status updated to: IN_REVIEW",
+    "entityType": "building",
+    "entityId": 50,
+    "timestamp": "2026-07-23T14:58:25.591Z"
+  },
+  {
+    "id": 4,
+    "userId": 1,
+    "userName": "David Cohen",
+    "action": "Status updated to: Building in the process of restoration",
+    "entityType": "building",
+    "entityId": 50,
+    "timestamp": "2026-07-23T14:58:27.288Z"
+  },
+  {
+    "id": 5,
+    "userId": 1,
+    "userName": "David Cohen",
+    "action": "Open Budget Request",
+    "entityType": "building",
+    "entityId": 50,
+    "timestamp": "2026-07-23T14:58:27.999Z"
+  },
+  {
+    "id": 6,
+    "userId": 1,
+    "userName": "David Cohen",
+    "action": "Update Appraisal",
+    "entityType": "building",
+    "entityId": 50,
+    "timestamp": "2026-07-23T14:58:50.284Z"
+  }
+]

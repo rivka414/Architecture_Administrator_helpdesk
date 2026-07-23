@@ -27,13 +27,39 @@
       @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
       .document-icon { cursor: pointer; color: #1f4f7a; font-size: 1.2rem; text-decoration: none; }
       .document-icon:hover { text-decoration: underline; }
+      .login-error { background: #fdecea; color: #c62828; border: 1px solid #f5c6cb; padding: 0.5rem; border-radius: 6px; margin-bottom: 0.75rem; display: none; }
+      .user-ref-table { width: 100%; border-collapse: collapse; margin-top: 0.5rem; }
+      .user-ref-table th, .user-ref-table td { border: 1px solid #d9d9d9; padding: 0.4rem 0.6rem; text-align: left; font-size: 0.85rem; }
+      .user-ref-table th { background: #eef4f8; }
     </style>
   </head>
   <body>
     <nav>
-      <h1>Damage Reports</h1>
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <h1 style="margin:0;">Damage Reports</h1>
+        <div id="navUserSection" class="hidden">
+          <span id="navUserName" style="margin-left:1rem;"></span>
+          <button id="logoutButton" style="margin-left:0.5rem;">Logout</button>
+        </div>
+      </div>
     </nav>
     <main>
+      <div id="loginScreen" class="card">
+        <h2>Login</h2>
+        <div id="loginError" class="login-error"></div>
+        <form id="loginForm">
+          <div><label>Username</label><br /><input id="loginUsername" type="text" required autocomplete="off" /></div>
+          <div style="margin-top:0.5rem;"><label>Password</label><br /><input id="loginPassword" type="password" required /></div>
+          <div style="margin-top:0.75rem;"><button type="submit">Login</button></div>
+        </form>
+        <div style="margin-top:1.5rem; padding:0.75rem; background:#f0f4f8; border-radius:6px;">
+          <strong>Available Users:</strong>
+          <table class="user-ref-table">
+            <thead><tr><th>Name</th><th>Username</th><th>Password</th></tr></thead>
+            <tbody id="userRefTableBody"></tbody>
+          </table>
+        </div>
+      </div>
       <div id="listScreen" class="card">
         <h2>Reports List</h2>
         <div class="list-controls">
@@ -83,6 +109,10 @@
           </select>
           <button id="saveStatusButton" style="margin-left:0.5rem;">Update Status</button>
           <button id="backButton" style="margin-left:0.5rem;">Back</button>
+        </div>
+        <div id="actionHistorySection" class="hidden" style="margin-top:1rem; padding:0.75rem; background:#f0f4f8; border-radius:6px;">
+          <h3 style="margin-top:0;">Action History</h3>
+          <div id="actionHistoryList"></div>
         </div>
       </div>
 

@@ -5,9 +5,13 @@ const { NotificationService } = require('./notificationService');
 const { AssessmentsService } = require('./domains/assessments/assessmentsService');
 const { ApprovalsService } = require('./domains/approvals/approvalsService');
 const { BuildingsService } = require('./domains/buildings/buildingsService');
+const { UsersService } = require('./domains/users/usersService');
+const { ActionsService } = require('./domains/actions/actionsService');
 const { createAssessmentsRoutes } = require('./domains/assessments/assessmentsRoutes');
 const { createApprovalsRoutes } = require('./domains/approvals/approvalsRoutes');
 const { createBuildingsRoutes } = require('./domains/buildings/buildingsRoutes');
+const { createUsersRoutes } = require('./domains/users/usersRoutes');
+const { createActionsRoutes } = require('./domains/actions/actionsRoutes');
 
 function createApp() {
   const app = express();
@@ -18,14 +22,18 @@ function createApp() {
   const assessmentsService = new AssessmentsService(reportsFilePath);
   const approvalsService = new ApprovalsService(reportsFilePath);
   const buildingsService = new BuildingsService(reportsFilePath, assessmentsService, approvalsService);
+  const usersService = new UsersService(path.join(__dirname, 'data', 'users.json'));
+  const actionsService = new ActionsService(path.join(__dirname, 'data', 'actions.json'));
 
   app.use(express.json());
   app.use(express.static(path.join(__dirname, 'public')));
   app.use('/files', express.static(path.join(__dirname, 'files')));
 
-  app.use(createAssessmentsRoutes(express, assessmentsService));
-  app.use(createApprovalsRoutes(express, approvalsService));
-  app.use(createBuildingsRoutes(express, buildingsService, habitationFileService, notificationService));
+  app.use(createUsersRoutes(express, usersService));
+  app.use(createActionsRoutes(express, actionsService));
+  app.use(createAssessmentsRoutes(express, assessmentsService, actionsService));
+  app.use(createApprovalsRoutes(express, approvalsService, actionsService));
+  app.use(createBuildingsRoutes(express, buildingsService, habitationFileService, notificationService, actionsService));
 
   app.post('/notifications/send', (req, res) => {
     const { buildingId, email, subject, body, idempotencyKey } = req.body;

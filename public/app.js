@@ -1,3 +1,4 @@
+const loginScreen = document.getElementById('loginScreen');
 const listScreen = document.getElementById('listScreen');
 const createScreen = document.getElementById('createScreen');
 const detailsScreen = document.getElementById('detailsScreen');
@@ -44,16 +45,118 @@ const appraisalReinspection = document.getElementById('appraisalReinspection');
 const appraisalBuildingInfo = document.getElementById('appraisalBuildingInfo');
 const saveAppraisalButton = document.getElementById('saveAppraisalButton');
 const cancelAppraisalButton = document.getElementById('cancelAppraisalButton');
+const navUserSection = document.getElementById('navUserSection');
+const navUserName = document.getElementById('navUserName');
+const logoutButton = document.getElementById('logoutButton');
+const actionHistorySection = document.getElementById('actionHistorySection');
+const actionHistoryList = document.getElementById('actionHistoryList');
+const loginForm = document.getElementById('loginForm');
+const loginUsername = document.getElementById('loginUsername');
+const loginPassword = document.getElementById('loginPassword');
+const loginError = document.getElementById('loginError');
+const userRefTableBody = document.getElementById('userRefTableBody');
 
 let reports = [];
 let selectedReportId = null;
 let pendingSuccessMessage = '';
 let generatedFiles = {};
 let selectedAppraisalReportId = null;
+let currentUser = null;
 
 function showScreen(screen) {
-  [listScreen, createScreen, detailsScreen, messageCenterScreen, appraisersPortalScreen, localAuthorityPortalScreen].forEach((element) => element.classList.add('hidden'));
+  [loginScreen, listScreen, createScreen, detailsScreen, messageCenterScreen, appraisersPortalScreen, localAuthorityPortalScreen].forEach((element) => element.classList.add('hidden'));
   screen.classList.remove('hidden');
+}
+
+function isLoggedIn() {
+  return currentUser !== null;
+}
+
+function saveSession(user) {
+  localStorage.setItem('currentUser', JSON.stringify(user));
+}
+
+function loadSession() {
+  try {
+    const stored = localStorage.getItem('currentUser');
+    if (stored) return JSON.parse(stored);
+  } catch {}
+  return null;
+}
+
+function clearSession() {
+  localStorage.removeItem('currentUser');
+}
+
+async function loadUserRefTable() {
+  const response = await fetch('/users');
+  const users = await response.json();
+  renderUserRefTable(users);
+}
+
+function renderUserRefTable(users) {
+  userRefTableBody.innerHTML = '';
+  users.forEach((user) => {
+    const row = document.createElement('tr');
+    row.innerHTML = `<td>${user.fullName}</td><td>${user.username}</td><td>${user.password}</td>`;
+    userRefTableBody.appendChild(row);
+  });
+}
+
+async function handleLogin(event) {
+  event.preventDefault();
+  loginError.style.display = 'none';
+  const username = loginUsername.value.trim();
+  const password = loginPassword.value;
+
+  if (!username || !password) {
+    loginError.textContent = 'Please enter username and password.';
+    loginError.style.display = 'block';
+    return;
+  }
+
+  const response = await fetch('/auth/login', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ username, password }),
+  });
+
+  if (!response.ok) {
+    const result = await response.json().catch(() => ({}));
+    loginError.textContent = result.error || 'Invalid username or password.';
+    loginError.style.display = 'block';
+    return;
+  }
+
+  const { user } = await response.json();
+  login(user);
+}
+
+function login(user) {
+  currentUser = user;
+  saveSession(user);
+  navUserName.textContent = user.fullName;
+  navUserSection.classList.remove('hidden');
+  loginForm.reset();
+  loginError.style.display = 'none';
+  showScreen(listScreen);
+  loadReports();
+}
+
+function logout() {
+  currentUser = null;
+  clearSession();
+  navUserSection.classList.add('hidden');
+  navUserName.textContent = '';
+  showScreen(loginScreen);
+}
+
+function authHeaders() {
+  if (!currentUser) return {};
+  return {
+    'X-User-Id': String(currentUser.id),
+    'X-User-Name': currentUser.fullName,
+  };
 }
 
 async function loadNotifications() {
@@ -207,7 +310,7 @@ function openAppraisalForm(reportId) {
 async function saveAppraisal() {
   const response = await fetch(`/reports/${selectedAppraisalReportId}/appraisal`, {
     method: 'PATCH',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json', ...authHeaders() },
     body: JSON.stringify({
       damageLevel: appraisalDamageLevel.value,
       appraiserComments: appraisalComments.value,
@@ -301,7 +404,7 @@ function openPermitApprovalForm(reportId) {
 async function savePermitApproval() {
   const response = await fetch(`/reports/${selectedPermitReportId}/permit-approval`, {
     method: 'PATCH',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json', ...authHeaders() },
     body: JSON.stringify({
       waterSupply: permitWaterSupply.checked,
       electricitySupply: permitElectricitySupply.checked,
@@ -584,7 +687,10 @@ function canOpenBudgetRequest(report) {
 }
 
 async function openBudgetRequest(report) {
-  const response = await fetch(`/reports/${report.id}/budget-request`, { method: 'PATCH' });
+  const response = await fetch(`/reports/${report.id}/budget-request`, {
+    method: 'PATCH',
+    headers: authHeaders(),
+  });
   if (!response.ok) {
     const result = await response.json().catch(() => ({}));
     alert(result.error || 'Unable to open budget request.');
@@ -602,6 +708,46 @@ async function openBudgetRequest(report) {
   pendingSuccessMessage = 'Budget request opened successfully.';
   renderDetails(updated);
   renderReports();
+}
+
+async function loadActionHistory(buildingId) {
+  const response = await fetch(`/buildings/${buildingId}/actions`);
+  const actions = await response.json();
+  renderActionHistory(actions);
+}
+
+function renderActionHistory(actions) {
+  if (!actions.length) {
+    actionHistoryList.innerHTML = '<p>No actions recorded yet.</p>';
+    return;
+  }
+
+  const table = document.createElement('table');
+  table.innerHTML = `
+    <thead>
+      <tr>
+        <th>Date & Time</th>
+        <th>User</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  `;
+
+  const tbody = table.querySelector('tbody');
+  actions.forEach((action) => {
+    const row = document.createElement('tr');
+    const dt = action.timestamp ? new Date(action.timestamp).toLocaleString() : '';
+    row.innerHTML = `
+      <td>${dt}</td>
+      <td>${action.userName}</td>
+      <td>${action.action}</td>
+    `;
+    tbody.appendChild(row);
+  });
+
+  actionHistoryList.innerHTML = '';
+  actionHistoryList.appendChild(table);
 }
 
 function renderDetails(report) {
@@ -683,6 +829,9 @@ function renderDetails(report) {
       }
     });
   }
+
+  actionHistorySection.classList.remove('hidden');
+  loadActionHistory(report.id);
 }
 
 async function openDetails(id) {
@@ -719,7 +868,7 @@ async function createReport(event) {
 async function updateStatus() {
   const response = await fetch(`/reports/${selectedReportId}/status`, {
     method: 'PATCH',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json', ...authHeaders() },
     body: JSON.stringify({ status: statusSelect.value }),
   });
   if (response.ok) {
@@ -817,7 +966,18 @@ reportList.addEventListener('click', async (event) => {
   await openDetails(Number(link.dataset.id));
 });
 
-loadReports();
+logoutButton.addEventListener('click', logout);
+loginForm.addEventListener('submit', handleLogin);
 
-// Ensure modal is hidden on page load
+const savedUser = loadSession();
+if (savedUser) {
+  currentUser = savedUser;
+  navUserName.textContent = savedUser.fullName;
+  navUserSection.classList.remove('hidden');
+  showScreen(listScreen);
+  loadReports();
+} else {
+  showScreen(loginScreen);
+}
+loadUserRefTable();
 hideModal();
