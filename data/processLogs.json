@@ -1,0 +1,127 @@
+{"timestamp":"2026-07-23T17:42:08.427Z","level":"INFO","event":"BUILDING_PDF_START","settlement":"Garden 33","buildingId":230,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:09.579Z","level":"INFO","event":"BUILDING_PDF_END","settlement":"Garden 33","buildingId":230,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:09.579Z","level":"INFO","event":"BUILDING_PROCESSING_COMPLETE","settlement":"Garden 33","buildingId":230,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:09.587Z","level":"INFO","event":"BUILDING_PDF_START","settlement":"North 9","buildingId":231,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:10.678Z","level":"INFO","event":"BUILDING_PDF_END","settlement":"North 9","buildingId":231,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:10.678Z","level":"INFO","event":"BUILDING_PROCESSING_COMPLETE","settlement":"North 9","buildingId":231,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:10.819Z","level":"INFO","event":"SETTLEMENT_PROCESS_START","settlement":"Jerusalem","buildingId":null,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:10.820Z","level":"INFO","event":"SETTLEMENT_ELIGIBLE_BUILDINGS_FOUND","settlement":"Jerusalem","buildingId":10,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:10.820Z","level":"INFO","event":"BUILDING_PROCESSING_START","settlement":"Jerusalem","buildingId":3,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:10.820Z","level":"INFO","event":"BUILDING_PDF_START","settlement":"Jerusalem","buildingId":3,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:11.919Z","level":"INFO","event":"BUILDING_PDF_END","settlement":"Jerusalem","buildingId":3,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:11.922Z","level":"INFO","event":"BUILDING_NOTIFICATION_START","settlement":"Jerusalem","buildingId":3,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:11.924Z","level":"INFO","event":"BUILDING_NOTIFICATION_SUCCESS","settlement":"Jerusalem","buildingId":3,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:11.924Z","level":"INFO","event":"BUILDING_PROCESSING_COMPLETE","settlement":"Jerusalem","buildingId":3,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:11.924Z","level":"INFO","event":"BUILDING_PROCESSING_START","settlement":"Jerusalem","buildingId":4,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:11.925Z","level":"INFO","event":"BUILDING_PDF_START","settlement":"Jerusalem","buildingId":4,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:13.048Z","level":"INFO","event":"BUILDING_PDF_END","settlement":"Jerusalem","buildingId":4,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:13.052Z","level":"INFO","event":"BUILDING_NOTIFICATION_START","settlement":"Jerusalem","buildingId":4,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:13.053Z","level":"INFO","event":"BUILDING_NOTIFICATION_SUCCESS","settlement":"Jerusalem","buildingId":4,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:13.054Z","level":"INFO","event":"BUILDING_PROCESSING_COMPLETE","settlement":"Jerusalem","buildingId":4,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:13.054Z","level":"INFO","event":"BUILDING_PROCESSING_START","settlement":"Jerusalem","buildingId":201,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:13.055Z","level":"INFO","event":"BUILDING_PDF_START","settlement":"Jerusalem","buildingId":201,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:14.168Z","level":"INFO","event":"BUILDING_PDF_END","settlement":"Jerusalem","buildingId":201,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:14.170Z","level":"INFO","event":"BUILDING_PROCESSING_COMPLETE","settlement":"Jerusalem","buildingId":201,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:14.171Z","level":"INFO","event":"BUILDING_PROCESSING_START","settlement":"Jerusalem","buildingId":225,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:14.171Z","level":"INFO","event":"BUILDING_PDF_START","settlement":"Jerusalem","buildingId":225,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:15.269Z","level":"INFO","event":"BUILDING_PDF_END","settlement":"Jerusalem","buildingId":225,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:15.275Z","level":"INFO","event":"BUILDING_PROCESSING_COMPLETE","settlement":"Jerusalem","buildingId":225,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:15.276Z","level":"INFO","event":"SETTLEMENT_PROCESS_COMPLETE","settlement":"Jerusalem","buildingId":null,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:15.294Z","level":"INFO","event":"SETTLEMENT_PROCESS_START","settlement":"Haifa","buildingId":null,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:15.297Z","level":"INFO","event":"SETTLEMENT_ELIGIBLE_BUILDINGS_FOUND","settlement":"Haifa","buildingId":2,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:15.297Z","level":"INFO","event":"BUILDING_PROCESSING_START","settlement":"Haifa","buildingId":5,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:15.298Z","level":"INFO","event":"BUILDING_PDF_START","settlement":"Haifa","buildingId":5,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:16.428Z","level":"INFO","event":"BUILDING_PDF_END","settlement":"Haifa","buildingId":5,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:16.430Z","level":"INFO","event":"BUILDING_NOTIFICATION_START","settlement":"Haifa","buildingId":5,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:16.430Z","level":"INFO","event":"BUILDING_NOTIFICATION_SUCCESS","settlement":"Haifa","buildingId":5,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:16.431Z","level":"INFO","event":"BUILDING_PROCESSING_COMPLETE","settlement":"Haifa","buildingId":5,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:16.431Z","level":"INFO","event":"BUILDING_PROCESSING_START","settlement":"Haifa","buildingId":6,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:16.431Z","level":"INFO","event":"BUILDING_PDF_START","settlement":"Haifa","buildingId":6,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:17.588Z","level":"INFO","event":"BUILDING_PDF_END","settlement":"Haifa","buildingId":6,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:17.591Z","level":"INFO","event":"BUILDING_NOTIFICATION_START","settlement":"Haifa","buildingId":6,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:17.592Z","level":"INFO","event":"BUILDING_NOTIFICATION_SUCCESS","settlement":"Haifa","buildingId":6,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:17.593Z","level":"INFO","event":"BUILDING_PROCESSING_COMPLETE","settlement":"Haifa","buildingId":6,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:17.593Z","level":"INFO","event":"SETTLEMENT_PROCESS_COMPLETE","settlement":"Haifa","buildingId":null,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:17.614Z","level":"INFO","event":"SETTLEMENT_PROCESS_START","settlement":"Tel Aviv","buildingId":null,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:17.618Z","level":"INFO","event":"SETTLEMENT_ELIGIBLE_BUILDINGS_FOUND","settlement":"Tel Aviv","buildingId":2,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:17.619Z","level":"INFO","event":"BUILDING_PROCESSING_START","settlement":"Tel Aviv","buildingId":1,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:17.619Z","level":"INFO","event":"BUILDING_PDF_START","settlement":"Tel Aviv","buildingId":1,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:18.752Z","level":"INFO","event":"BUILDING_PDF_END","settlement":"Tel Aviv","buildingId":1,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:18.755Z","level":"INFO","event":"BUILDING_NOTIFICATION_START","settlement":"Tel Aviv","buildingId":1,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:18.756Z","level":"INFO","event":"BUILDING_NOTIFICATION_SUCCESS","settlement":"Tel Aviv","buildingId":1,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:18.757Z","level":"INFO","event":"BUILDING_PROCESSING_COMPLETE","settlement":"Tel Aviv","buildingId":1,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:18.757Z","level":"INFO","event":"BUILDING_PROCESSING_START","settlement":"Tel Aviv","buildingId":2,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:18.758Z","level":"INFO","event":"BUILDING_PDF_START","settlement":"Tel Aviv","buildingId":2,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:19.858Z","level":"INFO","event":"BUILDING_PDF_END","settlement":"Tel Aviv","buildingId":2,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:19.860Z","level":"INFO","event":"BUILDING_NOTIFICATION_START","settlement":"Tel Aviv","buildingId":2,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:19.861Z","level":"INFO","event":"BUILDING_NOTIFICATION_SUCCESS","settlement":"Tel Aviv","buildingId":2,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:19.861Z","level":"INFO","event":"BUILDING_PROCESSING_COMPLETE","settlement":"Tel Aviv","buildingId":2,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:19.861Z","level":"INFO","event":"SETTLEMENT_PROCESS_COMPLETE","settlement":"Tel Aviv","buildingId":null,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:19.874Z","level":"INFO","event":"SETTLEMENT_PROCESS_START","settlement":"Beer Sheva","buildingId":null,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:19.875Z","level":"INFO","event":"SETTLEMENT_ELIGIBLE_BUILDINGS_FOUND","settlement":"Beer Sheva","buildingId":1,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:19.876Z","level":"INFO","event":"BUILDING_PROCESSING_START","settlement":"Beer Sheva","buildingId":7,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:19.876Z","level":"INFO","event":"BUILDING_PDF_START","settlement":"Beer Sheva","buildingId":7,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:21.033Z","level":"INFO","event":"BUILDING_PDF_END","settlement":"Beer Sheva","buildingId":7,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:21.039Z","level":"INFO","event":"BUILDING_NOTIFICATION_START","settlement":"Beer Sheva","buildingId":7,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:21.039Z","level":"INFO","event":"BUILDING_NOTIFICATION_SUCCESS","settlement":"Beer Sheva","buildingId":7,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:21.040Z","level":"INFO","event":"BUILDING_PROCESSING_COMPLETE","settlement":"Beer Sheva","buildingId":7,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:21.040Z","level":"INFO","event":"SETTLEMENT_PROCESS_COMPLETE","settlement":"Beer Sheva","buildingId":null,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:21.043Z","level":"INFO","event":"SETTLEMENT_PROCESS_START","settlement":"Netanya","buildingId":null,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:21.045Z","level":"INFO","event":"SETTLEMENT_ELIGIBLE_BUILDINGS_FOUND","settlement":"Netanya","buildingId":1,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:21.045Z","level":"INFO","event":"BUILDING_PROCESSING_START","settlement":"Netanya","buildingId":8,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:21.045Z","level":"INFO","event":"BUILDING_PDF_START","settlement":"Netanya","buildingId":8,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:22.164Z","level":"INFO","event":"BUILDING_PDF_END","settlement":"Netanya","buildingId":8,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:22.166Z","level":"INFO","event":"BUILDING_NOTIFICATION_START","settlement":"Netanya","buildingId":8,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:22.167Z","level":"INFO","event":"BUILDING_NOTIFICATION_SUCCESS","settlement":"Netanya","buildingId":8,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:22.167Z","level":"INFO","event":"BUILDING_PROCESSING_COMPLETE","settlement":"Netanya","buildingId":8,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:22.168Z","level":"INFO","event":"SETTLEMENT_PROCESS_COMPLETE","settlement":"Netanya","buildingId":null,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:22.180Z","level":"INFO","event":"SETTLEMENT_PROCESS_START","settlement":"Jerusalem","buildingId":null,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:22.183Z","level":"INFO","event":"SETTLEMENT_ELIGIBLE_BUILDINGS_FOUND","settlement":"Jerusalem","buildingId":10,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:22.184Z","level":"INFO","event":"BUILDING_PROCESSING_START","settlement":"Jerusalem","buildingId":3,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:22.185Z","level":"INFO","event":"BUILDING_PDF_START","settlement":"Jerusalem","buildingId":3,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:23.309Z","level":"INFO","event":"BUILDING_PDF_END","settlement":"Jerusalem","buildingId":3,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:23.311Z","level":"INFO","event":"BUILDING_NOTIFICATION_START","settlement":"Jerusalem","buildingId":3,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:23.311Z","level":"INFO","event":"BUILDING_NOTIFICATION_SUCCESS","settlement":"Jerusalem","buildingId":3,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:23.311Z","level":"INFO","event":"BUILDING_PROCESSING_COMPLETE","settlement":"Jerusalem","buildingId":3,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:23.312Z","level":"INFO","event":"BUILDING_PROCESSING_START","settlement":"Jerusalem","buildingId":4,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:23.312Z","level":"INFO","event":"BUILDING_PDF_START","settlement":"Jerusalem","buildingId":4,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:24.455Z","level":"INFO","event":"BUILDING_PDF_END","settlement":"Jerusalem","buildingId":4,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:24.458Z","level":"INFO","event":"BUILDING_NOTIFICATION_START","settlement":"Jerusalem","buildingId":4,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:24.458Z","level":"INFO","event":"BUILDING_NOTIFICATION_SUCCESS","settlement":"Jerusalem","buildingId":4,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:24.458Z","level":"INFO","event":"BUILDING_PROCESSING_COMPLETE","settlement":"Jerusalem","buildingId":4,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:24.459Z","level":"INFO","event":"BUILDING_PROCESSING_START","settlement":"Jerusalem","buildingId":201,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:24.459Z","level":"INFO","event":"BUILDING_PDF_START","settlement":"Jerusalem","buildingId":201,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:25.563Z","level":"INFO","event":"BUILDING_PDF_END","settlement":"Jerusalem","buildingId":201,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:25.566Z","level":"INFO","event":"BUILDING_PROCESSING_COMPLETE","settlement":"Jerusalem","buildingId":201,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:25.566Z","level":"INFO","event":"BUILDING_PROCESSING_START","settlement":"Jerusalem","buildingId":225,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:25.567Z","level":"INFO","event":"BUILDING_PDF_START","settlement":"Jerusalem","buildingId":225,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:26.681Z","level":"INFO","event":"BUILDING_PDF_END","settlement":"Jerusalem","buildingId":225,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:26.685Z","level":"INFO","event":"BUILDING_PROCESSING_COMPLETE","settlement":"Jerusalem","buildingId":225,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:26.685Z","level":"INFO","event":"SETTLEMENT_PROCESS_COMPLETE","settlement":"Jerusalem","buildingId":null,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:26.699Z","level":"INFO","event":"SETTLEMENT_PROCESS_START","settlement":"Haifa","buildingId":null,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:26.700Z","level":"INFO","event":"SETTLEMENT_ELIGIBLE_BUILDINGS_FOUND","settlement":"Haifa","buildingId":2,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:26.701Z","level":"INFO","event":"BUILDING_PROCESSING_START","settlement":"Haifa","buildingId":5,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:26.701Z","level":"INFO","event":"BUILDING_PDF_START","settlement":"Haifa","buildingId":5,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:27.805Z","level":"INFO","event":"BUILDING_PDF_END","settlement":"Haifa","buildingId":5,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:27.809Z","level":"INFO","event":"BUILDING_NOTIFICATION_START","settlement":"Haifa","buildingId":5,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:27.810Z","level":"INFO","event":"BUILDING_NOTIFICATION_SUCCESS","settlement":"Haifa","buildingId":5,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:27.810Z","level":"INFO","event":"BUILDING_PROCESSING_COMPLETE","settlement":"Haifa","buildingId":5,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:27.811Z","level":"INFO","event":"BUILDING_PROCESSING_START","settlement":"Haifa","buildingId":6,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:27.811Z","level":"INFO","event":"BUILDING_PDF_START","settlement":"Haifa","buildingId":6,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:28.922Z","level":"INFO","event":"BUILDING_PDF_END","settlement":"Haifa","buildingId":6,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:28.927Z","level":"INFO","event":"BUILDING_NOTIFICATION_START","settlement":"Haifa","buildingId":6,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:28.928Z","level":"INFO","event":"BUILDING_NOTIFICATION_SUCCESS","settlement":"Haifa","buildingId":6,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:28.928Z","level":"INFO","event":"BUILDING_PROCESSING_COMPLETE","settlement":"Haifa","buildingId":6,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:28.929Z","level":"INFO","event":"SETTLEMENT_PROCESS_COMPLETE","settlement":"Haifa","buildingId":null,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:28.938Z","level":"INFO","event":"SETTLEMENT_PROCESS_START","settlement":"Beer Sheva","buildingId":null,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:28.940Z","level":"INFO","event":"SETTLEMENT_ELIGIBLE_BUILDINGS_FOUND","settlement":"Beer Sheva","buildingId":1,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:28.940Z","level":"INFO","event":"BUILDING_PROCESSING_START","settlement":"Beer Sheva","buildingId":7,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:28.940Z","level":"INFO","event":"BUILDING_PDF_START","settlement":"Beer Sheva","buildingId":7,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:30.085Z","level":"INFO","event":"BUILDING_PDF_END","settlement":"Beer Sheva","buildingId":7,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:30.090Z","level":"INFO","event":"BUILDING_NOTIFICATION_START","settlement":"Beer Sheva","buildingId":7,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:30.091Z","level":"INFO","event":"BUILDING_NOTIFICATION_SUCCESS","settlement":"Beer Sheva","buildingId":7,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:30.091Z","level":"INFO","event":"BUILDING_PROCESSING_COMPLETE","settlement":"Beer Sheva","buildingId":7,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:30.092Z","level":"INFO","event":"SETTLEMENT_PROCESS_COMPLETE","settlement":"Beer Sheva","buildingId":null,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:30.110Z","level":"INFO","event":"BUILDING_PDF_START","settlement":"Jerusalem","buildingId":249,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:31.202Z","level":"INFO","event":"BUILDING_PDF_END","settlement":"Jerusalem","buildingId":249,"attempt":null,"error":null}
+{"timestamp":"2026-07-23T17:42:31.202Z","level":"INFO","event":"BUILDING_PROCESSING_COMPLETE","settlement":"Jerusalem","buildingId":249,"attempt":null,"error":null}

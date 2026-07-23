@@ -1,6 +1,6 @@
 const { requireRole, requireSettlementAccess } = require('../roles/rolesHelper');
 
-function createBuildingsRoutes(express, buildingsService, habitationFileService, notificationService, actionsService) {
+function createBuildingsRoutes(express, buildingsService, habitationFileService, notificationService, actionsService, settlementProcessesService, processLogger) {
   const router = express.Router();
 
   router.get('/reports', (req, res) => {
@@ -53,6 +53,7 @@ function createBuildingsRoutes(express, buildingsService, habitationFileService,
     const context = buildingsService.generateReturnHomePackage(req.params.id, habitationFileService, notificationService);
     if (context.error === 'not_found') return res.status(404).json({ error: 'Report not found' });
     const report = context.report;
+    const buildingSettlement = report.settlementId || '';
 
     const canGenerate = Boolean(
       report.damagePhotosExist &&
@@ -66,18 +67,26 @@ function createBuildingsRoutes(express, buildingsService, habitationFileService,
       return res.status(400).json({ error: 'Report is not eligible for a re-occupation file' });
     }
 
+    processLogger.info('BUILDING_PDF_START', { settlement: buildingSettlement, buildingId: report.id });
+
     const result = await habitationFileService.generateReturnHomePackage(report);
     buildingsService.markReturnHomeFileGenerated(report.id);
+
+    processLogger.info('BUILDING_PDF_END', { settlement: buildingSettlement, buildingId: report.id });
 
     if (report.familyEmail) {
       const subject = `Return to Home Approval ${report.address}`;
       const body = `Hello,\n\nWe are pleased to inform you that your building has been approved for return to home.\nThe occupancy file has been prepared successfully.\n\nBest regards,\nMinistry of Construction and Housing`;
+      processLogger.info('BUILDING_NOTIFICATION_START', { settlement: buildingSettlement, buildingId: report.id });
       try {
         await notificationService.sendWithRetry(report.id, report.familyEmail, subject, body, report.address, String(report.id));
+        processLogger.info('BUILDING_NOTIFICATION_SUCCESS', { settlement: buildingSettlement, buildingId: report.id });
       } catch (error) {
-        console.error(`Failed to send notification for building ${report.id}:`, error);
+        processLogger.error('BUILDING_NOTIFICATION_FAILED', { settlement: buildingSettlement, buildingId: report.id, error: error.message });
       }
     }
+
+    processLogger.info('BUILDING_PROCESSING_COMPLETE', { settlement: buildingSettlement, buildingId: report.id });
 
     res.json(result);
   });
@@ -86,9 +95,19 @@ function createBuildingsRoutes(express, buildingsService, habitationFileService,
     const { settlement } = req.body;
     const role = req.headers['x-user-role'];
     const userSettlement = req.headers['x-user-settlement'];
+    const userName = req.headers['x-user-name'] || 'System';
     const effectiveSettlement = (role === 'MUNICIPALITY' && userSettlement) ? userSettlement : settlement;
+
+    const process = settlementProcessesService.create(effectiveSettlement, userName);
+
+    processLogger.info('SETTLEMENT_PROCESS_START', { settlement: effectiveSettlement });
+
     const filteredReports = buildingsService.getSettlementReports(effectiveSettlement);
     const generatedFiles = [];
+
+    processLogger.info('SETTLEMENT_ELIGIBLE_BUILDINGS_FOUND', { settlement: effectiveSettlement, buildingId: filteredReports.length });
+
+    let processFailed = false;
 
     for (const report of filteredReports) {
       const canGenerate = Boolean(
@@ -100,25 +119,43 @@ function createBuildingsRoutes(express, buildingsService, habitationFileService,
       );
 
       if (canGenerate) {
+        processLogger.info('BUILDING_PROCESSING_START', { settlement: effectiveSettlement, buildingId: report.id });
+
         try {
+          processLogger.info('BUILDING_PDF_START', { settlement: effectiveSettlement, buildingId: report.id });
           const result = await habitationFileService.generateReturnHomePackage(report);
+          processLogger.info('BUILDING_PDF_END', { settlement: effectiveSettlement, buildingId: report.id });
+
           buildingsService.markReturnHomeFileGenerated(report.id);
           generatedFiles.push({ buildingId: report.id, url: result.url, fileName: result.fileName });
 
           if (report.familyEmail) {
             const subject = `Return to Home Approval ${report.address}`;
             const body = `Hello,\n\nWe are pleased to inform you that your building has been approved for return to home.\nThe occupancy file has been prepared successfully.\n\nBest regards,\nMinistry of Construction and Housing`;
+            processLogger.info('BUILDING_NOTIFICATION_START', { settlement: effectiveSettlement, buildingId: report.id });
             try {
               await notificationService.sendWithRetry(report.id, report.familyEmail, subject, body, report.address, String(report.id));
+              processLogger.info('BUILDING_NOTIFICATION_SUCCESS', { settlement: effectiveSettlement, buildingId: report.id });
             } catch (error) {
-              console.error(`Failed to send notification for building ${report.id}:`, error);
+              processLogger.error('BUILDING_NOTIFICATION_FAILED', { settlement: effectiveSettlement, buildingId: report.id, error: error.message });
             }
           }
         } catch (error) {
-          console.error(`Failed to generate file for building ${report.id}:`, error);
+          processFailed = true;
+          processLogger.error('BUILDING_PROCESSING_FAILED', { settlement: effectiveSettlement, buildingId: report.id, error: error.message });
         }
+
+        processLogger.info('BUILDING_PROCESSING_COMPLETE', { settlement: effectiveSettlement, buildingId: report.id });
       }
     }
+
+    if (processFailed) {
+      processLogger.error('SETTLEMENT_PROCESS_FAILED', { settlement: effectiveSettlement });
+    } else {
+      processLogger.info('SETTLEMENT_PROCESS_COMPLETE', { settlement: effectiveSettlement });
+    }
+
+    settlementProcessesService.complete(process.id);
 
     res.json({ count: generatedFiles.length, files: generatedFiles });
   });

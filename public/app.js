@@ -34,6 +34,10 @@ const permitApproved = document.getElementById('permitApproved');
 const savePermitApprovalButton = document.getElementById('savePermitApprovalButton');
 const cancelPermitApprovalButton = document.getElementById('cancelPermitApprovalButton');
 const backFromLocalAuthorityPortal = document.getElementById('backFromLocalAuthorityPortal');
+const settlementProcessesScreen = document.getElementById('settlementProcessesScreen');
+const settlementProcessesButton = document.getElementById('settlementProcessesButton');
+const settlementProcessesList = document.getElementById('settlementProcessesList');
+const backFromSettlementProcesses = document.getElementById('backFromSettlementProcesses');
 const modalOverlay = document.getElementById('modalOverlay');
 const modalContent = document.getElementById('modalContent');
 const notificationModeSelect = document.getElementById('notificationModeSelect');
@@ -64,7 +68,7 @@ let selectedAppraisalReportId = null;
 let currentUser = null;
 
 function showScreen(screen) {
-  [loginScreen, listScreen, createScreen, detailsScreen, messageCenterScreen, appraisersPortalScreen, localAuthorityPortalScreen].forEach((element) => element.classList.add('hidden'));
+  [loginScreen, listScreen, createScreen, detailsScreen, messageCenterScreen, appraisersPortalScreen, localAuthorityPortalScreen, settlementProcessesScreen].forEach((element) => element.classList.add('hidden'));
   screen.classList.remove('hidden');
 }
 
@@ -969,6 +973,91 @@ cancelPermitApprovalButton.addEventListener('click', () => {
   permitApprovalForm.classList.add('hidden');
   localAuthorityPortalList.classList.remove('hidden');
 });
+
+settlementProcessesButton.addEventListener('click', async () => {
+  await loadSettlementProcesses();
+  showScreen(settlementProcessesScreen);
+});
+backFromSettlementProcesses.addEventListener('click', () => showScreen(listScreen));
+settlementProcessesList.addEventListener('click', async (event) => {
+  const link = event.target.closest('a.view-logs-link');
+  if (link) {
+    event.preventDefault();
+    const settlement = link.dataset.settlement;
+    const response = await fetch('/process-logs');
+    const allLogs = await response.json();
+    const filtered = allLogs.filter((l) => l.settlement === settlement);
+    renderLogsModal(settlement, filtered);
+  }
+});
+
+function renderLogsModal(settlement, logs) {
+  if (!logs.length) {
+    showModal(`<h3>Logs: ${settlement}</h3><p>No logs found for this settlement.</p><button onclick="hideModal()">Close</button>`);
+    return;
+  }
+  let html = `<h3>Logs: ${settlement}</h3><div style="max-height:60vh; overflow:auto;">`;
+  html += '<table style="width:100%; font-size:0.85rem;"><thead><tr><th>Time</th><th>Level</th><th>Event</th><th>Building</th><th>Error</th></tr></thead><tbody>';
+  logs.forEach((l) => {
+    const time = new Date(l.timestamp).toLocaleString();
+    const levelColor = l.level === 'ERROR' ? '#c62828' : l.level === 'WARN' ? '#e65100' : '#0b6b2f';
+    const building = l.buildingId != null ? `#${l.buildingId}` : '—';
+    const error = l.error || '—';
+    html += `<tr><td>${time}</td><td style="color:${levelColor};font-weight:bold;">${l.level}</td><td>${l.event}</td><td>${building}</td><td style="max-width:200px;overflow:hidden;text-overflow:ellipsis;">${error}</td></tr>`;
+  });
+  html += '</tbody></table></div>';
+  html += '<button onclick="hideModal()" style="margin-top:0.75rem;">Close</button>';
+  showModal(html);
+}
+
+async function loadSettlementProcesses() {
+  const response = await fetch('/settlement-processes');
+  const processes = await response.json();
+  renderSettlementProcesses(processes);
+}
+
+function renderSettlementProcesses(processes) {
+  if (!processes.length) {
+    settlementProcessesList.innerHTML = '<p>No settlement processes recorded yet.</p>';
+    return;
+  }
+
+  const table = document.createElement('table');
+  table.innerHTML = `
+    <thead>
+      <tr>
+        <th>Settlement</th>
+        <th>Started By</th>
+        <th>Started At</th>
+        <th>Completed At</th>
+        <th>Status</th>
+        <th>Logs</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  `;
+
+  const tbody = table.querySelector('tbody');
+  processes.forEach((p) => {
+    const row = document.createElement('tr');
+    const startedAt = p.startedAt ? new Date(p.startedAt).toLocaleString() : '';
+    const completedAt = p.completedAt ? new Date(p.completedAt).toLocaleString() : '';
+    const statusClass = p.status === 'COMPLETED' ? 'status IN_REVIEW' : 'status NEW';
+    row.innerHTML = `
+      <td>${p.settlementName}</td>
+      <td>${p.startedBy}</td>
+      <td>${startedAt}</td>
+      <td>${completedAt}</td>
+      <td><span class="${statusClass}">${p.status}</span></td>
+      <td><a href="#" class="view-logs-link" data-settlement="${p.settlementName}">View Logs</a></td>
+    `;
+    tbody.appendChild(row);
+  });
+
+  settlementProcessesList.innerHTML = '';
+  settlementProcessesList.appendChild(table);
+}
+
 notificationModeSelect.addEventListener('change', () => setNotificationMode(notificationModeSelect.value));
 reportList.addEventListener('click', async (event) => {
   const fileLink = event.target.closest('a.generate-file-link');

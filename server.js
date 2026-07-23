@@ -12,6 +12,9 @@ const { createApprovalsRoutes } = require('./domains/approvals/approvalsRoutes')
 const { createBuildingsRoutes } = require('./domains/buildings/buildingsRoutes');
 const { createUsersRoutes } = require('./domains/users/usersRoutes');
 const { createActionsRoutes } = require('./domains/actions/actionsRoutes');
+const { SettlementProcessesService } = require('./domains/settlementProcesses/settlementProcessesService');
+const { createSettlementProcessesRoutes } = require('./domains/settlementProcesses/settlementProcessesRoutes');
+const { ProcessLogger } = require('./domains/settlementProcesses/processLogger');
 
 function createApp() {
   const app = express();
@@ -24,6 +27,8 @@ function createApp() {
   const buildingsService = new BuildingsService(reportsFilePath, assessmentsService, approvalsService);
   const usersService = new UsersService(path.join(__dirname, 'data', 'users.json'));
   const actionsService = new ActionsService(path.join(__dirname, 'data', 'actions.json'));
+  const settlementProcessesService = new SettlementProcessesService(path.join(__dirname, 'data', 'settlementProcesses.json'));
+  const processLogger = new ProcessLogger(path.join(__dirname, 'data', 'processLogs.json'));
 
   app.use(express.json());
   app.use(express.static(path.join(__dirname, 'public')));
@@ -33,7 +38,8 @@ function createApp() {
   app.use(createActionsRoutes(express, actionsService));
   app.use(createAssessmentsRoutes(express, assessmentsService, actionsService, buildingsService));
   app.use(createApprovalsRoutes(express, approvalsService, actionsService, buildingsService));
-  app.use(createBuildingsRoutes(express, buildingsService, habitationFileService, notificationService, actionsService));
+  app.use(createBuildingsRoutes(express, buildingsService, habitationFileService, notificationService, actionsService, settlementProcessesService, processLogger));
+  app.use(createSettlementProcessesRoutes(express, settlementProcessesService, processLogger));
 
   app.post('/notifications/send', (req, res) => {
     const { buildingId, email, subject, body, idempotencyKey } = req.body;

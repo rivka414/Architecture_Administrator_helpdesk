@@ -1,0 +1,66 @@
+[
+  {
+    "id": 1,
+    "settlementName": "Jerusalem",
+    "startedBy": "David Cohen",
+    "startedAt": "2026-07-23T17:42:10.818Z",
+    "completedAt": "2026-07-23T17:42:15.277Z",
+    "status": "COMPLETED"
+  },
+  {
+    "id": 2,
+    "settlementName": "Haifa",
+    "startedBy": "Test User",
+    "startedAt": "2026-07-23T17:42:15.293Z",
+    "completedAt": "2026-07-23T17:42:17.594Z",
+    "status": "COMPLETED"
+  },
+  {
+    "id": 3,
+    "settlementName": "Tel Aviv",
+    "startedBy": "Detail Test",
+    "startedAt": "2026-07-23T17:42:17.612Z",
+    "completedAt": "2026-07-23T17:42:19.861Z",
+    "status": "COMPLETED"
+  },
+  {
+    "id": 4,
+    "settlementName": "Beer Sheva",
+    "startedBy": "First",
+    "startedAt": "2026-07-23T17:42:19.873Z",
+    "completedAt": "2026-07-23T17:42:21.040Z",
+    "status": "COMPLETED"
+  },
+  {
+    "id": 5,
+    "settlementName": "Netanya",
+    "startedBy": "Second",
+    "startedAt": "2026-07-23T17:42:21.043Z",
+    "completedAt": "2026-07-23T17:42:22.168Z",
+    "status": "COMPLETED"
+  },
+  {
+    "id": 6,
+    "settlementName": "Jerusalem",
+    "startedBy": "Log Test User",
+    "startedAt": "2026-07-23T17:42:22.180Z",
+    "completedAt": "2026-07-23T17:42:26.686Z",
+    "status": "COMPLETED"
+  },
+  {
+    "id": 7,
+    "settlementName": "Haifa",
+    "startedBy": "Building Log User",
+    "startedAt": "2026-07-23T17:42:26.698Z",
+    "completedAt": "2026-07-23T17:42:28.930Z",
+    "status": "COMPLETED"
+  },
+  {
+    "id": 8,
+    "settlementName": "Beer Sheva",
+    "startedBy": "Structure Test",
+    "startedAt": "2026-07-23T17:42:28.937Z",
+    "completedAt": "2026-07-23T17:42:30.092Z",
+    "status": "COMPLETED"
+  }
+]

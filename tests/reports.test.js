@@ -1,5 +1,7 @@
 const test = require('node:test');
 const assert = require('node:assert/strict');
+const fs = require('fs');
+const path = require('path');
 const { createApp } = require('../server');
 
 let server;
@@ -803,4 +805,219 @@ test('No action record is created when operation is blocked by settlement', asyn
   const actionsResponse = await fetch(`${baseUrl}/buildings/${created.id}/actions`);
   const actions = await actionsResponse.json();
   assert.equal(actions.length, 0);
+});
+
+test('GET /settlement-processes returns empty array initially', async () => {
+  const response = await fetch(`${baseUrl}/settlement-processes`);
+  assert.equal(response.status, 200);
+  const body = await response.json();
+  assert.ok(Array.isArray(body));
+});
+
+test('Batch return-home-packages creates a SettlementProcess record', async () => {
+  const response = await fetch(`${baseUrl}/buildings/batch-return-home-packages`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'X-User-Name': 'David Cohen' },
+    body: JSON.stringify({ settlement: 'Jerusalem' }),
+  });
+  assert.equal(response.status, 200);
+
+  const processesResponse = await fetch(`${baseUrl}/settlement-processes`);
+  const processes = await processesResponse.json();
+  assert.ok(processes.length > 0);
+
+  const latest = processes[0];
+  assert.equal(latest.settlementName, 'Jerusalem');
+  assert.equal(latest.startedBy, 'David Cohen');
+  assert.equal(latest.status, 'COMPLETED');
+  assert.ok(latest.startedAt);
+  assert.ok(latest.completedAt);
+});
+
+test('SettlementProcess has correct fields', async () => {
+  await fetch(`${baseUrl}/buildings/batch-return-home-packages`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'X-User-Name': 'Test User' },
+    body: JSON.stringify({ settlement: 'Haifa' }),
+  });
+
+  const processesResponse = await fetch(`${baseUrl}/settlement-processes`);
+  const processes = await processesResponse.json();
+  const haifaProcess = processes.find((p) => p.settlementName === 'Haifa');
+  assert.ok(haifaProcess);
+  assert.equal(haifaProcess.startedBy, 'Test User');
+  assert.equal(haifaProcess.status, 'COMPLETED');
+  assert.ok(typeof haifaProcess.id === 'number');
+  assert.ok(typeof haifaProcess.startedAt === 'string');
+  assert.ok(typeof haifaProcess.completedAt === 'string');
+});
+
+test('GET /settlement-processes/:id returns a specific process', async () => {
+  await fetch(`${baseUrl}/buildings/batch-return-home-packages`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'X-User-Name': 'Detail Test' },
+    body: JSON.stringify({ settlement: 'Tel Aviv' }),
+  });
+
+  const processesResponse = await fetch(`${baseUrl}/settlement-processes`);
+  const processes = await processesResponse.json();
+  const telAvivProcess = processes.find((p) => p.settlementName === 'Tel Aviv');
+  assert.ok(telAvivProcess);
+
+  const detailResponse = await fetch(`${baseUrl}/settlement-processes/${telAvivProcess.id}`);
+  assert.equal(detailResponse.status, 200);
+  const detail = await detailResponse.json();
+  assert.equal(detail.settlementName, 'Tel Aviv');
+  assert.equal(detail.status, 'COMPLETED');
+});
+
+test('GET /settlement-processes/:id returns 404 for nonexistent process', async () => {
+  const response = await fetch(`${baseUrl}/settlement-processes/99999`);
+  assert.equal(response.status, 404);
+});
+
+test('Settlement processes are sorted newest first', async () => {
+  await fetch(`${baseUrl}/buildings/batch-return-home-packages`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'X-User-Name': 'First' },
+    body: JSON.stringify({ settlement: 'Beer Sheva' }),
+  });
+  await fetch(`${baseUrl}/buildings/batch-return-home-packages`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'X-User-Name': 'Second' },
+    body: JSON.stringify({ settlement: 'Netanya' }),
+  });
+
+  const response = await fetch(`${baseUrl}/settlement-processes`);
+  const processes = await response.json();
+  assert.ok(processes.length >= 2);
+  const firstDate = new Date(processes[0].startedAt);
+  const secondDate = new Date(processes[1].startedAt);
+  assert.ok(firstDate >= secondDate);
+});
+
+test('Batch process logs settlement-level events to file', async () => {
+  const logPath = path.join(__dirname, '..', 'data', 'processLogs.json');
+  const beforeLogs = fs.existsSync(logPath) ? fs.readFileSync(logPath, 'utf8') : '';
+
+  await fetch(`${baseUrl}/buildings/batch-return-home-packages`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'X-User-Name': 'Log Test User' },
+    body: JSON.stringify({ settlement: 'Jerusalem' }),
+  });
+
+  const afterLogs = fs.readFileSync(logPath, 'utf8');
+  const newLines = afterLogs.slice(beforeLogs.length).trim().split('\n').filter(Boolean);
+  const newEntries = newLines.map((line) => JSON.parse(line));
+
+  const startEvent = newEntries.find((e) => e.event === 'SETTLEMENT_PROCESS_START');
+  assert.ok(startEvent, 'SETTLEMENT_PROCESS_START event should exist');
+  assert.equal(startEvent.level, 'INFO');
+  assert.equal(startEvent.settlement, 'Jerusalem');
+
+  const foundEvent = newEntries.find((e) => e.event === 'SETTLEMENT_ELIGIBLE_BUILDINGS_FOUND');
+  assert.ok(foundEvent, 'SETTLEMENT_ELIGIBLE_BUILDINGS_FOUND event should exist');
+  assert.equal(foundEvent.level, 'INFO');
+  assert.equal(typeof foundEvent.buildingId, 'number');
+
+  const completeEvent = newEntries.find((e) => e.event === 'SETTLEMENT_PROCESS_COMPLETE');
+  assert.ok(completeEvent, 'SETTLEMENT_PROCESS_COMPLETE event should exist');
+  assert.equal(completeEvent.level, 'INFO');
+  assert.equal(completeEvent.settlement, 'Jerusalem');
+});
+
+test('Batch process logs building-level events to file', async () => {
+  const logPath = path.join(__dirname, '..', 'data', 'processLogs.json');
+  const beforeLogs = fs.existsSync(logPath) ? fs.readFileSync(logPath, 'utf8') : '';
+
+  await fetch(`${baseUrl}/buildings/batch-return-home-packages`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'X-User-Name': 'Building Log User' },
+    body: JSON.stringify({ settlement: 'Haifa' }),
+  });
+
+  const afterLogs = fs.readFileSync(logPath, 'utf8');
+  const newLines = afterLogs.slice(beforeLogs.length).trim().split('\n').filter(Boolean);
+  const newEntries = newLines.map((line) => JSON.parse(line));
+
+  const startEvents = newEntries.filter((e) => e.event === 'BUILDING_PROCESSING_START');
+  assert.ok(startEvents.length > 0, 'BUILDING_PROCESSING_START events should exist');
+  startEvents.forEach((e) => {
+    assert.equal(e.level, 'INFO');
+    assert.equal(e.settlement, 'Haifa');
+    assert.equal(typeof e.buildingId, 'number');
+  });
+
+  const pdfStartEvents = newEntries.filter((e) => e.event === 'BUILDING_PDF_START');
+  assert.ok(pdfStartEvents.length > 0, 'BUILDING_PDF_START events should exist');
+
+  const pdfEndEvents = newEntries.filter((e) => e.event === 'BUILDING_PDF_END');
+  assert.ok(pdfEndEvents.length > 0, 'BUILDING_PDF_END events should exist');
+
+  const completeEvents = newEntries.filter((e) => e.event === 'BUILDING_PROCESSING_COMPLETE');
+  assert.ok(completeEvents.length > 0, 'BUILDING_PROCESSING_COMPLETE events should exist');
+});
+
+test('Log entries have correct structure with timestamp and level', async () => {
+  const logPath = path.join(__dirname, '..', 'data', 'processLogs.json');
+  const beforeLogs = fs.existsSync(logPath) ? fs.readFileSync(logPath, 'utf8') : '';
+
+  await fetch(`${baseUrl}/buildings/batch-return-home-packages`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'X-User-Name': 'Structure Test' },
+    body: JSON.stringify({ settlement: 'Beer Sheva' }),
+  });
+
+  const afterLogs = fs.readFileSync(logPath, 'utf8');
+  const newLines = afterLogs.slice(beforeLogs.length).trim().split('\n').filter(Boolean);
+  const newEntries = newLines.map((line) => JSON.parse(line));
+
+  assert.ok(newEntries.length > 0);
+  newEntries.forEach((entry) => {
+    assert.ok(entry.timestamp, 'entry must have timestamp');
+    assert.ok(new Date(entry.timestamp).toISOString() === entry.timestamp, 'timestamp must be ISO format');
+    assert.ok(['INFO', 'WARN', 'ERROR'].includes(entry.level), 'level must be INFO, WARN, or ERROR');
+    assert.ok(entry.event, 'entry must have event');
+    assert.ok('settlement' in entry, 'entry must have settlement field');
+    assert.ok('buildingId' in entry, 'entry must have buildingId field');
+    assert.ok('attempt' in entry, 'entry must have attempt field');
+    assert.ok('error' in entry, 'entry must have error field');
+  });
+});
+
+test('Single building return-home-package logs events to file', async () => {
+  const createResponse = await fetch(`${baseUrl}/reports`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      reporterName: 'Log Single',
+      address: 'Jerusalem, Log St 1',
+      damageType: 'Water',
+      description: 'Test logging',
+      damagePhotosExist: true,
+      engineerReportExists: true,
+      eligibilityCheckPerformed: true,
+      budgetRequestOpened: true,
+      status: 'Restoration process completed',
+    }),
+  });
+  const created = await createResponse.json();
+
+  const logPath = path.join(__dirname, '..', 'data', 'processLogs.json');
+  const beforeLogs = fs.existsSync(logPath) ? fs.readFileSync(logPath, 'utf8') : '';
+
+  await fetch(`${baseUrl}/buildings/${created.id}/return-home-package`, {
+    method: 'POST',
+  });
+
+  const afterLogs = fs.readFileSync(logPath, 'utf8');
+  const newLines = afterLogs.slice(beforeLogs.length).trim().split('\n').filter(Boolean);
+  const newEntries = newLines.map((line) => JSON.parse(line));
+
+  const pdfEvents = newEntries.filter((e) => e.event === 'BUILDING_PDF_START' || e.event === 'BUILDING_PDF_END');
+  assert.ok(pdfEvents.length >= 2, 'PDF start and end events should be logged');
+
+  const completeEvent = newEntries.find((e) => e.event === 'BUILDING_PROCESSING_COMPLETE');
+  assert.ok(completeEvent, 'BUILDING_PROCESSING_COMPLETE should be logged');
+  assert.equal(completeEvent.buildingId, created.id);
 });
